@@ -1,0 +1,74 @@
+---
+title: "Test lecture"
+subtite: "Testing for RMPAW"
+format: 
+  revealjs:
+    theme: edtheme.scss
+editor: visual
+author:
+  - name: "Jill MacKay"
+    id: jb
+    orcid: 0000-0001-7134-4829
+    email: jill.mackay@ed.ac.uk
+    affiliation: 
+      - name: R(D)SVS, University of Edinburgh
+        city: Edinburgh, Scotland
+        url: www.ed.ac.uk
+logo: ../assets/rdsvs.png
+footer: "Your social media handles - anything you want on each slide"
+bibliography: ../references.bib
+---
+## Why use Quarto?
+
+Quarto enables you to weave together content and executable code into a finished presentation. 
+
+
+To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+# You can have sections like this
+
+## And important things: {.smaller}
+:::: {.columns}
+:::{.column width="50%"}
+
+And citations are managed via pandoc per [the @quartoguide23].
+
+It's also good to reference [@knuth84] for no particular reason. 
+
+:::
+
+
+:::{.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-cap: "A lovely chart"
+
+plot(mtcars$cyl, mtcars$mpg)
+
+```
+
+:::
+
+::::
+
+## And other stuff
+
+```{r}
+#| echo: true 
+
+# like code obviously
+
+3 * 3
+
+```
+
+::: footer
+A footer can be overriden when needed
+:::
+
+
+## References
+
+::: {#refs}
+:::

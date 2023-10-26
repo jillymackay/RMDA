@@ -30,6 +30,8 @@ plantplot <- plants |>
 ## Lecture 5
 This code will help you recreate the charts and analyses in Lecture 5: "Introduction to Research Methods" 
 
+
+### Create data and plot
 ```{r, "Create data for Manipulation Study"}
 
 library(tidyverse)
@@ -51,4 +53,19 @@ plants |>
 ```{r, "Week 1 Show chart", eval = TRUE, echo = FALSE}
 
 plantplot
+```
+
+### Run an ANOVA on Plant data
+
+```{r, "Week 1 anova", eval = TRUE, echo = TRUE}
+
+longplants <- plants |> 
+  pivot_longer(cols = c(none, nutrients1,nutrients2),
+                             names_to = "nutrients",
+                             values_to = "height")
+
+plant_model <- aov(height ~ nutrients, data = longplants)
+
+summary(plant_model)
+
 ```
