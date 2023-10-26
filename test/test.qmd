@@ -1,7 +1,6 @@
 ---
 title: "Test lecture"
 subtite: "Testing for RMPAW"
-output-dir: docs
 format: 
   revealjs:
     theme: edtheme.scss
