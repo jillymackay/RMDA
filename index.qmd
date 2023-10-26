@@ -1,0 +1,23 @@
+---
+title: "Research Planning and Methodology in Animal Welfare"
+format: html
+editor: visual
+execute: 
+  eval: TRUE
+  echo: FALSE
+  warning: FALSE
+---
+
+## Preface
+
+This book accompanies the Research Planning and Methodology in Animal Welfare course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.
+
+It is a companion document to the course
+
+
+
+
+```{r "general setup"}
+library(tidyverse)
+
+```

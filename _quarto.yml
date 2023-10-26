@@ -1,0 +1,23 @@
+project:
+  type: book
+  output-dir: docs
+
+
+book:
+  title: "Research Planning and Methodology in Animal Welfare"
+  author: "Jill R D MacKay"
+  date: "`r Sys.Date()`"
+  chapters:
+    - index.qmd
+    - week01.qmd
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: Yeti
+  pdf:
+    documentclass: scrreport
+  epub:
+    cover-image: assets/cover.png
