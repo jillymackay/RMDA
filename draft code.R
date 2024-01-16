@@ -203,7 +203,29 @@ starwars |>
        y = "Percentage") +
   scale_fill_brewer(palette = "Set3", name = "Eye Colour (Brown vs other)") +
   theme_classic()
-  
+
+
+starwars |> 
+  mutate(spec = fct_lump_n(species, 1),
+         eye = fct_lump_n(eye_color,1)) |> 
+  select(spec, eye) |> 
+  ggbarstats(x = eye, y = spec) +
+  labs(x = "Species (Human vs Other)",
+       y = "Percentage") +
+  scale_fill_brewer(palette = "Set3", name = "Eye Colour (Brown vs other)") +
+  theme_light()
+
+
+library(vcd)
+
+
+startbl <-  starwars |> 
+  mutate(spec = fct_lump_n(species, 2),
+         eye = fct_lump_n(eye_color,2)) 
+startbl <-  structable(spec ~ eye, startbl)
+mosaic(startbl) +
+  labs(x = "Species",
+       y = "Eye Colour")
 
 # Week 4 
 
