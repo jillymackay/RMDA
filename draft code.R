@@ -359,10 +359,110 @@ starwars |>
   scale_fill_brewer(palette = "Accent")
 
 
+
+heifers <- tibble(heifers = c(211.3, 200.4, 220.1, 200.8, 222.0, 209.3, 
+             195.8, 220.4, 226.2, 218.7, 193.7, 209.7))
+
+find_mode <- function(x) {
+  ux <- unique(x)
+  tab <- tabulate(match(x, ux))
+  ux[tab == max(tab)]
+}
+
+heifers |> 
+  ggplot(aes(x = heifers)) +
+  geom_density(fill = "#bb9cd1") +
+  theme_classic() +
+  labs(x = "Heifer Weight (kg)",
+       y = "Density")
+
+
+heifers |> 
+  ggplot(aes(x = heifers)) +
+  geom_density(fill = "#bb9cd1") +
+  geom_vline(aes(xintercept = 210.7)) +
+  theme_classic() +
+  labs(x = "Heifer Weight (kg)",
+       y = "Density")
+
+
+
+heifers |> 
+  ggplot(aes(x = heifers)) +
+  geom_density(fill = "#bb9cd1") +
+  geom_vline(aes(xintercept = 210)) +
+  theme_classic() +
+  labs(x = "Heifer Weight (kg)",
+       y = "Density")
+
+heifers |> 
+  summarise(mean = mean(heifers),
+            median = median(heifers),
+            min = min(heifers),
+            max = max(heifers),
+            mode = find_mode(round(heifers, 0)))
+
+heifers |> 
+  ggplot(aes(x = heifers)) +
+  geom_histogram(fill = "#bb9cd1", binwidth = 1) +
+  geom_vline(aes(xintercept = 220)) +
+  theme_classic() +
+  labs(x = "Heifer Weight (kg)",
+       y = "Density")
+
+
+wage <- readxl::read_excel("assets/UKWageData2023ONS.xlsx", 
+                           skip = 5)
+wage |> 
+  ggplot(aes(x = Median)) +
+  geom_density(fill = "#bb9cd1") +
+  theme_classic() +
+  geom_vline(aes(xintercept = 34475)) +
+  labs(x = "UK Salaries (£)",
+       y = "Density",
+       title = "Distribution of UK Salaries",
+       caption = "Data taken from ONS 2023 Median Salaries by Field, n = 329 fields")
+
+wage |> 
+  summarise(mean = mean(Median),
+            median = median(Median),
+            min = min(Median),
+            max = max(Median),
+            mode = find_mode(round(Median,0)))
+
+
+wage |> 
+  ggplot(aes(x = Median)) +
+  geom_histogram(fill = "#bb9cd1", bins = 200) +
+  geom_vline(aes(xintercept = 25000)) +
+  geom_vline(aes(xintercept = 26000)) +
+  geom_vline(aes(xintercept = 28216)) +
+  geom_vline(aes(xintercept = 35248)) +
+  theme_classic() +
+  labs(x = "UK Salaries (£)",
+       y = "Count")
+
+
+
+wage |> 
+  ggplot(aes(x = Median)) +
+  geom_density(fill = "#bb9cd1") +
+  theme_classic() +
+  geom_vline(aes(xintercept = 34475), colour = "lightblue") +
+  geom_vline(aes(xintercept = 31988),colour = "purple") +
+  labs(x = "UK Salaries (£)",
+       y = "Density",
+       title = "Distribution of UK Salaries",
+       caption = "Data taken from ONS 2023 Median Salaries by Field, n = 329 fields")
+
+
 # Week 4 
 
 cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
                       weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3))
+
+
+
 
 
 cat_weights |> 
