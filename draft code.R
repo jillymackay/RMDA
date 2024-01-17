@@ -220,12 +220,144 @@ library(vcd)
 
 
 startbl <-  starwars |> 
-  mutate(spec = fct_lump_n(species, 2),
-         eye = fct_lump_n(eye_color,2)) 
-startbl <-  structable(spec ~ eye, startbl)
-mosaic(startbl) +
-  labs(x = "Species",
-       y = "Eye Colour")
+  mutate(Species = fct_lump_n(species, 2),
+         EyeColour = fct_lump_n(eye_color,2)) 
+startbl <-  structable(Species ~ EyeColour, startbl)
+mosaic(startbl, highlighting = EyeColour)
+
+mosaic(~ Species + EyeColour, data = startbl, highlighting = "Species",
+       highlighting_fill = c("#A6CEE3", "#B2DF8A", "#FB9A99"))
+
+
+mosaic(~ Species + EyeColour, data = startbl,shade = TRUE, legend = TRUE)
+
+
+
+
+
+starwars |> 
+  mutate(species = fct_lump_n(species, 4)) |> 
+  group_by(species) |> 
+  filter(!is.na(species)) |> 
+  tally() |> 
+  ggplot(aes(x = "", fill = species, y = n)) +
+  geom_bar(stat = "identity", width = 1) +
+  theme_void() +
+  coord_polar("y", start = 0)
+
+
+starwars |> 
+  mutate(species = fct_lump_n(species, 4)) |> 
+  group_by(species) |> 
+  filter(!is.na(species)) |> 
+  tally() |> 
+  ggplot(aes(x = species, fill = species, y = n)) +
+  geom_bar(stat = "identity") +
+  theme_classic() +
+  labs(x = "Species", y = "Count") +
+  theme(legend.position = "none")
+
+
+
+library(easystats)
+library(BayesFactor)
+
+starcorr <- correlationBF(starwars$height, starwars$mass)
+describe_posterior(starcorr)
+bayesfactor_models(starcorr)
+
+plot(bayesfactor_models(starcorr)) +
+  scale_fill_pizza() +
+  labs(title = "Bayes Factor 'Pizza Plot' for A Bayesian correlation between height and weight for Star Wars characters")
+
+
+
+
+library (tidytext)
+library (wordcloud)
+library (textstem)
+library (janeaustenr) 
+
+austen <- austen_books() %>%
+  group_by(book) %>%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(text, regex("^chapter [\\divxlc]",
+                                                 ignore_case = TRUE)))) %>%
+  ungroup() %>%
+  unnest_tokens(word, text) %>%
+  mutate (lemma = (lemmatize_strings(word))) %>%
+  anti_join(stop_words)
+
+
+austen %>%
+  count (lemma) %>%
+  with (wordcloud(words = lemma, freq = n, max.words = 200, random.order = FALSE, rot.per = 0,
+                  colors = brewer.pal(12, "Paired"), use.r.layout = FALSE))
+starwars |> 
+  count(homeworld) |> 
+  with(wordcloud(words = homeworld, freq = n, min.freq=1, random.order = FALSE, rot.per = 0,
+                 colors = brewer.pal(6, "Accent"), use.r.layout = FALSE))
+
+starwars |> 
+  count(homeworld) |> 
+  ggplot(aes(x = reorder(homeworld, desc(n)), y = n, fill = as.factor(n))) +
+  geom_bar(stat = "identity") +
+  theme_classic() +
+  labs(x = "Homeworld", y = "Count") +
+  theme(legend.position = "none") +
+  scale_fill_brewer(palette = "Accent") +
+  coord_flip()
+
+
+
+
+
+
+
+
+starwars |> 
+  mutate(species = fct_lump_n(species,2)) |> 
+  filter(!is.na(species)) |> 
+  ggplot(aes(x = species)) +
+  geom_point(aes(y = height, colour = species), position = position_jitter(width = .13), size = 1, alpha = 0.6) +
+  see::geom_violinhalf(aes(y = height, alpha= 0.3, fill = species), linetype = "dashed", position = position_nudge(x = .2)) +
+  geom_boxplot(aes(y = height, alpha = 0.3, colour = species), position = position_nudge(x = -.1), width = 0.1, outlier.shape = NA) +
+  theme_classic() +
+  labs(x = "Species", y = "Height (cm)") +
+  theme(legend.position = "none") +
+  coord_flip()
+
+
+starwars |>
+  select(height, mass, birth_year) |> 
+  ggcorrmat()
+
+starwars |>
+  mutate(col = fct_lump_n(species, 2)) |> 
+  ggplot(aes(x = birth_year, y = mass, size = height, colour = col)) +
+  geom_point() +
+  scale_size(range = c(.1, 24), name="Height") +
+  theme_classic() +
+  scale_x_continuous(limits = c(0,250)) +
+  scale_y_continuous(limits = c(0,300)) +
+  scale_colour_brewer(palette = "Accent", name = "Species") +
+  theme(legend.position = "bottom") + 
+  labs(x = "Birth  Year (Before Battle of Yavin)",
+       y = "Weight (kg)",
+       title = "Weight by Age of Characters in Star Wars") 
+
+
+
+starwars |> 
+  mutate(species = fct_lump_n(species,2)) |> 
+  filter(!is.na(species)) |> 
+  ggplot(aes(x = species, y = height, fill = species)) +
+  geom_violin() +
+  theme_classic() +
+  labs(x = "Species", y = "Height (cm)") +
+  theme(legend.position = "none")  +
+  scale_fill_brewer(palette = "Accent")
+
 
 # Week 4 
 
