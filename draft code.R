@@ -456,6 +456,60 @@ wage |>
        caption = "Data taken from ONS 2023 Median Salaries by Field, n = 329 fields")
 
 
+# Week 3
+
+library(tidyverse)
+
+
+vardat <- tibble(cat = c(13, 17, 30, 36, 11, 43, 23, 50, 19, 23),
+                 dog = c(30, 31, 45, 43, 48, 50, 37, 32, 40, 44))
+std.error <- function(x) sd(x)/sqrt(length(x))
+
+vardat |> 
+  pivot_longer(cols = c(cat, dog),
+               names_to = "Species",
+               values_to = "Score") |> 
+  group_by(Species) |> 
+  summarise(mean = mean(Score),
+            sd = sd(Score),
+            se = std.error(Score),
+            var = var(Score))
+vardat |> 
+  mutate(dev_cat = cat-26.5,
+         dev_cat2 = (cat-26.5)*(cat-26.5)) |> 
+  summarise(sum = sum(dev_cat),
+            sumcat2 = sum(dev_cat2),
+            sum2 = sum(dev_cat)^2)
+
+
+vardat |> 
+  summarise(var_dogs = var(dog),
+            var_cat = var(cat))
+
+vardat |> 
+  summarise(sd_dogs = sd(dog),
+            sd_cat = sd(cat))
+
+
+vardat |> 
+  summarise(se_dogs = std.error(dog),
+            se_cat = std.error(cat))
+
+
+vardat |> 
+  pivot_longer(cols = c(cat, dog),
+               names_to = "Species",
+               values_to = "Score") |> 
+  ggplot(aes(x = Species)) +
+  geom_point(aes(y = Score, colour = Species), position = position_jitter(width = .13), size = 1) +
+  see::geom_violinhalf(aes(y = Score, fill = Species), linetype = "dashed", position = position_nudge(x = .2)) +
+  geom_boxplot(aes(y = Score, alpha = 0.3, colour = Species), position = position_nudge(x = -.1), width = 0.1, outlier.shape = NA) +
+  theme_classic() +
+  labs(x = "Species", y = "Score") +
+  theme(legend.position = "none") +
+  coord_flip()
+
+
 # Week 4 
 
 cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
