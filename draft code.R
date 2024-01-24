@@ -510,6 +510,50 @@ vardat |>
   coord_flip()
 
 
+
+# Week 3
+
+
+# Bayes vs Frequentist
+
+library(tidyverse)
+library(easystats)
+library(bayestestR)
+library(rstan)
+
+
+
+cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
+                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3),
+                      environ = c("Indoor", "Indoor", "Outdoor", "Indoor",
+                                  "Outdoor", "Indoor", "Outdoor", "Indoor",
+                                  "Indoor", "Indoor", "Outdoor", "Indoor",
+                                  "Outdoor", "Indoor", "Indoor", "Outdoor"))
+
+
+
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5))
+
+
+
+model_fcat <- lm(avg_daily_snacks ~ weight, data = cat_weights)
+summary(model_fcat)
+report::report(model_fcat)
+
+model_bcat <- stan_glm(avg_daily_snacks ~ weight, data = cat_weights)
+summary(model_bcat)
+describe_posterior(model_bcat)
+report::report(model_bcat)
+
+
+
+
 # Week 4 
 
 cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
