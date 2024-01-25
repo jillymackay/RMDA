@@ -520,6 +520,7 @@ library(tidyverse)
 library(easystats)
 library(bayestestR)
 library(rstan)
+library(rstanarm)
 
 
 
@@ -542,16 +543,98 @@ cat_weights |>
 
 
 
-model_fcat <- lm(avg_daily_snacks ~ weight, data = cat_weights)
+model_fcat <- lm(weight ~ avg_daily_snacks, data = cat_weights)
 summary(model_fcat)
 report::report(model_fcat)
+parameters(model_fcat) |>  View()
+plot(model_parameters(model_fcat), show_intercept = TRUE)
+plot(model_parameters(model_fcat))
 
-model_bcat <- stan_glm(avg_daily_snacks ~ weight, data = cat_weights)
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight",
+       caption = "Weight ~ Average Daily Snacks shown") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5)) +
+  geom_abline(slope = 0.20, intercept = 3.55)
+
+
+model_bcat <- stan_glm(weight ~ avg_daily_snacks, data = cat_weights)
 summary(model_bcat)
-describe_posterior(model_bcat)
+describe_posterior(model_bcat) |>  View()
 report::report(model_bcat)
 
+posteriors <- get_parameters(model_bcat)
 
+posteriors |> 
+  ggplot(aes(x = avg_daily_snacks)) +
+  geom_density(fill = "lightblue") +
+  theme_classic() +
+  labs(x = "Posterior Coefficient Estimates for Average Daily Snacks",
+       y = "Density",
+       caption = "Median Estimate Shown") +
+  geom_vline(xintercept = 0.21, color = "darkblue", linewidth = 1)
+
+
+
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight, colour = environ)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight",
+       caption = "Weight ~ Average Daily Snacks shown") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5)) +
+  geom_abline(slope = 0.20, intercept = 3.55)
+
+
+
+
+
+model_fcat2 <- lm(weight ~ avg_daily_snacks + environ, data = cat_weights)
+summary(model_fcat2)
+report::report(model_fcat2)
+parameters(model_fcat2) |>  View()
+plot(model_parameters(model_fcat2), show_intercept = TRUE)
+plot(model_parameters(model_fcat2))
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight, colour = environ)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight",
+       caption = "Weight ~ Average Daily Snacks shown") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5)) +
+  geom_smooth()
+
+
+model_bcat2 <- stan_glm(weight ~ avg_daily_snacks + environ, data = cat_weights)
+summary(model_bcat2)
+describe_posterior(model_bcat2) 
+
+report::report(model_bcat2)
+
+posteriors2 <- get_parameters(model_bcat2)
+
+
+posteriors2 |> 
+  pivot_longer(cols = c(avg_daily_snacks, environOutdoor),
+               names_to = "Parameter",
+               values_to="estimate") |> 
+  ggplot() +
+  geom_density(aes(x = estimate, fill = Parameter)) +
+  theme_classic() +
+  labs(x = "Posterior Coefficient Estimates",
+       y = "Density") +
+  facet_wrap(facets = ~Parameter, ncol = 1) +
+  theme(legend.position = "none")
+
+
+
+
+bayesfactor(model_bcat2)
+interpret_bf(0.431)
 
 
 # Week 4 

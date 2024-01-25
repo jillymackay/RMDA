@@ -30,14 +30,160 @@ cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 
 
 ## Introduction to statistics
 
-Set up your environment and packages
+### Set up your environment and packages
 
 ```{r, echo = TRUE, eval = FALSE}
 library(tidyverse)
 library(easystats)
-
+library(rstan)
+library(rstanarm)
 
 cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
-                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3))
+                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3),
+                      environ = c("Indoor", "Indoor", "Outdoor", "Indoor",
+                                  "Outdoor", "Indoor", "Outdoor", "Indoor",
+                                  "Indoor", "Indoor", "Outdoor", "Indoor",
+                                  "Outdoor", "Indoor", "Indoor", "Outdoor"))
+
+```
+
+
+### Example data
+
+```{r, eval = TRUE}
+
+cat_weights |> 
+  summarise("Mean Weight (kg)" = mean(weight),
+            "SD Weight (kg)" = sd(weight),
+            "Mean Daily Snacks" = mean (avg_daily_snacks),
+            )
+
+```
+
+
+### Visualise
+
+
+```{r}
+
+
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5))
+
+
+
+```
+
+
+### A Linear Model
+
+```{r}
+
+
+model_fcat <- lm(weight ~ avg_daily_snacks, data = cat_weights)
+summary(model_fcat)
+report::report(model_fcat)
+parameters(model_fcat) 
+plot(model_parameters(model_fcat), show_intercept = TRUE)
+plot(model_parameters(model_fcat))
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight",
+       caption = "Weight ~ Average Daily Snacks shown") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5)) +
+  geom_abline(slope = 0.20, intercept = 3.55)
+
+
+```
+
+
+### A Bayesian Model
+
+```{r}
+
+model_bcat <- stan_glm(weight ~ avg_daily_snacks, data = cat_weights)
+summary(model_bcat)
+describe_posterior(model_bcat)
+report::report(model_bcat)
+
+posteriors <- get_parameters(model_bcat)
+
+posteriors |> 
+  ggplot(aes(x = avg_daily_snacks)) +
+  geom_density(fill = "lightblue") +
+  theme_classic() +
+  labs(x = "Posterior Coefficient Estimates for Average Daily Snacks",
+       y = "Density",
+       caption = "Median Estimate Shown") +
+  geom_vline(xintercept = 0.21, color = "darkblue", linewidth = 1)
+
+
+
+
+```
+
+
+
+### A Linear model with a factor
+
+
+```{r}
+
+
+model_fcat2 <- lm(weight ~ avg_daily_snacks + environ, data = cat_weights)
+summary(model_fcat2)
+report::report(model_fcat2)
+parameters(model_fcat2)
+plot(model_parameters(model_fcat2), show_intercept = TRUE)
+plot(model_parameters(model_fcat2))
+
+
+cat_weights |> 
+  ggplot(aes(x = avg_daily_snacks, y = weight, colour = environ)) +
+  geom_point() +
+  labs(x = "Average Daily Snacks", y = "Cat Weight",
+       caption = "Weight ~ Average Daily Snacks shown") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0,5)) +
+  geom_smooth()
+
+```
+
+
+
+### Bayesian Framework
+
+
+```{r}
+
+
+model_bcat2 <- stan_glm(weight ~ avg_daily_snacks + environ, data = cat_weights)
+summary(model_bcat2)
+describe_posterior(model_bcat2) 
+report::report(model_bcat2)
+
+posteriors2 <- get_parameters(model_bcat2)
+
+
+posteriors2 |> 
+  pivot_longer(cols = c(avg_daily_snacks, environOutdoor),
+               names_to = "Parameter",
+               values_to="estimate") |> 
+  ggplot() +
+  geom_density(aes(x = estimate, fill = Parameter)) +
+  theme_classic() +
+  labs(x = "Posterior Coefficient Estimates",
+       y = "Density") +
+  facet_wrap(facets = ~Parameter, ncol = 1) +
+  theme(legend.position = "none")
+
 
 ```
