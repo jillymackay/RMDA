@@ -1,5 +1,5 @@
 ---
-title: "Week 4"
+title: "Week 4: Considerations for Collecting Data"
 format: html
 editor: visual
 execute: 
@@ -8,8 +8,6 @@ execute:
   warning: FALSE
   message: FALSE
 ---
-
-
 
 ```{r, "Week 2 Set Up", eval = TRUE, echo = FALSE}
 library(tidyverse)
@@ -24,8 +22,8 @@ cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 
 
 ```
 
-
 # Lecture 2 - Why do we model
+
 This code will help you replicate the stats in Lecture 2
 
 ```{r}
@@ -42,7 +40,7 @@ cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 
 ```
 
 Create the first plot
- 
+
 Note the changes to the y scale
 
 ```{r, eval = TRUE}

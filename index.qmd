@@ -1,5 +1,5 @@
 ---
-title: "Research Planning and Methodology in Animal Welfare"
+title: "Research Methods and Data Analysis (IAWEL)"
 format: html
 editor: visual
 execute: 
@@ -8,8 +8,19 @@ execute:
   warning: FALSE
 ---
 
-## Preface
+# Preface  {.unnumbered}
 
-This book accompanies the Research Planning and Methodology in Animal Welfare course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.
+This book accompanies the Research Methods and Data Analysis course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.
 
-It is a companion document to the course
+It is a companion document to the course, and not core to the materials.
+
+Throughout the RMDA Lectures, you will see a number of statistical tests, data visualisations, data manipulation, text mining, and simple calculations. Almost inevitably, each one of these steps will have been performed in R.
+
+Your R textbook is [R\@R(D)SVS](https://jillymackay.github.io/RatRDSVS/index.html "R@R(D)SVS Textbook"), and that textbook will explain h[ow to download and install R,](https://jillymackay.github.io/RatRDSVS/install.html "Installing R") [how to run simple commands in R](https://jillymackay.github.io/RatRDSVS/start.html), and more. This RMDA textbook is like an accompanying document to your lecture materials, and is a place to help you move your R and statistical knowledge along.
+
+## Packages in this textbook  {.unnumbered}
+
+There are a range of packages used in this book, including Tidyverse [@tidyverse], effsize [@effsize], ggstatsplot [@ggstatsplot], vcd [@vcd], wordcloud [@wordcloud], easystats [@easystats], rstan [@rstan], rstanarm [@rstanarm]
+
+
+You may need to [download and install a package](https://jillymackay.github.io/RatRDSVS/start.html#packages) or [load a package](https://jillymackay.github.io/RatRDSVS/start.html#ex_packages) for some of these commands to work. 

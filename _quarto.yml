@@ -4,8 +4,10 @@ project:
 
 
 book:
-  title: "Research Planning and Methodology in Animal Welfare"
+  title: "Research Methods and Data Analysis (IAWEL)"
   author: "Jill R D MacKay"
+  search: true
+  downloads: [pdf, epub]
   date: "`r Sys.Date()`"
   chapters:
     - index.qmd
@@ -13,6 +15,12 @@ book:
     - week02.qmd
     - week03.qmd
     - week04.qmd
+    - week05.qmd
+    - week06.qmd
+    - week07.qmd
+    - week089.qmd
+    - week10.qmd
+    - refs.qmd
 
 
 bibliography: references.bib
@@ -20,7 +28,11 @@ bibliography: references.bib
 format:
   html:
     theme: Yeti
+    code-copy: true
   pdf:
     documentclass: scrreport
   epub:
-    cover-image: assets/cover.png
+    cover-image: "assets/cover.png"
+    
+commentS:
+  hypothesis: true

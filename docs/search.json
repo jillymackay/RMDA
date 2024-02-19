@@ -1,37 +1,254 @@
 [
   {
-    "objectID": "index.html#preface",
-    "href": "index.html#preface",
-    "title": "Research Planning and Methodology in Animal Welfare",
-    "section": "0.1 Preface",
-    "text": "0.1 Preface\nThis book accompanies the Research Planning and Methodology in Animal Welfare course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.\nIt is a companion document to the course"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Research Methods and Data Analysis (IAWEL)",
+    "section": "",
+    "text": "Preface\nThis book accompanies the Research Methods and Data Analysis course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.\nIt is a companion document to the course, and not core to the materials.\nThroughout the RMDA Lectures, you will see a number of statistical tests, data visualisations, data manipulation, text mining, and simple calculations. Almost inevitably, each one of these steps will have been performed in R.\nYour R textbook is R@R(D)SVS, and that textbook will explain how to download and install R, how to run simple commands in R, and more. This RMDA textbook is like an accompanying document to your lecture materials, and is a place to help you move your R and statistical knowledge along."
   },
   {
-    "objectID": "week01.html#lecture-5",
-    "href": "week01.html#lecture-5",
-    "title": "2  Week 1",
-    "section": "2.1 Lecture 5",
-    "text": "2.1 Lecture 5\nThis code will help you recreate the charts and analyses in Lecture 5: “Introduction to Research Methods”\n\n2.1.1 Create data and plot\n\nlibrary(tidyverse)\n\nplants &lt;- tibble(none = c(4.8, 4.8, 3.94, 4.4,4.5,4.6),\n                 nutrients1  = c( 10.1, 9.7, 9.8, 9.9, 9.3, 10.1),\n                 nutrients2 = c(14.8, 14.6, 14.8, 14, 13.8, 14.6))\n\nplants |&gt; \n  pivot_longer(cols = c(none, nutrients1,nutrients2),\n               names_to = \"nutrients\",\n               values_to = \"height\") |&gt; \n  ggplot(aes(x = nutrients, y = height)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n2.1.2 Run an ANOVA on Plant data\n\nlongplants &lt;- plants |&gt; \n  pivot_longer(cols = c(none, nutrients1,nutrients2),\n                             names_to = \"nutrients\",\n                             values_to = \"height\")\n\nplant_model &lt;- aov(height ~ nutrients, data = longplants)\n\nsummary(plant_model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)    \nnutrients    2 296.10  148.05    1184 &lt;2e-16 ***\nResiduals   15   1.88    0.13                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n2.1.3 Read and Run Crude Chicken Correlations\n\ncrudechicks &lt;- tibble(year = c(\"2000\", \"2001\", \"2002\", \"2003\",\n                               \"2004\", \"2005\", \"2006\", \"2007\",\n                               \"2008\", \"2009\"),\n                      chicken = c(54.2, 54, 56.8, 57.5, 59.3, 60.5, 60.9,\n                                  59.9, 58.7, 56),\n                      crude = c(3311, 3405, 3336, 3521, 3674, 3670, 3685,\n                                3656, 3571, 3307))\n\n\ncor.test(crudechicks$chicken, crudechicks$crude, method = \"spearman\")\n\n\n    Spearman's rank correlation rho\n\ndata:  crudechicks$chicken and crudechicks$crude\nS = 20, p-value = 0.001977\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8787879"
+    "objectID": "index.html#packages-in-this-textbook",
+    "href": "index.html#packages-in-this-textbook",
+    "title": "Research Methods and Data Analysis (IAWEL)",
+    "section": "Packages in this textbook",
+    "text": "Packages in this textbook\nThere are a range of packages used in this book, including Tidyverse (Wickham et al. 2019), effsize (Torchiano 2020), ggstatsplot (Patil 2021), vcd (Zeileis, Meyer, and Hornik 2007), wordcloud (Fellows 2018), easystats (Lüdecke et al. 2022), rstan (Stan Development Team 2023), rstanarm (Brilleman et al. 2018)\nYou may need to download and install a package or load a package for some of these commands to work.\n\n\n\n\nBrilleman, SL, MJ Crowther, M Moreno-Betancur, J Buros Novik, and R Wolfe. 2018. “Joint Longitudinal and Time-to-Event Models via Stan.” https://github.com/stan-dev/stancon_talks/.\n\n\nFellows, Ian. 2018. Wordcloud: Word Clouds. https://CRAN.R-project.org/package=wordcloud.\n\n\nLüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Brenton M. Wiernik, and Dominique Makowski. 2022. “Easystats: Framework for Easy Statistical Modeling, Visualization, and Reporting.” CRAN. https://easystats.github.io/easystats/.\n\n\nPatil, Indrajeet. 2021. “Visualizations with statistical details: The ’ggstatsplot’ approach.” Journal of Open Source Software 6 (61): 3167. https://doi.org/10.21105/joss.03167.\n\n\nStan Development Team. 2023. “RStan: The R Interface to Stan.” https://mc-stan.org/.\n\n\nTorchiano, Marco. 2020. Effsize: Efficient Effect Size Computation. https://doi.org/10.5281/zenodo.1480624.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” Journal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nZeileis, Achim, David Meyer, and Kurt Hornik. 2007. “Residual-Based Shadings for Visualizing (Conditional) Independence.” Journal of Computational and Graphical Statistics 16 (3): 507–25. https://doi.org/10.1198/106186007X237856."
+  },
+  {
+    "objectID": "week01.html",
+    "href": "week01.html",
+    "title": "2  Week 1: The Philosophy of Science",
+    "section": "",
+    "text": "Lecture 3: The Replication Crisis\nBland-Altmann Plots are generated with the following code.\nlibrary(tidyverse)\n\nbland &lt;-  tibble(\n  subject = c(1:17),\n  Wright1 = c(484,395,516,434,476,557,413,442,650,433,417,656,267,478,178,423,427),\n  Wright2 = c(490,397,512,401,470,611,415,431,638,429,420,633,275,492,165,372,421),\n  Mini1 = c(512,430,520,428,500,600,364,380,658,445,432,626,260,477,259,350,451),\n  Mini2 = c(525,415,508,444,500,625,460,390,642,432,420,605,227,467,268,370,443)\n)\n\nbland |&gt; \n  ggplot(aes(x = Wright1, y = Mini1)) +\n  stat_smooth(method=\"lm\", se=FALSE) +\n  geom_point(colour = \"turquoise4\", size = 3) +\n  scale_x_continuous(limits = c(0,700)) +\n  scale_y_continuous(limits = c(0,700)) +\n  theme_classic() +\n  labs(x = \"Wright Meter (1st Measure)\", y = \"Mini Wright Meter (1st Measure)\")\nAnd then if we add 100 to each measure, we see a very similar plot:\nbland |&gt; \n  mutate (Wright1 = (Wright1+100)) %&gt;%\n  ggplot(aes(x = Wright1, y = Mini1)) +\n  stat_smooth(method=\"lm\", se=FALSE) +\n  geom_point(colour = \"turquoise4\", size = 3) +\n  scale_x_continuous(limits = c(0,800)) +\n  scale_y_continuous(limits = c(0,700)) +\n  theme_classic() +\n  labs(x = \"Wright Meter (1st Measure)\", y = \"Mini Wright Meter (1st Measure)\")"
+  },
+  {
+    "objectID": "week01.html#create-data-and-plot",
+    "href": "week01.html#create-data-and-plot",
+    "title": "2  Week 1: The Philosophy of Science",
+    "section": "2.1 Create data and plot",
+    "text": "2.1 Create data and plot\n\nlibrary(tidyverse)\n\nplants &lt;- tibble(none = c(4.8, 4.8, 3.94, 4.4,4.5,4.6),\n                 nutrients1  = c( 10.1, 9.7, 9.8, 9.9, 9.3, 10.1),\n                 nutrients2 = c(14.8, 14.6, 14.8, 14, 13.8, 14.6))\n\nplants |&gt; \n  pivot_longer(cols = c(none, nutrients1,nutrients2),\n               names_to = \"nutrients\",\n               values_to = \"height\") |&gt; \n  ggplot(aes(x = nutrients, y = height)) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "week01.html#run-an-anova-on-plant-data",
+    "href": "week01.html#run-an-anova-on-plant-data",
+    "title": "2  Week 1: The Philosophy of Science",
+    "section": "2.2 Run an ANOVA on Plant data",
+    "text": "2.2 Run an ANOVA on Plant data\n\nlongplants &lt;- plants |&gt; \n  pivot_longer(cols = c(none, nutrients1,nutrients2),\n                             names_to = \"nutrients\",\n                             values_to = \"height\")\n\nplant_model &lt;- aov(height ~ nutrients, data = longplants)\n\nsummary(plant_model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)    \nnutrients    2 296.10  148.05    1184 &lt;2e-16 ***\nResiduals   15   1.88    0.13                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "week01.html#read-and-run-crude-chicken-correlations",
+    "href": "week01.html#read-and-run-crude-chicken-correlations",
+    "title": "2  Week 1: The Philosophy of Science",
+    "section": "2.3 Read and Run Crude Chicken Correlations",
+    "text": "2.3 Read and Run Crude Chicken Correlations\n\ncrudechicks &lt;- tibble(year = c(\"2000\", \"2001\", \"2002\", \"2003\",\n                               \"2004\", \"2005\", \"2006\", \"2007\",\n                               \"2008\", \"2009\"),\n                      chicken = c(54.2, 54, 56.8, 57.5, 59.3, 60.5, 60.9,\n                                  59.9, 58.7, 56),\n                      crude = c(3311, 3405, 3336, 3521, 3674, 3670, 3685,\n                                3656, 3571, 3307))\n\n\ncor.test(crudechicks$chicken, crudechicks$crude, method = \"spearman\")\n\n\n    Spearman's rank correlation rho\n\ndata:  crudechicks$chicken and crudechicks$crude\nS = 20, p-value = 0.001977\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8787879"
   },
   {
     "objectID": "week02.html",
     "href": "week02.html",
-    "title": "3  Week 2",
+    "title": "3  Week 2: The Use and Abuse of Data",
     "section": "",
-    "text": "4 Lecture 2 - Data Visualisation\nThis code will help you replicate the charts in Lecture 2\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt; \n  ggplot(aes(x = height, y = mass, colour = sex)) +\n  geom_point() +\n  theme_classic() +\n  scale_x_continuous(limits = c(0,250)) +\n  scale_y_continuous(limits = c(0,150)) +\n  scale_colour_brewer(palette = \"Accent\", name = \"Sex\") +\n  theme(legend.position = \"bottom\") + \n  labs(x = \"Height (cm)\",\n       y = \"Weight (kg)\",\n       title = \"Height and Weight of Human Characters in Star Wars by Sex\")\n\n\n\n\n\nstarwars |&gt; \n  filter(species == \"Human\",\n         sex == \"male\") |&gt;\n  ggplot(aes(x = height)) +\n  geom_histogram(binwidth = 3, fill = \"#bb9cd1\") +\n  theme_classic() +\n  labs(x = \"Height (cm)\",\n       y = \"Count\",\n       title = \"Histogram of height of male human Star Wars characters\")\n\n\n\n\n\nstarwars |&gt; \n  filter(species == \"Human\",\n         sex == \"male\") |&gt;\n  ggplot(aes(x = height)) +\n  geom_density(fill = \"#bb9cd1\") +\n  theme_classic() +\n  labs(x = \"Height (cm)\",\n       y = \"Count\",\n       title = \"Density plot of height of male human Star Wars characters\")\n\n\n\n\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt;\n  ggplot(aes(y = height, x = sex, colour = sex)) +\n  geom_boxplot() +\n  theme_classic() +\n  scale_colour_brewer(palette = \"Accent\", name = \"Sex\") +\n  labs(y = \"Height (cm)\",\n       x = \"Sex\",\n       title = \"Boxplot of height by sex of human characters in Star Wars\") +\n  theme(legend.position =\"none\")\n\n\n\n\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt; \n  group_by(sex) |&gt; \n  summarise(ht = mean(height, na.rm = TRUE),\n            sd = sd(height, na.rm = TRUE)) |&gt; \n  ggplot(aes(x = sex, y = ht, fill = sex)) +\n  geom_bar(stat = \"identity\") +\n  geom_errorbar(aes(ymin = ht-sd, ymax = ht+sd), width = 0.2)+\n  scale_fill_brewer(palette = \"Accent\") +\n  labs(y = \"Mean Height (cm)\",\n       x = \"Sex\",\n       title = \"Mean height by sex of human characters in Star Wars\") +\n  theme_classic() +\n  theme(legend.position = \"none\")\n\n\n\n\n\nlibrary(vcd)\n\n\nstartbl &lt;-  starwars |&gt; \n  mutate(Species = fct_lump_n(species, 2),\n         EyeColour = fct_lump_n(eye_color,2)) \n\n\nmosaic(~ Species + EyeColour, data = startbl,shade = TRUE, legend = TRUE)\n\n\n\n\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species, 4)) |&gt; \n  group_by(species) |&gt; \n  filter(!is.na(species)) |&gt; \n  tally() |&gt; \n  ggplot(aes(x = \"\", fill = species, y = n)) +\n  geom_bar(stat = \"identity\", width = 1) +\n  theme_void() +\n  coord_polar(\"y\", start = 0)\n\n\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species, 4)) |&gt; \n  group_by(species) |&gt; \n  filter(!is.na(species)) |&gt; \n  tally() |&gt; \n  ggplot(aes(x = species, fill = species, y = n)) +\n  geom_bar(stat = \"identity\") +\n  theme_classic() +\n  labs(x = \"Species\", y = \"Count\") +\n  theme(legend.position = \"none\")\n\n\n\n\n\nlibrary(wordcloud)\nstarwars |&gt; \n  count(homeworld) |&gt; \n  with(wordcloud(words = homeworld, freq = n, min.freq=1, random.order = FALSE, rot.per = 0,\n                 colors = brewer.pal(6, \"Accent\"), use.r.layout = FALSE))\n\n\n\n\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species,2)) |&gt; \n  filter(!is.na(species)) |&gt; \n  ggplot(aes(x = species)) +\n  geom_point(aes(y = height, colour = species), position = position_jitter(width = .13), size = 1, alpha = 0.6) +\n  see::geom_violinhalf(aes(y = height, alpha= 0.3, fill = species), linetype = \"dashed\", position = position_nudge(x = .2)) +\n  geom_boxplot(aes(y = height, alpha = 0.3, colour = species), position = position_nudge(x = -.1), width = 0.1, outlier.shape = NA) +\n  theme_classic() +\n  labs(x = \"Species\", y = \"Height (cm)\") +\n  theme(legend.position = \"none\") +\n  coord_flip()\n\n\n\n\n\nstarwars |&gt;\n  mutate(col = fct_lump_n(species, 2)) |&gt; \n  ggplot(aes(x = birth_year, y = mass, size = height, colour = col)) +\n  geom_point() +\n  scale_size(range = c(.1, 24), name=\"Height\") +\n  theme_classic() +\n  scale_x_continuous(limits = c(0,250)) +\n  scale_y_continuous(limits = c(0,300)) +\n  scale_colour_brewer(palette = \"Accent\", name = \"Species\") +\n  theme(legend.position = \"bottom\") + \n  labs(x = \"Birth  Year (Before Battle of Yavin)\",\n       y = \"Weight (kg)\",\n       title = \"Weight by Age of Characters in Star Wars\") \n\n\n\n\n\nstarwars |&gt;\n  select(height, mass, birth_year) |&gt; \n  ggcorrmat()"
+    "text": "Lecture 2: Data Visualisation\nThis code will help you replicate the charts in Lecture 2"
+  },
+  {
+    "objectID": "week02.html#height-vs-weight-by-sex",
+    "href": "week02.html#height-vs-weight-by-sex",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Height vs Weight by Sex",
+    "text": "Height vs Weight by Sex\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt; \n  ggplot(aes(x = height, y = mass, colour = sex)) +\n  geom_point() +\n  theme_classic() +\n  scale_x_continuous(limits = c(0,250)) +\n  scale_y_continuous(limits = c(0,150)) +\n  scale_colour_brewer(palette = \"Accent\", name = \"Sex\") +\n  theme(legend.position = \"bottom\") + \n  labs(x = \"Height (cm)\",\n       y = \"Weight (kg)\",\n       title = \"Height and Weight of Human Characters in Star Wars by Sex\")"
+  },
+  {
+    "objectID": "week02.html#histogram-of-male-height",
+    "href": "week02.html#histogram-of-male-height",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Histogram of male height",
+    "text": "Histogram of male height\n\nstarwars |&gt; \n  filter(species == \"Human\",\n         sex == \"male\") |&gt;\n  ggplot(aes(x = height)) +\n  geom_histogram(binwidth = 3, fill = \"#bb9cd1\") +\n  theme_classic() +\n  labs(x = \"Height (cm)\",\n       y = \"Count\",\n       title = \"Histogram of height of male human Star Wars characters\")"
+  },
+  {
+    "objectID": "week02.html#density-plot-of-male-height",
+    "href": "week02.html#density-plot-of-male-height",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Density plot of male height",
+    "text": "Density plot of male height\n\nstarwars |&gt; \n  filter(species == \"Human\",\n         sex == \"male\") |&gt;\n  ggplot(aes(x = height)) +\n  geom_density(fill = \"#bb9cd1\") +\n  theme_classic() +\n  labs(x = \"Height (cm)\",\n       y = \"Count\",\n       title = \"Density plot of height of male human Star Wars characters\")"
+  },
+  {
+    "objectID": "week02.html#boxplot-of-height",
+    "href": "week02.html#boxplot-of-height",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Boxplot of height",
+    "text": "Boxplot of height\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt;\n  ggplot(aes(y = height, x = sex, colour = sex)) +\n  geom_boxplot() +\n  theme_classic() +\n  scale_colour_brewer(palette = \"Accent\", name = \"Sex\") +\n  labs(y = \"Height (cm)\",\n       x = \"Sex\",\n       title = \"Boxplot of height by sex of human characters in Star Wars\") +\n  theme(legend.position =\"none\")"
+  },
+  {
+    "objectID": "week02.html#mean-height-bar-chart",
+    "href": "week02.html#mean-height-bar-chart",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Mean height (bar chart)",
+    "text": "Mean height (bar chart)\n\nstarwars |&gt; \n  filter(species == \"Human\") |&gt; \n  group_by(sex) |&gt; \n  summarise(ht = mean(height, na.rm = TRUE),\n            sd = sd(height, na.rm = TRUE)) |&gt; \n  ggplot(aes(x = sex, y = ht, fill = sex)) +\n  geom_bar(stat = \"identity\") +\n  geom_errorbar(aes(ymin = ht-sd, ymax = ht+sd), width = 0.2)+\n  scale_fill_brewer(palette = \"Accent\") +\n  labs(y = \"Mean Height (cm)\",\n       x = \"Sex\",\n       title = \"Mean height by sex of human characters in Star Wars\") +\n  theme_classic() +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "week02.html#mosaic-plot",
+    "href": "week02.html#mosaic-plot",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Mosaic Plot",
+    "text": "Mosaic Plot\n\nlibrary(vcd)\n\n\nstartbl &lt;-  starwars |&gt; \n  mutate(Species = fct_lump_n(species, 2),\n         EyeColour = fct_lump_n(eye_color,2)) \n\n\nmosaic(~ Species + EyeColour, data = startbl,shade = TRUE, legend = TRUE)"
+  },
+  {
+    "objectID": "week02.html#pie-charts-are-just-bad-bar-charts",
+    "href": "week02.html#pie-charts-are-just-bad-bar-charts",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Pie Charts are Just Bad Bar Charts",
+    "text": "Pie Charts are Just Bad Bar Charts\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species, 4)) |&gt; \n  group_by(species) |&gt; \n  filter(!is.na(species)) |&gt; \n  tally() |&gt; \n  ggplot(aes(x = \"\", fill = species, y = n)) +\n  geom_bar(stat = \"identity\", width = 1) +\n  theme_void() +\n  coord_polar(\"y\", start = 0)\n\n\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species, 4)) |&gt; \n  group_by(species) |&gt; \n  filter(!is.na(species)) |&gt; \n  tally() |&gt; \n  ggplot(aes(x = species, fill = species, y = n)) +\n  geom_bar(stat = \"identity\") +\n  theme_classic() +\n  labs(x = \"Species\", y = \"Count\") +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "week02.html#wordclouds",
+    "href": "week02.html#wordclouds",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Wordclouds",
+    "text": "Wordclouds\n\nlibrary(wordcloud)\nstarwars |&gt; \n  count(homeworld) |&gt; \n  with(wordcloud(words = homeworld, freq = n, min.freq=1, random.order = FALSE, rot.per = 0,\n                 colors = brewer.pal(6, \"Accent\"), use.r.layout = FALSE))"
+  },
+  {
+    "objectID": "week02.html#raincloud-plots",
+    "href": "week02.html#raincloud-plots",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Raincloud Plots",
+    "text": "Raincloud Plots\n\nstarwars |&gt; \n  mutate(species = fct_lump_n(species,2)) |&gt; \n  filter(!is.na(species)) |&gt; \n  ggplot(aes(x = species)) +\n  geom_point(aes(y = height, colour = species), position = position_jitter(width = .13), size = 1, alpha = 0.6) +\n  see::geom_violinhalf(aes(y = height, alpha= 0.3, fill = species), linetype = \"dashed\", position = position_nudge(x = .2)) +\n  geom_boxplot(aes(y = height, alpha = 0.3, colour = species), position = position_nudge(x = -.1), width = 0.1, outlier.shape = NA) +\n  theme_classic() +\n  labs(x = \"Species\", y = \"Height (cm)\") +\n  theme(legend.position = \"none\") +\n  coord_flip()"
+  },
+  {
+    "objectID": "week02.html#bubble-plots",
+    "href": "week02.html#bubble-plots",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Bubble plots",
+    "text": "Bubble plots\n\nstarwars |&gt;\n  mutate(col = fct_lump_n(species, 2)) |&gt; \n  ggplot(aes(x = birth_year, y = mass, size = height, colour = col)) +\n  geom_point() +\n  scale_size(range = c(.1, 24), name=\"Height\") +\n  theme_classic() +\n  scale_x_continuous(limits = c(0,250)) +\n  scale_y_continuous(limits = c(0,300)) +\n  scale_colour_brewer(palette = \"Accent\", name = \"Species\") +\n  theme(legend.position = \"bottom\") + \n  labs(x = \"Birth  Year (Before Battle of Yavin)\",\n       y = \"Weight (kg)\",\n       title = \"Weight by Age of Characters in Star Wars\")"
+  },
+  {
+    "objectID": "week02.html#correlation-plots",
+    "href": "week02.html#correlation-plots",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Correlation plots",
+    "text": "Correlation plots\n\nstarwars |&gt;\n  select(height, mass, birth_year) |&gt; \n  ggcorrmat()"
+  },
+  {
+    "objectID": "week02.html#data-and-custom-function-for-this-lecture",
+    "href": "week02.html#data-and-custom-function-for-this-lecture",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Data and custom function for this lecture",
+    "text": "Data and custom function for this lecture\n\nlibrary(tidyverse)\n\nheifers &lt;- tibble(heifers = c(211.3, 200.4, 220.1, 200.8, 222.0, 209.3, \n             195.8, 220.4, 226.2, 218.7, 193.7, 209.7))\n\n\n\nwage &lt;- readxl::read_excel(\"assets/UKWageData2023ONS.xlsx\", \n                           skip = 5)\n\nfind_mode &lt;- function(x) {\n  ux &lt;- unique(x)\n  tab &lt;- tabulate(match(x, ux))\n  ux[tab == max(tab)]\n}"
+  },
+  {
+    "objectID": "week02.html#finding-central-tendency",
+    "href": "week02.html#finding-central-tendency",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Finding central tendency",
+    "text": "Finding central tendency\n\nheifers |&gt; \n  summarise(mean = mean(heifers),\n            median = median(heifers),\n            min = min(heifers),\n            max = max(heifers),\n            mode = find_mode(round(heifers, 0)))\n\n# A tibble: 1 × 5\n   mean median   min   max  mode\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1  211.   210.  194.  226.   220\n\nwage |&gt; \n  summarise(mean = mean(Median),\n            median = median(Median),\n            min = min(Median),\n            max = max(Median),\n            mode = find_mode(round(Median,0)))\n\n# A tibble: 4 × 5\n    mean median   min   max  mode\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 34475.  31988 17859 84131 28216\n2 34475.  31988 17859 84131 35248\n3 34475.  31988 17859 84131 26000\n4 34475.  31988 17859 84131 25000"
+  },
+  {
+    "objectID": "week02.html#the-mean-and-outliers",
+    "href": "week02.html#the-mean-and-outliers",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "The Mean and Outliers",
+    "text": "The Mean and Outliers\n\nheifers |&gt; \n  ggplot(aes(x = heifers)) +\n  geom_density(fill = \"#bb9cd1\") +\n  theme_classic() +\n  labs(x = \"Heifer Weight (kg)\",\n       y = \"Density\")\n\n\n\nheifers |&gt; \n  ggplot(aes(x = heifers)) +\n  geom_density(fill = \"#bb9cd1\") +\n  geom_vline(aes(xintercept = 210.7)) +\n  theme_classic() +\n  labs(x = \"Heifer Weight (kg)\",\n       y = \"Density\")"
+  },
+  {
+    "objectID": "week02.html#mean-uk-salary",
+    "href": "week02.html#mean-uk-salary",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Mean UK Salary",
+    "text": "Mean UK Salary\n\nwage |&gt; \n  ggplot(aes(x = Median)) +\n  geom_density(fill = \"#bb9cd1\") +\n  theme_classic() +\n  geom_vline(aes(xintercept = 34475)) +\n  labs(x = \"UK Salaries (£)\",\n       y = \"Density\",\n       title = \"Distribution of UK Salaries\",\n       caption = \"Data taken from ONS 2023 Median Salaries by Field, n = 329 fields\")"
+  },
+  {
+    "objectID": "week02.html#the-mode",
+    "href": "week02.html#the-mode",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "The Mode",
+    "text": "The Mode\n\nheifers |&gt; \n  ggplot(aes(x = heifers)) +\n  geom_histogram(fill = \"#bb9cd1\", binwidth = 1) +\n  geom_vline(aes(xintercept = 220)) +\n  theme_classic() +\n  labs(x = \"Heifer Weight (kg)\",\n       y = \"Density\")"
+  },
+  {
+    "objectID": "week02.html#multiple-modes",
+    "href": "week02.html#multiple-modes",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Multiple Modes",
+    "text": "Multiple Modes\n\nwage |&gt; \n  ggplot(aes(x = Median)) +\n  geom_histogram(fill = \"#bb9cd1\", bins = 200) +\n  geom_vline(aes(xintercept = 25000)) +\n  geom_vline(aes(xintercept = 26000)) +\n  geom_vline(aes(xintercept = 28216)) +\n  geom_vline(aes(xintercept = 35248)) +\n  theme_classic() +\n  labs(x = \"UK Salaries (£)\",\n       y = \"Count\")"
+  },
+  {
+    "objectID": "week02.html#the-median",
+    "href": "week02.html#the-median",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "The Median",
+    "text": "The Median\n\nheifers |&gt; \n  ggplot(aes(x = heifers)) +\n  geom_density(fill = \"#bb9cd1\") +\n  geom_vline(aes(xintercept = 210)) +\n  theme_classic() +\n  labs(x = \"Heifer Weight (kg)\",\n       y = \"Density\")"
+  },
+  {
+    "objectID": "week02.html#median-uk-salary",
+    "href": "week02.html#median-uk-salary",
+    "title": "3  Week 2: The Use and Abuse of Data",
+    "section": "Median UK Salary",
+    "text": "Median UK Salary\n\nwage |&gt; \n  ggplot(aes(x = Median)) +\n  geom_density(fill = \"#bb9cd1\") +\n  theme_classic() +\n  geom_vline(aes(xintercept = 34475), colour = \"lightblue\") +\n  geom_vline(aes(xintercept = 31988),colour = \"purple\") +\n  labs(x = \"UK Salaries (£)\",\n       y = \"Density\",\n       title = \"Distribution of UK Salaries\",\n       caption = \"Data taken from ONS 2023 Median Salaries by Field, n = 329 fields\")"
   },
   {
     "objectID": "week03.html#introduction-to-statistics",
     "href": "week03.html#introduction-to-statistics",
-    "title": "4  Week 3",
+    "title": "4  Week 3: Introduction to Analyses",
     "section": "4.1 Introduction to statistics",
-    "text": "4.1 Introduction to statistics\nSet up your environment and packages\n\nlibrary(tidyverse)\nlibrary(easystats)\n\n\ncat_weights &lt;- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),\n                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3))"
+    "text": "4.1 Introduction to statistics\n\n4.1.1 Set up your environment and packages\n\nlibrary(tidyverse)\nlibrary(easystats)\nlibrary(rstan)\nlibrary(rstanarm)\n\ncat_weights &lt;- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),\n                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3),\n                      environ = c(\"Indoor\", \"Indoor\", \"Outdoor\", \"Indoor\",\n                                  \"Outdoor\", \"Indoor\", \"Outdoor\", \"Indoor\",\n                                  \"Indoor\", \"Indoor\", \"Outdoor\", \"Indoor\",\n                                  \"Outdoor\", \"Indoor\", \"Indoor\", \"Outdoor\"))\n\n\n\n4.1.2 Example data\n\ncat_weights |&gt; \n  summarise(\"Mean Weight (kg)\" = mean(weight),\n            \"SD Weight (kg)\" = sd(weight),\n            \"Mean Daily Snacks\" = mean (avg_daily_snacks),\n            )\n\n# A tibble: 1 × 3\n  `Mean Weight (kg)` `SD Weight (kg)` `Mean Daily Snacks`\n               &lt;dbl&gt;            &lt;dbl&gt;               &lt;dbl&gt;\n1               3.92            0.373                1.81\n\n\n\n\n4.1.3 Visualise\n\ncat_weights |&gt; \n  ggplot(aes(x = avg_daily_snacks, y = weight)) +\n  geom_point() +\n  labs(x = \"Average Daily Snacks\", y = \"Cat Weight\") +\n  theme_classic() +\n  scale_y_continuous(limits = c(0,5))\n\n\n\n4.1.4 A Linear Model\n\nmodel_fcat &lt;- lm(weight ~ avg_daily_snacks, data = cat_weights)\nsummary(model_fcat)\nreport::report(model_fcat)\nparameters(model_fcat) \nplot(model_parameters(model_fcat), show_intercept = TRUE)\nplot(model_parameters(model_fcat))\n\ncat_weights |&gt; \n  ggplot(aes(x = avg_daily_snacks, y = weight)) +\n  geom_point() +\n  labs(x = \"Average Daily Snacks\", y = \"Cat Weight\",\n       caption = \"Weight ~ Average Daily Snacks shown\") +\n  theme_classic() +\n  scale_y_continuous(limits = c(0,5)) +\n  geom_abline(slope = 0.20, intercept = 3.55)\n\n\n\n4.1.5 A Bayesian Model\n\nmodel_bcat &lt;- stan_glm(weight ~ avg_daily_snacks, data = cat_weights)\nsummary(model_bcat)\ndescribe_posterior(model_bcat)\nreport::report(model_bcat)\n\nposteriors &lt;- get_parameters(model_bcat)\n\nposteriors |&gt; \n  ggplot(aes(x = avg_daily_snacks)) +\n  geom_density(fill = \"lightblue\") +\n  theme_classic() +\n  labs(x = \"Posterior Coefficient Estimates for Average Daily Snacks\",\n       y = \"Density\",\n       caption = \"Median Estimate Shown\") +\n  geom_vline(xintercept = 0.21, color = \"darkblue\", linewidth = 1)\n\n\n\n4.1.6 A Linear model with a factor\n\nmodel_fcat2 &lt;- lm(weight ~ avg_daily_snacks + environ, data = cat_weights)\nsummary(model_fcat2)\nreport::report(model_fcat2)\nparameters(model_fcat2)\nplot(model_parameters(model_fcat2), show_intercept = TRUE)\nplot(model_parameters(model_fcat2))\n\n\ncat_weights |&gt; \n  ggplot(aes(x = avg_daily_snacks, y = weight, colour = environ)) +\n  geom_point() +\n  labs(x = \"Average Daily Snacks\", y = \"Cat Weight\",\n       caption = \"Weight ~ Average Daily Snacks shown\") +\n  theme_classic() +\n  scale_y_continuous(limits = c(0,5)) +\n  geom_smooth()\n\n\n\n4.1.7 Bayesian Framework\n\nmodel_bcat2 &lt;- stan_glm(weight ~ avg_daily_snacks + environ, data = cat_weights)\nsummary(model_bcat2)\ndescribe_posterior(model_bcat2) \nreport::report(model_bcat2)\n\nposteriors2 &lt;- get_parameters(model_bcat2)\n\n\nposteriors2 |&gt; \n  pivot_longer(cols = c(avg_daily_snacks, environOutdoor),\n               names_to = \"Parameter\",\n               values_to=\"estimate\") |&gt; \n  ggplot() +\n  geom_density(aes(x = estimate, fill = Parameter)) +\n  theme_classic() +\n  labs(x = \"Posterior Coefficient Estimates\",\n       y = \"Density\") +\n  facet_wrap(facets = ~Parameter, ncol = 1) +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "week03.html#meta-analyses",
+    "href": "week03.html#meta-analyses",
+    "title": "4  Week 3: Introduction to Analyses",
+    "section": "4.2 Meta Analyses",
+    "text": "4.2 Meta Analyses\nCalculate rs from R2\n\nsqrt(0.11)"
+  },
+  {
+    "objectID": "week03.html#effect-sizes",
+    "href": "week03.html#effect-sizes",
+    "title": "4  Week 3: Introduction to Analyses",
+    "section": "4.3 Effect Sizes",
+    "text": "4.3 Effect Sizes\nMock Data and visualisation\n\njob_dat &lt;- tibble(job = c(\"vet\", \"vet\", \"vet\",\"vet\", \"vet\", \"vet\", \"vet\", \"vet\", \"vet\", \"vet\",\n                          \"assc\", \"assc\", \"assc\", \"assc\", \"assc\", \"assc\", \"assc\", \"assc\", \"assc\", \"assc\"),\n                  burnout = c(13, 12, 4, 16, 16, 20, 8, 10, 11, 10,\n                              10, 11, 8, 7, 8, 10, 9, 11, 17, 10),\n                  empathy = c(4, 5, 1, 4,3, 5, 2, 3,3,2,\n                              2, 3, 3, 2, 2, 3, 3, 4, 5, 2),\n                  satisfaction = c(\"yes\", \"no\", \"no\", \"no\", \"yes\", \"no\", \"yes\", \"no\", \"yes\", \"yes\",\n                                   \"yes\", \"yes\", \"yes\", \"no\", \"yes\", \"yes\", \"yes\",\"no\", \"yes\", \"yes\"))\n\n\njob_dat |&gt; \n  ggplot(aes(x = burnout, y = empathy, shape = job, colour = satisfaction)) +\n  geom_point() +\n  theme_classic() +\n  labs(title = \"Burnout and empathy scores for vets and associated professions\",\n       subtitle = \"Job Satisfaction shown\",\n       caption = \"Mock data for teaching\",\n       x = \"Burnout Score\",\n       y = \"Empathy Score\") +\n  scale_shape_discrete(name = \"Vet or Associated Profession\") +\n  scale_color_discrete(name = \"Satisfied with job?\") \n\n\n\n\n\n\n\n4.3.0.1 Calculcate Cohen’s d\n\nlibrary(effsize)\n\ncohen.d(d = job_dat$burnout, f = job_dat$job)\n\n\nCohen's d\n\nd estimate: -0.5048995 (medium)\n95 percent confidence interval:\n     lower      upper \n-1.4593128  0.4495138"
   },
   {
     "objectID": "week04.html",
     "href": "week04.html",
-    "title": "5  Week 4",
+    "title": "5  Week 4: Considerations for Collecting Data",
     "section": "",
     "text": "6 Lecture 2 - Why do we model\nThis code will help you replicate the stats in Lecture 2\n\nlibrary(tidyverse)\nlibrary(report)\n\n\n\n\ncat_weights &lt;- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),\n                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3))\n\nCreate the first plot\nNote the changes to the y scale\n\ncat_weights |&gt; \n  ggplot(aes(x = avg_daily_snacks, y = weight)) +\n  geom_point() +\n  labs(x = \"Average Daily Snacks\", y = \"Cat Weight\") +\n  theme_classic() +\n  scale_y_continuous(limits = c(0,5))"
+  },
+  {
+    "objectID": "week05.html",
+    "href": "week05.html",
+    "title": "6  Week 5: Sources of Data",
+    "section": "",
+    "text": "This week has no content yet, please check back later!"
+  },
+  {
+    "objectID": "week06.html",
+    "href": "week06.html",
+    "title": "7  Week 6: Analysing Qualitative Data",
+    "section": "",
+    "text": "This week has no content yet, please check back later!"
+  },
+  {
+    "objectID": "week07.html",
+    "href": "week07.html",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "",
+    "text": "This week has no content yet, please check back later!"
+  },
+  {
+    "objectID": "week089.html",
+    "href": "week089.html",
+    "title": "9  Weeks 8 & 9: Analytical Softwares",
+    "section": "",
+    "text": "This week has no content yet, please check back later!"
+  },
+  {
+    "objectID": "week10.html",
+    "href": "week10.html",
+    "title": "10  Week 10: Project Proposals",
+    "section": "",
+    "text": "This week has no content yet, please check back later!"
+  },
+  {
+    "objectID": "refs.html",
+    "href": "refs.html",
+    "title": "11  References",
+    "section": "",
+    "text": "References\nThe cover image duck comes from Pixabay, as a Creative Commons 0 image by Clker-Free-Vector-Images-3736\n\n\nBrilleman, SL, MJ Crowther, M Moreno-Betancur, J Buros Novik, and R\nWolfe. 2018. “Joint Longitudinal and Time-to-Event Models via\nStan.” https://github.com/stan-dev/stancon_talks/.\n\n\nFellows, Ian. 2018. Wordcloud: Word Clouds. https://CRAN.R-project.org/package=wordcloud.\n\n\nLüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Brenton M.\nWiernik, and Dominique Makowski. 2022. “Easystats: Framework for\nEasy Statistical Modeling, Visualization, and Reporting.”\nCRAN. https://easystats.github.io/easystats/.\n\n\nPatil, Indrajeet. 2021. “Visualizations with\nstatistical details: The ’ggstatsplot’\napproach.” Journal of Open Source\nSoftware 6 (61): 3167. https://doi.org/10.21105/joss.03167.\n\n\nStan Development Team. 2023. “RStan: The\nR Interface to Stan.” https://mc-stan.org/.\n\n\nTorchiano, Marco. 2020. Effsize: Efficient Effect Size\nComputation. https://doi.org/10.5281/zenodo.1480624.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the tidyverse.”\nJournal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nZeileis, Achim, David Meyer, and Kurt Hornik. 2007.\n“Residual-Based Shadings for Visualizing (Conditional)\nIndependence.” Journal of Computational and Graphical\nStatistics 16 (3): 507–25. https://doi.org/10.1198/106186007X237856."
   }
 ]

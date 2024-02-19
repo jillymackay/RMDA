@@ -1,0 +1,15 @@
+---
+title: "References"
+format: html
+editor: source
+---
+
+# References {.unnumbered}
+
+The cover image duck comes from [Pixabay](https://pixabay.com/vectors/duck-mallard-bird-wings-feathers-47864/), as a Creative Commons 0 image by Clker-Free-Vector-Images-3736
+
+
+::: {#refs}
+:::
+
+

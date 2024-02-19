@@ -72,6 +72,25 @@ starwars |>
   geom_smooth(method = lm, se = FALSE)
 
 
+
+starwars |> 
+  filter(species == "Human") |> 
+  ggplot(aes(x = height, y = mass, colour = sex)) +
+  geom_point() +
+  theme_classic() +
+  scale_x_continuous(limits = c(0,250)) +
+  scale_y_continuous(limits = c(0,150)) +
+  scale_colour_brewer(palette = "Accent", name = "Sex") +
+  theme(legend.position = "bottom") + 
+  labs(x = "Height (cm)",
+       y = "Weight (kg)",
+       title = "Height and Weight of Human Characters in Star Wars by Sex",
+       caption = "My height and weight as reference") +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_vline(xintercept = 157.48) +
+  geom_hline(yintercept = 72)
+
+
 starwars |> 
   filter(species == "Human") |> 
   mutate(BMI = case_when((mass/(height^2)) > 25 ~ "High BMI",
@@ -635,6 +654,58 @@ posteriors2 |>
 
 bayesfactor(model_bcat2)
 interpret_bf(0.431)
+
+
+
+
+
+
+# Week 3
+# Meta analysis
+
+sqrt(0.11)
+
+
+
+# Effect sizes
+
+job_dat <- tibble(job = c("vet", "vet", "vet","vet", "vet", "vet", "vet", "vet", "vet", "vet",
+                          "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc"),
+                  burnout = c(13, 12, 4, 16, 16, 20, 8, 10, 11, 10,
+                              10, 11, 8, 7, 8, 10, 9, 11, 17, 10),
+                  empathy = c(4, 5, 1, 4,3, 5, 2, 3,3,2,
+                              2, 3, 3, 2, 2, 3, 3, 4, 5, 2),
+                  satisfaction = c("yes", "no", "no", "no", "yes", "no", "yes", "no", "yes", "yes",
+                                   "yes", "yes", "yes", "no", "yes", "yes", "yes","no", "yes", "yes"))
+
+
+job_dat |> 
+  ggplot(aes(x = burnout, y = empathy, shape = job, colour = satisfaction)) +
+  geom_point() +
+  theme_classic() +
+  labs(title = "Burnout and empathy scores for vets and associated professions",
+       subtitle = "Job Satisfaction shown",
+       caption = "Mock data for teaching",
+       x = "Burnout Score",
+       y = "Empathy Score") +
+  scale_shape_discrete(name = "Vet or Associated Profession") +
+  scale_color_discrete(name = "Satisfied with job?") 
+
+
+job_dat |> 
+  group_by(job, satisfaction) |> 
+  tally()
+
+
+job_dat |> 
+  group_by(job) |> 
+  summarise(mean = mean(burnout),
+            sd = sd(burnout))
+
+
+library(effsize)
+
+cohen.d(d = job_dat$burnout, f = job_dat$job)
 
 
 # Week 4 
