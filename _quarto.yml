@@ -8,7 +8,8 @@ book:
   author: "Jill R D MacKay"
   search: true
   downloads: [pdf, epub]
-  date: "`r Sys.Date()`"
+  date: last-modified
+  date-format: "YYYY-MM-DD"
   chapters:
     - index.qmd
     - week01.qmd
@@ -34,5 +35,3 @@ format:
   epub:
     cover-image: "assets/cover.png"
     
-commentS:
-  hypothesis: true
