@@ -9,7 +9,13 @@ execute:
   message: FALSE
 ---
 
-```{r, "Week 3 Set Up", eval = TRUE, echo = FALSE}
+```{r, "Week 3 Set Up"}
+#| eval: TRUE
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+
 library(tidyverse)
 library(easystats)
 library(effsize)
@@ -36,9 +42,9 @@ job_dat <- tibble(job = c("vet", "vet", "vet","vet", "vet", "vet", "vet", "vet",
 
 
 
-## Introduction to statistics
+# Lecture 2: Introduction to statistics {.unnumbered}
 
-### Set up your environment and packages
+## Set up your environment and packages {.unnumbered}
 
 ```{r, echo = TRUE, eval = FALSE}
 library(tidyverse)

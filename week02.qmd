@@ -1,7 +1,7 @@
 ---
 title: "Week 2: The Use and Abuse of Data"
 format: html
-editor: visual
+editor: source
 execute: 
   eval: FALSE
   echo: TRUE
@@ -31,11 +31,11 @@ wage <- readxl::read_excel("assets/UKWageData2023ONS.xlsx",
 
 ```
 
-# Lecture 2: Data Visualisation   {.unnumbered}
+# Lecture 2: Data Visualisation {.unnumbered}
 
 This code will help you replicate the charts in Lecture 2
 
-## Height vs Weight by Sex  {.unnumbered}
+## Height vs Weight by Sex {.unnumbered}
 
 ```{r, eval = TRUE}
 
@@ -54,7 +54,6 @@ starwars |>
 
 ```
 
-
 ## Histogram of male height {.unnumbered}
 
 ```{r, eval = TRUE}
@@ -70,7 +69,6 @@ starwars |>
 
 ```
 
-
 ## Density plot of male height {.unnumbered}
 
 ```{r, eval = TRUE}
@@ -85,7 +83,6 @@ starwars |>
        title = "Density plot of height of male human Star Wars characters")
 
 ```
-
 
 ## Boxplot of height {.unnumbered}
 
@@ -125,6 +122,7 @@ starwars |>
 ```
 
 ## Mosaic Plot {.unnumbered}
+
 ```{r, eval = TRUE}
 
 
@@ -140,7 +138,6 @@ mosaic(~ Species + EyeColour, data = startbl,shade = TRUE, legend = TRUE)
 
 
 ```
-
 
 ## Pie Charts are Just Bad Bar Charts {.unnumbered}
 
@@ -169,7 +166,6 @@ starwars |>
 
 ```
 
-
 ## Wordclouds {.unnumbered}
 
 ```{r, eval = TRUE}
@@ -180,7 +176,6 @@ starwars |>
                  colors = brewer.pal(6, "Accent"), use.r.layout = FALSE))
 
 ```
-
 
 ## Raincloud Plots {.unnumbered}
 
@@ -221,6 +216,7 @@ starwars |>
 ```
 
 ## Correlation plots {.unnumbered}
+
 ```{r, eval = TRUE}
 starwars |>
   select(height, mass, birth_year) |> 
@@ -228,8 +224,6 @@ starwars |>
 
 
 ```
-
-
 
 # Lecture 3: The Mean as a Basic Model {.unnumbered}
 
@@ -279,7 +273,6 @@ wage |>
 
 ```
 
-
 ## The Mean and Outliers {.unnumbered}
 
 ```{r}
@@ -320,7 +313,6 @@ wage |>
 
 ```
 
-
 ## The Mode {.unnumbered}
 
 ```{r}
@@ -357,8 +349,8 @@ wage |>
 
 ```
 
-
 ## The Median {.unnumbered}
+
 ```{r}
 #| eval: true
 
@@ -375,7 +367,6 @@ heifers |>
 ```
 
 ## Median UK Salary {.unnumbered}
-
 
 ```{r}
 #| eval: true
