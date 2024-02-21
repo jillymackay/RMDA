@@ -480,6 +480,34 @@ wage |>
 library(tidyverse)
 
 
+resid <- tibble(x = c(1, 2, 3),
+                y = c(3, 2, 6))
+
+resid |> 
+  ggplot(aes(x, y)) +
+  geom_point(size = 4, colour = "lightblue") +
+  theme_classic() +
+  geom_hline(yintercept = 3.67) +
+  labs(title = "Plot of 3 points, mean of y shown") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.x = element_blank())
+
+resid |> 
+  ggplot(aes(x, y)) +
+  geom_point(size = 4, colour = "lightblue") +
+  theme_classic() +
+  geom_hline(yintercept = 3.67) +
+  geom_segment(aes(x = 1, y = 3.67, xend = 1, yend = 3)) +
+  geom_segment(aes(x = 2, y = 3.67, xend = 2, yend = 2)) +
+  geom_segment(aes(x = 3, y = 3.67, xend = 3, yend = 6)) +
+  labs(title = "Plot of 3 points, mean of y shown, residuals shown") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.x = element_blank())
+
+
+
 vardat <- tibble(cat = c(13, 17, 30, 36, 11, 43, 23, 50, 19, 23),
                  dog = c(30, 31, 45, 43, 48, 50, 37, 32, 40, 44))
 std.error <- function(x) sd(x)/sqrt(length(x))
@@ -700,12 +728,19 @@ job_dat |>
 job_dat |> 
   group_by(job) |> 
   summarise(mean = mean(burnout),
-            sd = sd(burnout))
+            sd = sd(burnout),
+            min = min(burnout),
+            max = max(burnout))
 
 
 library(effsize)
 
 cohen.d(d = job_dat$burnout, f = job_dat$job)
+
+cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
+
+cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
+
 
 
 # Week 4 

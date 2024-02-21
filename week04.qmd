@@ -1,7 +1,7 @@
 ---
 title: "Week 4: Considerations for Collecting Data"
 format: html
-editor: visual
+editor: source
 execute: 
   eval: FALSE
   echo: TRUE
@@ -22,36 +22,66 @@ cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 
 
 ```
 
-# Lecture 2 - Why do we model
 
-This code will help you replicate the stats in Lecture 2
+
+# Lecture: Effect Sizes and Covariance {.unnumbered}
+
+
+## Mock Data and visualisation {.unnumbered}
+
 
 ```{r}
-library(tidyverse)
-library(report)
+#| echo: true
+#| eval: true
 
 
+job_dat <- tibble(job = c("vet", "vet", "vet","vet", "vet", "vet", "vet", "vet", "vet", "vet",
+                          "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc", "assc"),
+                  burnout = c(13, 12, 4, 16, 16, 20, 8, 10, 11, 10,
+                              10, 11, 8, 7, 8, 10, 9, 11, 17, 10),
+                  empathy = c(4, 5, 1, 4,3, 5, 2, 3,3,2,
+                              2, 3, 3, 2, 2, 3, 3, 4, 5, 2),
+                  satisfaction = c("yes", "no", "no", "no", "yes", "no", "yes", "no", "yes", "yes",
+                                   "yes", "yes", "yes", "no", "yes", "yes", "yes","no", "yes", "yes"))
 
 
-cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 1, 2, 1, 3),
-                      weight = c(3.8, 3.9, 5, 3.7,  4.1, 3.6, 3.7, 3.6, 3.8, 4.1, 4.3, 3.9, 3.7, 3.8, 3.5, 4.3))
-
-
-```
-
-Create the first plot
-
-Note the changes to the y scale
-
-```{r, eval = TRUE}
-
-
-cat_weights |> 
-  ggplot(aes(x = avg_daily_snacks, y = weight)) +
+job_dat |> 
+  ggplot(aes(x = burnout, y = empathy, shape = job, colour = satisfaction)) +
   geom_point() +
-  labs(x = "Average Daily Snacks", y = "Cat Weight") +
   theme_classic() +
-  scale_y_continuous(limits = c(0,5))
+  labs(title = "Burnout and empathy scores for vets and associated professions",
+       subtitle = "Job Satisfaction shown",
+       caption = "Mock data for teaching",
+       x = "Burnout Score",
+       y = "Empathy Score") +
+  scale_shape_discrete(name = "Vet or Associated Profession") +
+  scale_color_discrete(name = "Satisfied with job?") 
+
+
+
 
 
 ```
+
+
+
+## Calculcate Cohen's d {.unnumbered}
+
+```{r}
+#| eval: TRUE
+library(effsize)
+
+cohen.d(d = job_dat$burnout, f = job_dat$job)
+
+```
+
+
+## Calculcate Hedge's g {.unnumbered}
+
+```{r}
+#| eval: TRUE
+
+cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
+
+```
+

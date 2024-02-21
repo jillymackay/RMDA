@@ -231,16 +231,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#set-up-your-environment-and-packages" id="toc-set-up-your-environment-and-packages" class="nav-link" data-scroll-target="#set-up-your-environment-and-packages">Set up your environment and packages</a>
   <ul class="collapse">
-  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data"><span class="header-section-number">4.0.1</span> Example data</a></li>
-  <li><a href="#visualise" id="toc-visualise" class="nav-link" data-scroll-target="#visualise"><span class="header-section-number">4.0.2</span> Visualise</a></li>
-  <li><a href="#a-linear-model" id="toc-a-linear-model" class="nav-link" data-scroll-target="#a-linear-model"><span class="header-section-number">4.0.3</span> A Linear Model</a></li>
-  <li><a href="#a-bayesian-model" id="toc-a-bayesian-model" class="nav-link" data-scroll-target="#a-bayesian-model"><span class="header-section-number">4.0.4</span> A Bayesian Model</a></li>
-  <li><a href="#a-linear-model-with-a-factor" id="toc-a-linear-model-with-a-factor" class="nav-link" data-scroll-target="#a-linear-model-with-a-factor"><span class="header-section-number">4.0.5</span> A Linear model with a factor</a></li>
-  <li><a href="#bayesian-framework" id="toc-bayesian-framework" class="nav-link" data-scroll-target="#bayesian-framework"><span class="header-section-number">4.0.6</span> Bayesian Framework</a></li>
+  <li><a href="#summarise-example-data" id="toc-summarise-example-data" class="nav-link" data-scroll-target="#summarise-example-data">Summarise example data</a></li>
+  <li><a href="#visualise-example-data" id="toc-visualise-example-data" class="nav-link" data-scroll-target="#visualise-example-data">Visualise example data</a></li>
+  <li><a href="#a-linear-model" id="toc-a-linear-model" class="nav-link" data-scroll-target="#a-linear-model">A Linear Model</a></li>
+  <li><a href="#a-bayesian-model" id="toc-a-bayesian-model" class="nav-link" data-scroll-target="#a-bayesian-model">A Bayesian Model</a></li>
+  <li><a href="#a-linear-model-with-a-factor" id="toc-a-linear-model-with-a-factor" class="nav-link" data-scroll-target="#a-linear-model-with-a-factor">A Linear model with a factor</a></li>
+  <li><a href="#bayesian-framework" id="toc-bayesian-framework" class="nav-link" data-scroll-target="#bayesian-framework">Bayesian Framework</a></li>
   </ul></li>
-  <li><a href="#meta-analyses" id="toc-meta-analyses" class="nav-link" data-scroll-target="#meta-analyses"><span class="header-section-number">4.1</span> Meta Analyses</a></li>
-  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes"><span class="header-section-number">4.2</span> Effect Sizes</a></li>
   </ul></li>
+  <li><a href="#lecture-calculating-variance" id="toc-lecture-calculating-variance" class="nav-link" data-scroll-target="#lecture-calculating-variance">Lecture: Calculating variance</a>
+  <ul class="collapse">
+  <li><a href="#why-does-it-matter" id="toc-why-does-it-matter" class="nav-link" data-scroll-target="#why-does-it-matter">Why does it matter?</a></li>
+  <li><a href="#residuals" id="toc-residuals" class="nav-link" data-scroll-target="#residuals">Residuals</a></li>
+  <li><a href="#adding-the-residuals" id="toc-adding-the-residuals" class="nav-link" data-scroll-target="#adding-the-residuals">Adding the residuals</a></li>
+  <li><a href="#compare-variances" id="toc-compare-variances" class="nav-link" data-scroll-target="#compare-variances">Compare Variances</a></li>
+  <li><a href="#compare-standard-deviations" id="toc-compare-standard-deviations" class="nav-link" data-scroll-target="#compare-standard-deviations">Compare Standard Deviations</a></li>
+  <li><a href="#compare-standard-errors" id="toc-compare-standard-errors" class="nav-link" data-scroll-target="#compare-standard-errors">Compare Standard Errors</a></li>
+  </ul></li>
+  <li><a href="#lecture-meta-analyses" id="toc-lecture-meta-analyses" class="nav-link" data-scroll-target="#lecture-meta-analyses">Lecture: Meta Analyses</a></li>
   </ul>
 </nav>
     </div>
@@ -281,8 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Indoor"</span>, <span class="st">"Indoor"</span>, <span class="st">"Outdoor"</span>, <span class="st">"Indoor"</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Outdoor"</span>, <span class="st">"Indoor"</span>, <span class="st">"Indoor"</span>, <span class="st">"Outdoor"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="example-data" class="level3" data-number="4.0.1">
-<h3 data-number="4.0.1" class="anchored" data-anchor-id="example-data"><span class="header-section-number">4.0.1</span> Example data</h3>
+<section id="summarise-example-data" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="summarise-example-data">Summarise example data</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Mean Weight (kg)"</span> <span class="ot">=</span> <span class="fu">mean</span>(weight),</span>
@@ -297,8 +305,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="visualise" class="level3" data-number="4.0.2">
-<h3 data-number="4.0.2" class="anchored" data-anchor-id="visualise"><span class="header-section-number">4.0.2</span> Visualise</h3>
+<section id="visualise-example-data" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="visualise-example-data">Visualise example data</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
@@ -306,152 +314,878 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Daily Snacks"</span>, <span class="at">y =</span> <span class="st">"Cat Weight"</span>) <span class="sc">+</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="a-linear-model" class="level3" data-number="4.0.3">
-<h3 data-number="4.0.3" class="anchored" data-anchor-id="a-linear-model"><span class="header-section-number">4.0.3</span> A Linear Model</h3>
+<section id="a-linear-model" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-linear-model">A Linear Model</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model_fcat <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> avg_daily_snacks, <span class="at">data =</span> cat_weights)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_fcat)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_fcat)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span>(model_fcat) </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat), <span class="at">show_intercept =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Daily Snacks"</span>, <span class="at">y =</span> <span class="st">"Cat Weight"</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Weight ~ Average Daily Snacks shown"</span>) <span class="sc">+</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fl">0.20</span>, <span class="at">intercept =</span> <span class="fl">3.55</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_fcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = weight ~ avg_daily_snacks, data = cat_weights)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.36758 -0.18723 -0.06116  0.06705  0.62813 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       3.55474    0.14045  25.309 4.33e-13 ***
+avg_daily_snacks  0.20428    0.06576   3.107  0.00773 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2973 on 14 degrees of freedom
+Multiple R-squared:  0.4081,    Adjusted R-squared:  0.3658 
+F-statistic: 9.652 on 1 and 14 DF,  p-value: 0.007729</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_fcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We fitted a linear model (estimated using OLS) to predict weight with
+avg_daily_snacks (formula: weight ~ avg_daily_snacks). The model explains a
+statistically significant and substantial proportion of variance (R2 = 0.41,
+F(1, 14) = 9.65, p = 0.008, adj. R2 = 0.37). The model's intercept,
+corresponding to avg_daily_snacks = 0, is at 3.55 (95% CI [3.25, 3.86], t(14) =
+25.31, p &lt; .001). Within this model:
+
+  - The effect of avg daily snacks is statistically significant and positive
+(beta = 0.20, 95% CI [0.06, 0.35], t(14) = 3.11, p = 0.008; Std. beta = 0.64,
+95% CI [0.20, 1.08])
+
+Standardized parameters were obtained by fitting the model on a standardized
+version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+computed using a Wald t-distribution approximation.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span>(model_fcat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parameter        | Coefficient |   SE |       95% CI | t(14) |      p
+---------------------------------------------------------------------
+(Intercept)      |        3.55 | 0.14 | [3.25, 3.86] | 25.31 | &lt; .001
+avg daily snacks |        0.20 | 0.07 | [0.06, 0.35] |  3.11 | 0.008 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat), <span class="at">show_intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Daily Snacks"</span>, <span class="at">y =</span> <span class="st">"Cat Weight"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Weight ~ Average Daily Snacks shown"</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="fl">0.20</span>, <span class="at">intercept =</span> <span class="fl">3.55</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="a-bayesian-model" class="level3" data-number="4.0.4">
-<h3 data-number="4.0.4" class="anchored" data-anchor-id="a-bayesian-model"><span class="header-section-number">4.0.4</span> A Bayesian Model</h3>
+<section id="a-bayesian-model" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-bayesian-model">A Bayesian Model</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model_bcat <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(weight <span class="sc">~</span> avg_daily_snacks, <span class="at">data =</span> cat_weights)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_bcat)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_posterior</span>(model_bcat)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_bcat)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>posteriors <span class="ot">&lt;-</span> <span class="fu">get_parameters</span>(model_bcat)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>posteriors <span class="sc">|&gt;</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks)) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Posterior Coefficient Estimates for Average Daily Snacks"</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Median Estimate Shown"</span>) <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>model_bcat <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(weight <span class="sc">~</span> avg_daily_snacks, <span class="at">data =</span> cat_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 5.6e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.56 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.05 seconds (Warm-up)
+Chain 1:                0.053 seconds (Sampling)
+Chain 1:                0.103 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 1.4e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.037 seconds (Warm-up)
+Chain 2:                0.042 seconds (Sampling)
+Chain 2:                0.079 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 1.3e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.046 seconds (Warm-up)
+Chain 3:                0.055 seconds (Sampling)
+Chain 3:                0.101 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 0.000578 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 5.78 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.054 seconds (Warm-up)
+Chain 4:                0.063 seconds (Sampling)
+Chain 4:                0.117 seconds (Total)
+Chain 4: </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_bcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Info:
+ function:     stan_glm
+ family:       gaussian [identity]
+ formula:      weight ~ avg_daily_snacks
+ algorithm:    sampling
+ sample:       4000 (posterior sample size)
+ priors:       see help('prior_summary')
+ observations: 16
+ predictors:   2
+
+Estimates:
+                   mean   sd   10%   50%   90%
+(Intercept)      3.6    0.2  3.4   3.6   3.7  
+avg_daily_snacks 0.2    0.1  0.1   0.2   0.3  
+sigma            0.3    0.1  0.2   0.3   0.4  
+
+Fit Diagnostics:
+           mean   sd   10%   50%   90%
+mean_PPD 3.9    0.1  3.8   3.9   4.1  
+
+The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
+
+MCMC diagnostics
+                 mcse Rhat n_eff
+(Intercept)      0.0  1.0  3066 
+avg_daily_snacks 0.0  1.0  2981 
+sigma            0.0  1.0  2539 
+mean_PPD         0.0  1.0  3573 
+log-posterior    0.0  1.0  1450 
+
+For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_posterior</span>(model_bcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary of Posterior Distribution
+
+Parameter        | Median |       95% CI |     pd |          ROPE | % in ROPE |  Rhat |     ESS
+-----------------------------------------------------------------------------------------------
+(Intercept)      |   3.55 | [3.26, 3.86] |   100% | [-0.04, 0.04] |        0% | 1.001 | 3066.00
+avg_daily_snacks |   0.20 | [0.06, 0.35] | 99.62% | [-0.04, 0.04] |        0% | 1.000 | 2981.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_bcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 1.5e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.15 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.049 seconds (Warm-up)
+Chain 1:                0.058 seconds (Sampling)
+Chain 1:                0.107 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.037 seconds (Warm-up)
+Chain 2:                0.047 seconds (Sampling)
+Chain 2:                0.084 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 1e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.037 seconds (Warm-up)
+Chain 3:                0.047 seconds (Sampling)
+Chain 3:                0.084 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 1e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.038 seconds (Warm-up)
+Chain 4:                0.055 seconds (Sampling)
+Chain 4:                0.093 seconds (Total)
+Chain 4: </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
+of 2000 iterations and a warmup of 1000) to predict weight with
+avg_daily_snacks (formula: weight ~ avg_daily_snacks). Priors over parameters
+were set as normal (mean = 0.00, SD = 0.80) distributions. The model's
+explanatory power is substantial (R2 = 0.38, 95% CI [6.54e-06, 0.62], adj. R2 =
+0.15). The model's intercept, corresponding to avg_daily_snacks = 0, is at 3.55
+(95% CI [3.26, 3.86]). Within this model:
+
+  - The effect of avg daily snacks (Median = 0.20, 95% CI [0.06, 0.35]) has a
+99.62% probability of being positive (&gt; 0), 99.30% of being significant (&gt;
+0.02), and 90.10% of being large (&gt; 0.11). The estimation successfully
+converged (Rhat = 1.000) and the indices are reliable (ESS = 2981)
+
+Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
+framework, we report the median of the posterior distribution and its 95% CI
+(Highest Density Interval), along the probability of direction (pd), the
+probability of significance and the probability of being large. The thresholds
+beyond which the effect is considered as significant (i.e., non-negligible) and
+large are |0.02| and |0.11| (corresponding respectively to 0.05 and 0.30 of the
+outcome's SD). Convergence and stability of the Bayesian sampling has been
+assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
+Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>posteriors <span class="ot">&lt;-</span> <span class="fu">get_parameters</span>(model_bcat)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>posteriors <span class="sc">|&gt;</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks)) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Posterior Coefficient Estimates for Average Daily Snacks"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Median Estimate Shown"</span>) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.21</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="a-linear-model-with-a-factor" class="level3" data-number="4.0.5">
-<h3 data-number="4.0.5" class="anchored" data-anchor-id="a-linear-model-with-a-factor"><span class="header-section-number">4.0.5</span> A Linear model with a factor</h3>
+<section id="a-linear-model-with-a-factor" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-linear-model-with-a-factor">A Linear model with a factor</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model_fcat2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> avg_daily_snacks <span class="sc">+</span> environ, <span class="at">data =</span> cat_weights)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_fcat2)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_fcat2)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span>(model_fcat2)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat2), <span class="at">show_intercept =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat2))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks, <span class="at">y =</span> weight, <span class="at">colour =</span> environ)) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Daily Snacks"</span>, <span class="at">y =</span> <span class="st">"Cat Weight"</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Weight ~ Average Daily Snacks shown"</span>) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model_fcat2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> avg_daily_snacks <span class="sc">+</span> environ, <span class="at">data =</span> cat_weights)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_fcat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = weight ~ avg_daily_snacks + environ, data = cat_weights)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.2678 -0.1897 -0.0700  0.0821  0.5725 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       3.52748    0.13078  26.972 8.49e-13 ***
+avg_daily_snacks  0.16168    0.06512   2.483   0.0275 *  
+environOutdoor    0.27860    0.15203   1.833   0.0899 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.275 on 13 degrees of freedom
+Multiple R-squared:  0.5296,    Adjusted R-squared:  0.4572 
+F-statistic: 7.318 on 2 and 13 DF,  p-value: 0.007431</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_fcat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We fitted a linear model (estimated using OLS) to predict weight with
+avg_daily_snacks and environ (formula: weight ~ avg_daily_snacks + environ).
+The model explains a statistically significant and substantial proportion of
+variance (R2 = 0.53, F(2, 13) = 7.32, p = 0.007, adj. R2 = 0.46). The model's
+intercept, corresponding to avg_daily_snacks = 0 and environ = Indoor, is at
+3.53 (95% CI [3.24, 3.81], t(13) = 26.97, p &lt; .001). Within this model:
+
+  - The effect of avg daily snacks is statistically significant and positive
+(beta = 0.16, 95% CI [0.02, 0.30], t(13) = 2.48, p = 0.027; Std. beta = 0.51,
+95% CI [0.07, 0.95])
+  - The effect of environ [Outdoor] is statistically non-significant and positive
+(beta = 0.28, 95% CI [-0.05, 0.61], t(13) = 1.83, p = 0.090; Std. beta = 0.75,
+95% CI [-0.13, 1.63])
+
+Standardized parameters were obtained by fitting the model on a standardized
+version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+computed using a Wald t-distribution approximation.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span>(model_fcat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parameter         | Coefficient |   SE |        95% CI | t(13) |      p
+-----------------------------------------------------------------------
+(Intercept)       |        3.53 | 0.13 | [ 3.24, 3.81] | 26.97 | &lt; .001
+avg daily snacks  |        0.16 | 0.07 | [ 0.02, 0.30] |  2.48 | 0.027 
+environ [Outdoor] |        0.28 | 0.15 | [-0.05, 0.61] |  1.83 | 0.090 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat2), <span class="at">show_intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">model_parameters</span>(model_fcat2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cat_weights <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_daily_snacks, <span class="at">y =</span> weight, <span class="at">colour =</span> environ)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Daily Snacks"</span>, <span class="at">y =</span> <span class="st">"Cat Weight"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Weight ~ Average Daily Snacks shown"</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="bayesian-framework" class="level3" data-number="4.0.6">
-<h3 data-number="4.0.6" class="anchored" data-anchor-id="bayesian-framework"><span class="header-section-number">4.0.6</span> Bayesian Framework</h3>
+<section id="bayesian-framework" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bayesian-framework">Bayesian Framework</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model_bcat2 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(weight <span class="sc">~</span> avg_daily_snacks <span class="sc">+</span> environ, <span class="at">data =</span> cat_weights)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_bcat2)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_posterior</span>(model_bcat2) </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_bcat2)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>posteriors2 <span class="ot">&lt;-</span> <span class="fu">get_parameters</span>(model_bcat2)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>posteriors2 <span class="sc">|&gt;</span> </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(avg_daily_snacks, environOutdoor),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Parameter"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"estimate"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">fill =</span> Parameter)) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Posterior Coefficient Estimates"</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="sc">~</span>Parameter, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model_bcat2 <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(weight <span class="sc">~</span> avg_daily_snacks <span class="sc">+</span> environ, <span class="at">data =</span> cat_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 1.4e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.063 seconds (Warm-up)
+Chain 1:                0.068 seconds (Sampling)
+Chain 1:                0.131 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 1.6e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.059 seconds (Warm-up)
+Chain 2:                0.044 seconds (Sampling)
+Chain 2:                0.103 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 9e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.058 seconds (Warm-up)
+Chain 3:                0.053 seconds (Sampling)
+Chain 3:                0.111 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 3e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.3 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.055 seconds (Warm-up)
+Chain 4:                0.045 seconds (Sampling)
+Chain 4:                0.1 seconds (Total)
+Chain 4: </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_bcat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Info:
+ function:     stan_glm
+ family:       gaussian [identity]
+ formula:      weight ~ avg_daily_snacks + environ
+ algorithm:    sampling
+ sample:       4000 (posterior sample size)
+ priors:       see help('prior_summary')
+ observations: 16
+ predictors:   3
+
+Estimates:
+                   mean   sd   10%   50%   90%
+(Intercept)      3.5    0.1  3.4   3.5   3.7  
+avg_daily_snacks 0.2    0.1  0.1   0.2   0.2  
+environOutdoor   0.3    0.2  0.1   0.3   0.5  
+sigma            0.3    0.1  0.2   0.3   0.4  
+
+Fit Diagnostics:
+           mean   sd   10%   50%   90%
+mean_PPD 3.9    0.1  3.8   3.9   4.1  
+
+The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
+
+MCMC diagnostics
+                 mcse Rhat n_eff
+(Intercept)      0.0  1.0  3785 
+avg_daily_snacks 0.0  1.0  3047 
+environOutdoor   0.0  1.0  2937 
+sigma            0.0  1.0  2680 
+mean_PPD         0.0  1.0  3807 
+log-posterior    0.0  1.0  1463 
+
+For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_posterior</span>(model_bcat2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary of Posterior Distribution
+
+Parameter        | Median |        95% CI |     pd |          ROPE | % in ROPE |  Rhat |     ESS
+------------------------------------------------------------------------------------------------
+(Intercept)      |   3.53 | [ 3.25, 3.81] |   100% | [-0.04, 0.04] |        0% | 1.000 | 3785.00
+avg_daily_snacks |   0.16 | [ 0.02, 0.30] | 98.90% | [-0.04, 0.04] |     1.55% | 1.001 | 3047.00
+environOutdoor   |   0.28 | [-0.04, 0.62] | 95.65% | [-0.04, 0.04] |     4.18% | 1.000 | 2937.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>report<span class="sc">::</span><span class="fu">report</span>(model_bcat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 1.6e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.043 seconds (Warm-up)
+Chain 1:                0.048 seconds (Sampling)
+Chain 1:                0.091 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 1.1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.11 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.048 seconds (Warm-up)
+Chain 2:                0.039 seconds (Sampling)
+Chain 2:                0.087 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 9e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.044 seconds (Warm-up)
+Chain 3:                0.041 seconds (Sampling)
+Chain 3:                0.085 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 9e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.048 seconds (Warm-up)
+Chain 4:                0.075 seconds (Sampling)
+Chain 4:                0.123 seconds (Total)
+Chain 4: </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
+of 2000 iterations and a warmup of 1000) to predict weight with
+avg_daily_snacks and environ (formula: weight ~ avg_daily_snacks + environ).
+Priors over parameters were all set as normal (mean = 0.00, SD = 0.80; mean =
+0.00, SD = 1.87) distributions. The model's explanatory power is substantial
+(R2 = 0.50, 95% CI [0.17, 0.74], adj. R2 = 0.26). The model's intercept,
+corresponding to avg_daily_snacks = 0 and environ = Indoor, is at 3.53 (95% CI
+[3.25, 3.81]). Within this model:
+
+  - The effect of avg daily snacks (Median = 0.16, 95% CI [0.02, 0.30]) has a
+98.90% probability of being positive (&gt; 0), 97.72% of being significant (&gt;
+0.02), and 76.35% of being large (&gt; 0.11). The estimation successfully
+converged (Rhat = 1.001) and the indices are reliable (ESS = 3047)
+  - The effect of environ [Outdoor] (Median = 0.28, 95% CI [-0.04, 0.62]) has a
+95.65% probability of being positive (&gt; 0), 94.53% of being significant (&gt;
+0.02), and 85.28% of being large (&gt; 0.11). The estimation successfully
+converged (Rhat = 1.000) and the indices are reliable (ESS = 2937)
+
+Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
+framework, we report the median of the posterior distribution and its 95% CI
+(Highest Density Interval), along the probability of direction (pd), the
+probability of significance and the probability of being large. The thresholds
+beyond which the effect is considered as significant (i.e., non-negligible) and
+large are |0.02| and |0.11| (corresponding respectively to 0.05 and 0.30 of the
+outcome's SD). Convergence and stability of the Bayesian sampling has been
+assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
+Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>posteriors2 <span class="ot">&lt;-</span> <span class="fu">get_parameters</span>(model_bcat2)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>posteriors2 <span class="sc">|&gt;</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(avg_daily_snacks, environOutdoor),</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Parameter"</span>,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"estimate"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">fill =</span> Parameter)) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Posterior Coefficient Estimates"</span>,</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="sc">~</span>Parameter, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
 </section>
-<section id="meta-analyses" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="meta-analyses"><span class="header-section-number">4.1</span> Meta Analyses</h2>
-<p>Calculate rs from R2</p>
+</section>
+<section id="lecture-calculating-variance" class="level1 unnumbered">
+<h1 class="unnumbered">Lecture: Calculating variance</h1>
+<section id="why-does-it-matter" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="why-does-it-matter">Why does it matter?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fl">0.11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>vardat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">cat =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">30</span>, <span class="dv">36</span>, <span class="dv">11</span>, <span class="dv">43</span>, <span class="dv">23</span>, <span class="dv">50</span>, <span class="dv">19</span>, <span class="dv">23</span>),</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dog =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">45</span>, <span class="dv">43</span>, <span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">37</span>, <span class="dv">32</span>, <span class="dv">40</span>, <span class="dv">44</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>vardat <span class="sc">|&gt;</span> </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(cat, dog),</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Species"</span>,</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species)) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Score, <span class="at">colour =</span> Species), <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">13</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  see<span class="sc">::</span><span class="fu">geom_violinhalf</span>(<span class="fu">aes</span>(<span class="at">y =</span> Score, <span class="at">fill =</span> Species), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> .<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Score, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">colour =</span> Species), <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span>.<span class="dv">1</span>), <span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Score"</span>) <span class="sc">+</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="effect-sizes" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="effect-sizes"><span class="header-section-number">4.2</span> Effect Sizes</h2>
-<p>Mock Data and visualisation</p>
+<section id="residuals" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="residuals">Residuals</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>job_dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">job =</span> <span class="fu">c</span>(<span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>,<span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>, <span class="st">"vet"</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>, <span class="st">"assc"</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">burnout =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">10</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                              <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">17</span>, <span class="dv">10</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">empathy =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>,<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                              <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">satisfaction =</span> <span class="fu">c</span>(<span class="st">"yes"</span>, <span class="st">"no"</span>, <span class="st">"no"</span>, <span class="st">"no"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>, <span class="st">"yes"</span>, <span class="st">"yes"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"yes"</span>, <span class="st">"yes"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>, <span class="st">"yes"</span>, <span class="st">"yes"</span>, <span class="st">"yes"</span>,<span class="st">"no"</span>, <span class="st">"yes"</span>, <span class="st">"yes"</span>))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>job_dat <span class="sc">|&gt;</span> </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> burnout, <span class="at">y =</span> empathy, <span class="at">shape =</span> job, <span class="at">colour =</span> satisfaction)) <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Burnout and empathy scores for vets and associated professions"</span>,</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Job Satisfaction shown"</span>,</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Mock data for teaching"</span>,</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Burnout Score"</span>,</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Empathy Score"</span>) <span class="sc">+</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_discrete</span>(<span class="at">name =</span> <span class="st">"Vet or Associated Profession"</span>) <span class="sc">+</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Satisfied with job?"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>resid <span class="sc">|&gt;</span> </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">3.67</span>) <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot of 3 points, mean of y shown"</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="week03_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<section id="calculcate-cohens-d" class="level4" data-number="4.2.0.1">
-<h4 data-number="4.2.0.1" class="anchored" data-anchor-id="calculcate-cohens-d"><span class="header-section-number">4.2.0.1</span> Calculcate Cohen’s d</h4>
+</section>
+<section id="adding-the-residuals" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="adding-the-residuals">Adding the residuals</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cohen.d</span>(<span class="at">d =</span> job_dat<span class="sc">$</span>burnout, <span class="at">f =</span> job_dat<span class="sc">$</span>job)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>resid <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">3.67</span>) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">3.67</span>, <span class="at">xend =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fl">3.67</span>, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">yend =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="fl">3.67</span>, <span class="at">xend =</span> <span class="dv">3</span>, <span class="at">yend =</span> <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plot of 3 points, mean of y shown, residuals shown"</span>) <span class="sc">+</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="compare-variances" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="compare-variances">Compare Variances</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>vardat <span class="sc">|&gt;</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_dogs =</span> <span class="fu">var</span>(dog),</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_cat =</span> <span class="fu">var</span>(cat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Cohen's d
-
-d estimate: -0.5048995 (medium)
-95 percent confidence interval:
-     lower      upper 
--1.4593128  0.4495138 </code></pre>
+<pre><code># A tibble: 1 × 2
+  var_dogs var_cat
+     &lt;dbl&gt;   &lt;dbl&gt;
+1       52    169.</code></pre>
 </div>
 </div>
-
-
+</section>
+<section id="compare-standard-deviations" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="compare-standard-deviations">Compare Standard Deviations</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>vardat <span class="sc">|&gt;</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd_dogs =</span> <span class="fu">sd</span>(dog),</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_cat =</span> <span class="fu">sd</span>(cat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  sd_dogs sd_cat
+    &lt;dbl&gt;  &lt;dbl&gt;
+1    7.21   13.0</code></pre>
+</div>
+</div>
+</section>
+<section id="compare-standard-errors" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="compare-standard-errors">Compare Standard Errors</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>std.error <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>vardat <span class="sc">|&gt;</span> </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">se_dogs =</span> <span class="fu">std.error</span>(dog),</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_cat =</span> <span class="fu">std.error</span>(cat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  se_dogs se_cat
+    &lt;dbl&gt;  &lt;dbl&gt;
+1    2.28   4.11</code></pre>
+</div>
+</div>
 </section>
 </section>
+<section id="lecture-meta-analyses" class="level1 unnumbered">
+<h1 class="unnumbered">Lecture: Meta Analyses</h1>
+<p>Calculate rs from R2</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fl">0.11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
