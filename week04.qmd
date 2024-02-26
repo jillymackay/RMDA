@@ -85,3 +85,58 @@ cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
 
 ```
 
+
+## Effects of Differences {.unnumbered}
+
+```{r}
+#| eval: true
+
+job_dat |> 
+  ggplot(aes(x = burnout, y = empathy)) +
+  geom_point() +
+  theme_classic() +
+  labs(x = "Burnout Score", y = "Empathy Score")
+
+
+```
+
+## Correlation coefficient (r) {.unnumbered}
+
+```{r}
+#| eval: true
+
+cor(job_dat$burnout, job_dat$empathy, method = "pearson")
+
+
+```
+
+
+## Other Correlation Coefficients {.unnumbered}
+
+
+```{r}
+#| eval: true
+cor(job_dat$burnout, job_dat$empathy, method = "spearman")
+
+cor.test(job_dat$burnout, as.numeric(as.factor(job_dat$job)))
+
+```
+
+
+## Cramer's V {.unnumbered}
+
+
+```{r}
+#|: eval: true
+
+library(vcd)
+library(lsr)
+
+
+
+job_tbl <- xtabs(~job_dat$burnoutcat + job_dat$job + job_dat$satisfaction)
+chisq.test(ftable(job_tbl))
+cramersV(ftable(job_tbl))
+
+
+```

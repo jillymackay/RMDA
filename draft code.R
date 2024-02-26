@@ -733,6 +733,44 @@ job_dat |>
             max = max(burnout))
 
 
+job_dat |> 
+  ggplot(aes(x = burnout, y = empathy)) +
+  geom_point() +
+  theme_classic() +
+  labs(x = "Burnout Score", y = "Empathy Score") +
+  facet_wrap(facets = ~ job, ncol = 1)
+
+
+job_dat |> 
+  ggplot(aes(x = burnout, y = empathy)) +
+  geom_point() +
+  theme_classic() +
+  labs(x = "Burnout Score", y = "Empathy Score") 
+
+cor(job_dat$burnout, job_dat$empathy, method = "pearson")
+
+
+cor(job_dat$burnout, job_dat$empathy, method = "spearman")
+
+
+cor.test(job_dat$burnout, as.numeric(as.factor(job_dat$job)))
+
+
+job_dat <- job_dat |> 
+  mutate(burnoutcat = case_when(burnout > 10 ~ "burnout",
+                                TRUE ~ "no burnout"))
+
+library(vcd)
+library(lsr)
+
+
+
+job_tbl <- xtabs(~job_dat$burnoutcat + job_dat$job + job_dat$satisfaction)
+ftable(job_tbl)
+job_tbl
+chisq.test(ftable(job_tbl))
+cramersV(ftable(job_tbl))
+
 library(effsize)
 
 cohen.d(d = job_dat$burnout, f = job_dat$job)
