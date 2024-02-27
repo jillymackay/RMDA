@@ -760,14 +760,12 @@ job_dat <- job_dat |>
   mutate(burnoutcat = case_when(burnout > 10 ~ "burnout",
                                 TRUE ~ "no burnout"))
 
-library(vcd)
 library(lsr)
 
 
 
-job_tbl <- xtabs(~job_dat$burnoutcat + job_dat$job + job_dat$satisfaction)
+job_tbl <- xtabs(~job_dat$burnoutcat +  job_dat$satisfaction)
 ftable(job_tbl)
-job_tbl
 chisq.test(ftable(job_tbl))
 cramersV(ftable(job_tbl))
 

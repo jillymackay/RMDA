@@ -127,16 +127,17 @@ cor.test(job_dat$burnout, as.numeric(as.factor(job_dat$job)))
 
 
 ```{r}
-#|: eval: true
+#| eval: true
 
-library(vcd)
 library(lsr)
 
 
 
-job_tbl <- xtabs(~job_dat$burnoutcat + job_dat$job + job_dat$satisfaction)
+job_tbl <- xtabs(~job_dat$burnout +  job_dat$satisfaction)
+ftable(job_tbl)
 chisq.test(ftable(job_tbl))
 cramersV(ftable(job_tbl))
+
 
 
 ```

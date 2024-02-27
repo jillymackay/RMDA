@@ -232,6 +232,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mock-data-and-visualisation" id="toc-mock-data-and-visualisation" class="nav-link" data-scroll-target="#mock-data-and-visualisation">Mock Data and visualisation</a></li>
   <li><a href="#calculcate-cohens-d" id="toc-calculcate-cohens-d" class="nav-link" data-scroll-target="#calculcate-cohens-d">Calculcate Cohen’s d</a></li>
   <li><a href="#calculcate-hedges-g" id="toc-calculcate-hedges-g" class="nav-link" data-scroll-target="#calculcate-hedges-g">Calculcate Hedge’s g</a></li>
+  <li><a href="#effects-of-differences" id="toc-effects-of-differences" class="nav-link" data-scroll-target="#effects-of-differences">Effects of Differences</a></li>
+  <li><a href="#correlation-coefficient-r" id="toc-correlation-coefficient-r" class="nav-link" data-scroll-target="#correlation-coefficient-r">Correlation coefficient (r)</a></li>
+  <li><a href="#other-correlation-coefficients" id="toc-other-correlation-coefficients" class="nav-link" data-scroll-target="#other-correlation-coefficients">Other Correlation Coefficients</a></li>
+  <li><a href="#cramers-v" id="toc-cramers-v" class="nav-link" data-scroll-target="#cramers-v">Cramer’s V</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -316,6 +320,89 @@ g estimate: -0.4835657 (small)
 95 percent confidence interval:
      lower      upper 
 -1.3964834  0.4293519 </code></pre>
+</div>
+</div>
+</section>
+<section id="effects-of-differences" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="effects-of-differences">Effects of Differences</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>job_dat <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> burnout, <span class="at">y =</span> empathy)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Burnout Score"</span>, <span class="at">y =</span> <span class="st">"Empathy Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week04_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="correlation-coefficient-r" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="correlation-coefficient-r">Correlation coefficient (r)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(job_dat<span class="sc">$</span>burnout, job_dat<span class="sc">$</span>empathy, <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7991678</code></pre>
+</div>
+</div>
+</section>
+<section id="other-correlation-coefficients" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="other-correlation-coefficients">Other Correlation Coefficients</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(job_dat<span class="sc">$</span>burnout, job_dat<span class="sc">$</span>empathy, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8202187</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(job_dat<span class="sc">$</span>burnout, <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(job_dat<span class="sc">$</span>job)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  job_dat$burnout and as.numeric(as.factor(job_dat$job))
+t = 1.129, df = 18, p-value = 0.2737
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.2091671  0.6281908
+sample estimates:
+      cor 
+0.2571562 </code></pre>
+</div>
+</div>
+</section>
+<section id="cramers-v" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="cramers-v">Cramer’s V</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lsr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>job_tbl <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>job_dat<span class="sc">$</span>burnout <span class="sc">+</span>  job_dat<span class="sc">$</span>satisfaction)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(job_tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                job_dat$satisfaction no yes
+job_dat$burnout                            
+4                                     1   0
+7                                     1   0
+8                                     0   3
+9                                     0   1
+10                                    1   4
+11                                    1   2
+12                                    1   0
+13                                    0   1
+16                                    1   1
+17                                    0   1
+20                                    1   0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">ftable</span>(job_tbl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  ftable(job_tbl)
+X-squared = 11.355, df = 10, p-value = 0.3305</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramersV</span>(<span class="fu">ftable</span>(job_tbl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7535022</code></pre>
 </div>
 </div>
 
