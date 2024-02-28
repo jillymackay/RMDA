@@ -298,7 +298,21 @@
     "href": "week04.html#cramers-v",
     "title": "5  Week 4: Considerations for Collecting Data",
     "section": "Cramer’s V",
-    "text": "Cramer’s V\n\nlibrary(lsr)\n\n\n\njob_tbl &lt;- xtabs(~job_dat$burnout +  job_dat$satisfaction)\nftable(job_tbl)\n\n                job_dat$satisfaction no yes\njob_dat$burnout                            \n4                                     1   0\n7                                     1   0\n8                                     0   3\n9                                     0   1\n10                                    1   4\n11                                    1   2\n12                                    1   0\n13                                    0   1\n16                                    1   1\n17                                    0   1\n20                                    1   0\n\nchisq.test(ftable(job_tbl))\n\n\n    Pearson's Chi-squared test\n\ndata:  ftable(job_tbl)\nX-squared = 11.355, df = 10, p-value = 0.3305\n\ncramersV(ftable(job_tbl))\n\n[1] 0.7535022"
+    "text": "Cramer’s V\n\nlibrary(lsr)\n\njob_dat &lt;- job_dat |&gt; \n  mutate(burnoutcat = case_when(burnout &gt; 10 ~ \"burnout\",\n                                TRUE ~ \"no burnout\"))\n\n\njob_tbl &lt;- xtabs(~job_dat$job +  job_dat$satisfaction + job_dat$burnoutcat)\nftable(job_tbl)\n\n                                 job_dat$burnoutcat burnout no burnout\njob_dat$job job_dat$satisfaction                                      \nassc        no                                            1          1\n            yes                                           2          6\nvet         no                                            3          2\n            yes                                           3          2\n\nchisq.test(ftable(job_tbl))\n\n\n    Pearson's Chi-squared test\n\ndata:  ftable(job_tbl)\nX-squared = 2.2222, df = 3, p-value = 0.5276\n\ncramersV(ftable(job_tbl))\n\n[1] 0.3333333"
+  },
+  {
+    "objectID": "week04.html#r2adj-example",
+    "href": "week04.html#r2adj-example",
+    "title": "5  Week 4: Considerations for Collecting Data",
+    "section": "R2adj Example",
+    "text": "R2adj Example\n\njobmod &lt;- lm(burnout ~ empathy + satisfaction, data = job_dat)\nsummary(jobmod)\n\n\nCall:\nlm(formula = burnout ~ empathy + satisfaction, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.7526 -1.0832 -0.3836  1.4822  4.7305 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       1.9944     1.8904   1.055    0.306    \nempathy           2.7516     0.4865   5.656 2.85e-05 ***\nsatisfactionyes   1.0202     1.1393   0.895    0.383    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.354 on 17 degrees of freedom\nMultiple R-squared:  0.6549,    Adjusted R-squared:  0.6144 \nF-statistic: 16.13 on 2 and 17 DF,  p-value: 0.000118\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = satisfaction)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ satisfaction, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
+  },
+  {
+    "objectID": "week04.html#covariance-.-unnumbered",
+    "href": "week04.html#covariance-.-unnumbered",
+    "title": "5  Week 4: Considerations for Collecting Data",
+    "section": "5.1 Covariance {. unnumbered}",
+    "text": "5.1 Covariance {. unnumbered}\n\njobmod2 &lt;- lm(burnout ~ empathy + job, data = job_dat)\nsummary(jobmod2)\n\n\nCall:\nlm(formula = burnout ~ empathy + job, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6359 -1.3894 -0.4212  1.6035  4.5151 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    2.631      1.552   1.695    0.108    \nempathy        2.575      0.471   5.469 4.16e-05 ***\njobvet         1.127      1.052   1.072    0.299    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.331 on 17 degrees of freedom\nMultiple R-squared:  0.6615,    Adjusted R-squared:  0.6217 \nF-statistic: 16.61 on 2 and 17 DF,  p-value: 0.0001002\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod2)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = job)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ job, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
   },
   {
     "objectID": "week05.html",

@@ -236,6 +236,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#correlation-coefficient-r" id="toc-correlation-coefficient-r" class="nav-link" data-scroll-target="#correlation-coefficient-r">Correlation coefficient (r)</a></li>
   <li><a href="#other-correlation-coefficients" id="toc-other-correlation-coefficients" class="nav-link" data-scroll-target="#other-correlation-coefficients">Other Correlation Coefficients</a></li>
   <li><a href="#cramers-v" id="toc-cramers-v" class="nav-link" data-scroll-target="#cramers-v">Cramer’s V</a></li>
+  <li><a href="#r2adj-example" id="toc-r2adj-example" class="nav-link" data-scroll-target="#r2adj-example">R<sup>2</sup>adj Example</a></li>
+  <li><a href="#covariance-.-unnumbered" id="toc-covariance-.-unnumbered" class="nav-link" data-scroll-target="#covariance-.-unnumbered"><span class="header-section-number">5.1</span> Covariance {. unnumbered}</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -373,24 +375,20 @@ sample estimates:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lsr)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>job_tbl <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>job_dat<span class="sc">$</span>burnout <span class="sc">+</span>  job_dat<span class="sc">$</span>satisfaction)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(job_tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>job_dat <span class="ot">&lt;-</span> job_dat <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">burnoutcat =</span> <span class="fu">case_when</span>(burnout <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"burnout"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"no burnout"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>job_tbl <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>job_dat<span class="sc">$</span>job <span class="sc">+</span>  job_dat<span class="sc">$</span>satisfaction <span class="sc">+</span> job_dat<span class="sc">$</span>burnoutcat)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ftable</span>(job_tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                job_dat$satisfaction no yes
-job_dat$burnout                            
-4                                     1   0
-7                                     1   0
-8                                     0   3
-9                                     0   1
-10                                    1   4
-11                                    1   2
-12                                    1   0
-13                                    0   1
-16                                    1   1
-17                                    0   1
-20                                    1   0</code></pre>
+<pre><code>                                 job_dat$burnoutcat burnout no burnout
+job_dat$job job_dat$satisfaction                                      
+assc        no                                            1          1
+            yes                                           2          6
+vet         no                                            3          2
+            yes                                           3          2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">ftable</span>(job_tbl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -398,11 +396,89 @@ job_dat$burnout
     Pearson's Chi-squared test
 
 data:  ftable(job_tbl)
-X-squared = 11.355, df = 10, p-value = 0.3305</code></pre>
+X-squared = 2.2222, df = 3, p-value = 0.5276</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramersV</span>(<span class="fu">ftable</span>(job_tbl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7535022</code></pre>
+<pre><code>[1] 0.3333333</code></pre>
+</div>
+</div>
+</section>
+<section id="r2adj-example" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="r2adj-example">R<sup>2</sup>adj Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>jobmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(burnout <span class="sc">~</span> empathy <span class="sc">+</span> satisfaction, <span class="at">data =</span> job_dat)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(jobmod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = burnout ~ empathy + satisfaction, data = job_dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.7526 -1.0832 -0.3836  1.4822  4.7305 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       1.9944     1.8904   1.055    0.306    
+empathy           2.7516     0.4865   5.656 2.85e-05 ***
+satisfactionyes   1.0202     1.1393   0.895    0.383    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.354 on 17 degrees of freedom
+Multiple R-squared:  0.6549,    Adjusted R-squared:  0.6144 
+F-statistic: 16.13 on 2 and 17 DF,  p-value: 0.000118</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>job_dat <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">predict</span>(jobmod)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> empathy, <span class="at">y =</span> burnout, <span class="at">colour =</span> satisfaction)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> empathy, <span class="at">y =</span> mod)) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="sc">~</span> satisfaction, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Empathy Score"</span>, <span class="at">y =</span> <span class="st">"Burnout Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week04_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="covariance-.-unnumbered" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="covariance-.-unnumbered"><span class="header-section-number">5.1</span> Covariance {. unnumbered}</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>jobmod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(burnout <span class="sc">~</span> empathy <span class="sc">+</span> job, <span class="at">data =</span> job_dat)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(jobmod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = burnout ~ empathy + job, data = job_dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.6359 -1.3894 -0.4212  1.6035  4.5151 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    2.631      1.552   1.695    0.108    
+empathy        2.575      0.471   5.469 4.16e-05 ***
+jobvet         1.127      1.052   1.072    0.299    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.331 on 17 degrees of freedom
+Multiple R-squared:  0.6615,    Adjusted R-squared:  0.6217 
+F-statistic: 16.61 on 2 and 17 DF,  p-value: 0.0001002</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>job_dat <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">predict</span>(jobmod2)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> empathy, <span class="at">y =</span> burnout, <span class="at">colour =</span> job)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> empathy, <span class="at">y =</span> mod)) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="sc">~</span> job, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Empathy Score"</span>, <span class="at">y =</span> <span class="st">"Burnout Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week04_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

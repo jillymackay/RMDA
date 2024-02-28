@@ -764,7 +764,7 @@ library(lsr)
 
 
 
-job_tbl <- xtabs(~job_dat$burnoutcat +  job_dat$satisfaction)
+job_tbl <- xtabs(~job_dat$job +  job_dat$satisfaction + job_dat$burnoutcat)
 ftable(job_tbl)
 chisq.test(ftable(job_tbl))
 cramersV(ftable(job_tbl))
@@ -776,6 +776,45 @@ cohen.d(d = job_dat$burnout, f = job_dat$job)
 cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
 
 cohen.d(d = job_dat$burnout, f = job_dat$job, hedges.correction = TRUE)
+
+
+
+jobmod <- lm(burnout ~ empathy + satisfaction, data = job_dat)
+summary(jobmod)
+
+job_dat |> 
+  ggplot(aes(x = empathy, y = burnout, colour = satisfaction)) +
+  geom_point() +
+  geom_smooth(aes(x = empathy, y = burnout)method = lm, se = FALSE, formula = burnout ~ empathy + satisfaction)+
+  theme_classic() +
+  labs(x = "Empathy Score", y = "Burnout Score")
+ 
+job_dat |> 
+  mutate(mod = predict(jobmod)) |> 
+  ggplot() + 
+  geom_point(aes(x = empathy, y = burnout, colour = satisfaction)) +
+  geom_line(aes(x = empathy, y = mod)) +
+  theme_classic() +
+  facet_wrap(facets = ~ satisfaction, ncol = 1) +
+  labs(x = "Empathy Score", y = "Burnout Score")
+
+
+
+
+
+
+jobmod2 <- lm(burnout ~ empathy + job, data = job_dat)
+summary(jobmod2)
+
+
+job_dat |> 
+  mutate(mod = predict(jobmod2)) |> 
+  ggplot() + 
+  geom_point(aes(x = empathy, y = burnout, colour = job)) +
+  geom_line(aes(x = empathy, y = mod)) +
+  theme_classic() +
+  facet_wrap(facets = ~ job, ncol = 1) +
+  labs(x = "Empathy Score", y = "Burnout Score")
 
 
 

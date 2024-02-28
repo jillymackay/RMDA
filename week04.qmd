@@ -131,13 +131,57 @@ cor.test(job_dat$burnout, as.numeric(as.factor(job_dat$job)))
 
 library(lsr)
 
+job_dat <- job_dat |> 
+  mutate(burnoutcat = case_when(burnout > 10 ~ "burnout",
+                                TRUE ~ "no burnout"))
 
 
-job_tbl <- xtabs(~job_dat$burnout +  job_dat$satisfaction)
+job_tbl <- xtabs(~job_dat$job +  job_dat$satisfaction + job_dat$burnoutcat)
 ftable(job_tbl)
 chisq.test(ftable(job_tbl))
 cramersV(ftable(job_tbl))
 
 
+```
+
+## R^2^adj Example {.unnumbered}
+
+```{r}
+#| eval: true
+
+jobmod <- lm(burnout ~ empathy + satisfaction, data = job_dat)
+summary(jobmod)
+
+job_dat |> 
+  mutate(mod = predict(jobmod)) |> 
+  ggplot() + 
+  geom_point(aes(x = empathy, y = burnout, colour = satisfaction)) +
+  geom_line(aes(x = empathy, y = mod)) +
+  theme_classic() +
+  facet_wrap(facets = ~ satisfaction, ncol = 1) +
+  labs(x = "Empathy Score", y = "Burnout Score")
+
+```
+
+
+## Covariance {. unnumbered}
+
+
+```{r}
+#| eval: true
+
+
+jobmod2 <- lm(burnout ~ empathy + job, data = job_dat)
+summary(jobmod2)
+
+
+job_dat |> 
+  mutate(mod = predict(jobmod2)) |> 
+  ggplot() + 
+  geom_point(aes(x = empathy, y = burnout, colour = job)) +
+  geom_line(aes(x = empathy, y = mod)) +
+  theme_classic() +
+  facet_wrap(facets = ~ job, ncol = 1) +
+  labs(x = "Empathy Score", y = "Burnout Score")
 
 ```
