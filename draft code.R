@@ -885,3 +885,63 @@ internet |>
   theme(legend.position = "bottom") +
   labs(x = "Year", y = "Percentage of Adults",
        caption = "UK adults who used the internet in the last 3 months (Jan-March)\nData from ONS")
+
+
+
+# Week 7 Sample Data
+
+
+library(tidyverse)
+library(faux)
+
+between <- list(parlour = c(robot = "robotic",
+                            manual = "manual"))
+within <- list(housing =c( "continually housed","seasonally housed"))
+mu <- data.frame(robot = c(31, 30),
+                  manual = c(34, 33),
+                 row.names = within$housing)
+
+mu1 <- data.frame(robot = c(18, 12),
+                 manual = c(17, 11),
+                 row.names = within$housing)
+cows <- sim_design(within, between, n = 100, mu = mu, sd = c(4.15, 4.82, 2.12, 1.01), r =0.5,
+                   empirical = TRUE, plot = TRUE)
+
+welfare <- sim_design(within, between, n = 100, mu = mu1, sd = c(2, 2.8, 1.1, 1.05), r =0.5,
+                      empirical = TRUE, plot = TRUE)
+
+cows <- cows |> 
+  pivot_longer(cols = c(`continually housed`,`seasonally housed`),
+               names_to = "housing type",
+               values_to = "Average Daily Yield") %>% 
+  select(-id) 
+
+welfare <- welfare |> 
+  pivot_longer(cols = c(`continually housed`,`seasonally housed`),
+               names_to = "housing type",
+               values_to = "Welfare Score") %>% 
+  select(`Welfare Score`)
+
+
+cows <- cows |> 
+  cbind(welfare) |> 
+  mutate(`Welfare Score` = round(`Welfare Score`, 0))
+
+cows |> 
+  writexl::write_xlsx("cows.xlsx")
+
+
+cows <- readxl::read_excel("cows.xlsx") |> 
+  mutate(parlour = as.factor(parlour),
+         `housing type` = as.factor(`housing type`))
+
+
+cows |> 
+  ggplot(aes(x = `Welfare Score`, y= `Average Daily Yield`, colour = `housing type`)) +
+  geom_point() +
+  theme_classic() +
+  labs(x  = "Welfare Score", y = "Average Daily Yield",
+       title = "Milk Yield versus Welfare Score",
+       subtitle = "For Robotic vs Manual Parlours") +
+  facet_wrap(facets = ~parlour, ncol = 1) +
+  theme(legend.position = "bottom")

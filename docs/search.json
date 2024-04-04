@@ -319,21 +319,91 @@
     "href": "week05.html",
     "title": "6  Week 5: Sources of Data",
     "section": "",
-    "text": "This week has no content yet, please check back later!"
+    "text": "Lecture 1 Digital Media Research"
+  },
+  {
+    "objectID": "week05.html#whos-in-digital-spaces",
+    "href": "week05.html#whos-in-digital-spaces",
+    "title": "6  Week 5: Sources of Data",
+    "section": "6.1 Who’s in digital spaces",
+    "text": "6.1 Who’s in digital spaces\n\nlibrary(tidyverse)\n\ninternet &lt;- tibble(year = c(2013, 2014, 2015, 2016, 2017,   2018,   2019,   2020),\n                   \"16-24\" = c(98.3,    98.9,   98.8,   99.2,   99.2,   99.3,   99.2,   99.5),\n                   \"25-34\" = c(97.7,    98.3,   98.6,   98.9,   99.1,   99.2,   99.4,   99.5),\n                   \"35-44\" = c(95.8,    96.7,   97.3,   98.2,   98.4,   98.6,   98.9,   99.1),\n                   \"45-54\" = c(90.2,    92.3,   93.6,   94.9,   96.2,   96.8,   97.5,   97.9),\n                   \"55-64\" = c(81.3,    84.2,   86.7,   88.3,   90.0,   91.8,   93.2,   94.6),\n                   \"65-74\" = c(61.1,    65.5,   70.6,   74.1,   77.5,   80.2,   83.2,   85.5),\n                  \"75+\" = c(29.1,   31.9,   33.0,   38.7,   40.5,   43.6,   46.8,   54.0)) |&gt; \n  pivot_longer(cols = -year,\n               names_to = \"age\",\n               values_to = \"perc\")\n\n\ninternet |&gt;\n  ggplot(aes(x = year, y = perc, fill = age)) +\n  geom_bar(stat = \"identity\", position = \"dodge2\") +\n  theme_classic() +\n  theme(legend.position = \"bottom\") +\n  labs(x = \"Year\", y = \"Percentage of Adults\",\n       caption = \"UK adults who used the internet in the last 3 months (Jan-March)\\nData from ONS\")"
   },
   {
     "objectID": "week06.html",
     "href": "week06.html",
     "title": "7  Week 6: Analysing Qualitative Data",
     "section": "",
-    "text": "This week has no content yet, please check back later!"
+    "text": "There’s no content in this week this year :)"
   },
   {
     "objectID": "week07.html",
     "href": "week07.html",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "",
-    "text": "This week has no content yet, please check back later!"
+    "text": "Lecture 1: Choosing a Statistical Test\nlibrary(tidyverse)\n\ncows &lt;- readxl::read_excel(\"cows.xlsx\") |&gt; \n  mutate(parlour = as.factor(parlour),\n         `housing type` = as.factor(`housing type`))\n\n\ncows |&gt; \n  ggplot(aes(x = `Welfare Score`, y= `Average Daily Yield`, colour = `housing type`)) +\n  geom_point() +\n  theme_classic() +\n  labs(x  = \"Welfare Score\", y = \"Average Daily Yield\",\n       title = \"Milk Yield versus Welfare Score\",\n       subtitle = \"For Robotic vs Manual Parlours\") +\n  facet_wrap(facets = ~parlour, ncol = 1) +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "week07.html#numerical-response",
+    "href": "week07.html#numerical-response",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Numerical Response",
+    "text": "Numerical Response"
+  },
+  {
+    "objectID": "week07.html#numerical-response-categorical-explanatory",
+    "href": "week07.html#numerical-response-categorical-explanatory",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Numerical Response Categorical Explanatory",
+    "text": "Numerical Response Categorical Explanatory"
+  },
+  {
+    "objectID": "week07.html#numerical-response-numerical-explanatory",
+    "href": "week07.html#numerical-response-numerical-explanatory",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Numerical Response Numerical Explanatory",
+    "text": "Numerical Response Numerical Explanatory"
+  },
+  {
+    "objectID": "week07.html#categorical-response",
+    "href": "week07.html#categorical-response",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Categorical Response",
+    "text": "Categorical Response"
+  },
+  {
+    "objectID": "week07.html#categorical-response-categorical-explanatory",
+    "href": "week07.html#categorical-response-categorical-explanatory",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Categorical Response Categorical Explanatory",
+    "text": "Categorical Response Categorical Explanatory"
+  },
+  {
+    "objectID": "week07.html#categorical-response-numerical-explanatory",
+    "href": "week07.html#categorical-response-numerical-explanatory",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Categorical Response Numerical Explanatory",
+    "text": "Categorical Response Numerical Explanatory"
+  },
+  {
+    "objectID": "week07.html#parametric-vs-non-parametric",
+    "href": "week07.html#parametric-vs-non-parametric",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Parametric vs Non Parametric",
+    "text": "Parametric vs Non Parametric"
+  },
+  {
+    "objectID": "week07.html#power-calculations",
+    "href": "week07.html#power-calculations",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Power Calculations",
+    "text": "Power Calculations"
+  },
+  {
+    "objectID": "week07.html#assumptions",
+    "href": "week07.html#assumptions",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Assumptions",
+    "text": "Assumptions"
   },
   {
     "objectID": "week089.html",

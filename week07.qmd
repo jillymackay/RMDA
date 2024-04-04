@@ -9,4 +9,60 @@ execute:
   message: FALSE
 ---
 
-This week has no content yet, please check back later!
+# Lecture 1: Choosing a Statistical Test {.unnumbered}
+
+```{r}
+#| eval: TRUE
+
+
+library(tidyverse)
+
+cows <- readxl::read_excel("cows.xlsx") |> 
+  mutate(parlour = as.factor(parlour),
+         `housing type` = as.factor(`housing type`))
+
+
+cows |> 
+  ggplot(aes(x = `Welfare Score`, y= `Average Daily Yield`, colour = `housing type`)) +
+  geom_point() +
+  theme_classic() +
+  labs(x  = "Welfare Score", y = "Average Daily Yield",
+       title = "Milk Yield versus Welfare Score",
+       subtitle = "For Robotic vs Manual Parlours") +
+  facet_wrap(facets = ~parlour, ncol = 1) +
+  theme(legend.position = "bottom")
+
+```
+
+## Numerical Response {.unnumbered}
+
+
+
+
+## Numerical Response Categorical Explanatory{.unnumbered}
+
+
+
+
+## Numerical Response Numerical Explanatory {.unnumbered}
+
+
+
+## Categorical Response {.unnumbered}
+
+
+
+
+## Categorical Response Categorical Explanatory{.unnumbered}
+
+
+
+
+## Categorical Response Numerical Explanatory {.unnumbered}
+
+
+## Parametric vs Non Parametric {.unnumbered}
+
+## Power Calculations {.unnumbered}
+
+## Assumptions {.unnumbered}

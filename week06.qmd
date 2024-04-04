@@ -9,4 +9,4 @@ execute:
   message: FALSE
 ---
 
-This week has no content yet, please check back later!
+There's no content in this week this year :)

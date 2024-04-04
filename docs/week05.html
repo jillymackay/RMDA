@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -189,7 +223,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lecture-1-digital-media-research" id="toc-lecture-1-digital-media-research" class="nav-link active" data-scroll-target="#lecture-1-digital-media-research">Lecture 1 Digital Media Research</a>
+  <ul class="collapse">
+  <li><a href="#whos-in-digital-spaces" id="toc-whos-in-digital-spaces" class="nav-link" data-scroll-target="#whos-in-digital-spaces"><span class="header-section-number">6.1</span> Who’s in digital spaces</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -211,9 +254,41 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This week has no content yet, please check back later!</p>
+<section id="lecture-1-digital-media-research" class="level1 unnumbered">
+<h1 class="unnumbered">Lecture 1 Digital Media Research</h1>
+<section id="whos-in-digital-spaces" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="whos-in-digital-spaces"><span class="header-section-number">6.1</span> Who’s in digital spaces</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>internet <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2013</span>, <span class="dv">2014</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2017</span>,   <span class="dv">2018</span>,   <span class="dv">2019</span>,   <span class="dv">2020</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"16-24"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">98.3</span>,    <span class="fl">98.9</span>,   <span class="fl">98.8</span>,   <span class="fl">99.2</span>,   <span class="fl">99.2</span>,   <span class="fl">99.3</span>,   <span class="fl">99.2</span>,   <span class="fl">99.5</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"25-34"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">97.7</span>,    <span class="fl">98.3</span>,   <span class="fl">98.6</span>,   <span class="fl">98.9</span>,   <span class="fl">99.1</span>,   <span class="fl">99.2</span>,   <span class="fl">99.4</span>,   <span class="fl">99.5</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"35-44"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">95.8</span>,    <span class="fl">96.7</span>,   <span class="fl">97.3</span>,   <span class="fl">98.2</span>,   <span class="fl">98.4</span>,   <span class="fl">98.6</span>,   <span class="fl">98.9</span>,   <span class="fl">99.1</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"45-54"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">90.2</span>,    <span class="fl">92.3</span>,   <span class="fl">93.6</span>,   <span class="fl">94.9</span>,   <span class="fl">96.2</span>,   <span class="fl">96.8</span>,   <span class="fl">97.5</span>,   <span class="fl">97.9</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"55-64"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">81.3</span>,    <span class="fl">84.2</span>,   <span class="fl">86.7</span>,   <span class="fl">88.3</span>,   <span class="fl">90.0</span>,   <span class="fl">91.8</span>,   <span class="fl">93.2</span>,   <span class="fl">94.6</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"65-74"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">61.1</span>,    <span class="fl">65.5</span>,   <span class="fl">70.6</span>,   <span class="fl">74.1</span>,   <span class="fl">77.5</span>,   <span class="fl">80.2</span>,   <span class="fl">83.2</span>,   <span class="fl">85.5</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"75+"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">29.1</span>,   <span class="fl">31.9</span>,   <span class="fl">33.0</span>,   <span class="fl">38.7</span>,   <span class="fl">40.5</span>,   <span class="fl">43.6</span>,   <span class="fl">46.8</span>,   <span class="fl">54.0</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>year,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"age"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"perc"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>internet <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> perc, <span class="at">fill =</span> age)) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge2"</span>) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Percentage of Adults"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"UK adults who used the internet in the last 3 months (Jan-March)</span><span class="sc">\n</span><span class="st">Data from ONS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week05_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
