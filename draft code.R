@@ -945,3 +945,53 @@ cows |>
        subtitle = "For Robotic vs Manual Parlours") +
   facet_wrap(facets = ~parlour, ncol = 1) +
   theme(legend.position = "bottom")
+
+
+
+cows |> 
+  summarise(mean_yield = mean(`Average Daily Yield`),
+            sd_yield = sd(`Average Daily Yield`))
+
+
+t.test(cows$`Average Daily Yield`, mu = 28)
+
+summary(lm(cows$`Average Daily Yield` ~ 28))
+
+
+
+
+diet <- tibble (before = c(5.04, 4.63, 4.04, 5.10, 5.43, 4.83, 3.45, 3.49, 5.02, 4.81),
+                after = c( 4.78, 2.49, 4.46, 2.03, 5.13, 7.23, 3.50, 1.89, 3.30, 3.91))
+
+diet |> 
+  ggplot(aes(y = before)) +
+  geom_boxplot() +
+  geom_boxplot(aes(y = after, x =1)) +
+  theme_classic() +
+  scale_x_continuous(labels =c("Before Diet", "After Diet"), breaks = c(0,1)) +
+  labs(x = "Diet", y = "Weight (kg)")
+
+
+diet |> 
+  summarise(before_mean = mean(before),
+            after_mean = mean(after),
+            before_sd = sd(before),
+            after_sd = sd(after))
+
+
+t.test(diet$before, diet$after, paired = TRUE, alternative = "two.sided")
+
+
+robot_yield <- cows |> 
+  filter(parlour == "robot") |> 
+  select(`Average Daily Yield`)
+
+manual_yield <- cows |> 
+  filter(parlour == "manual") |> 
+  select(`Average Daily Yield`)
+
+
+t.test(robot_yield, manual_yield, alternative = "two.sided")
+
+
+summary(lm(`Average Daily Yield` ~ parlour, data = cows))

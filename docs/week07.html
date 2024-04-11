@@ -287,9 +287,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="numerical-response" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="numerical-response">Numerical Response</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cows <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_yield =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_yield =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_yield sd_yield
+       &lt;dbl&gt;    &lt;dbl&gt;
+1         32     3.73</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(cows<span class="sc">$</span><span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span>, <span class="at">mu =</span> <span class="dv">28</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  cows$`Average Daily Yield`
+t = 21.448, df = 399, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 28
+95 percent confidence interval:
+ 31.63336 32.36664
+sample estimates:
+mean of x 
+       32 </code></pre>
+</div>
+</div>
 </section>
 <section id="numerical-response-categorical-explanatory" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="numerical-response-categorical-explanatory">Numerical Response Categorical Explanatory</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">tibble</span> (<span class="at">before =</span> <span class="fu">c</span>(<span class="fl">5.04</span>, <span class="fl">4.63</span>, <span class="fl">4.04</span>, <span class="fl">5.10</span>, <span class="fl">5.43</span>, <span class="fl">4.83</span>, <span class="fl">3.45</span>, <span class="fl">3.49</span>, <span class="fl">5.02</span>, <span class="fl">4.81</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">after =</span> <span class="fu">c</span>( <span class="fl">4.78</span>, <span class="fl">2.49</span>, <span class="fl">4.46</span>, <span class="fl">2.03</span>, <span class="fl">5.13</span>, <span class="fl">7.23</span>, <span class="fl">3.50</span>, <span class="fl">1.89</span>, <span class="fl">3.30</span>, <span class="fl">3.91</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">|&gt;</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> before)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> after, <span class="at">x =</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span><span class="fu">c</span>(<span class="st">"Before Diet"</span>, <span class="st">"After Diet"</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Diet"</span>, <span class="at">y =</span> <span class="st">"Weight (kg)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week07_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">before_mean =</span> <span class="fu">mean</span>(before),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">after_mean =</span> <span class="fu">mean</span>(after),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">before_sd =</span> <span class="fu">sd</span>(before),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">after_sd =</span> <span class="fu">sd</span>(after))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  before_mean after_mean before_sd after_sd
+        &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1        4.58       3.87     0.689     1.62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet<span class="sc">$</span>before, diet<span class="sc">$</span>after, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  diet$before and diet$after
+t = 1.4615, df = 9, p-value = 0.1779
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.3900511  1.8140511
+sample estimates:
+mean difference 
+          0.712 </code></pre>
+</div>
+</div>
 </section>
 <section id="numerical-response-numerical-explanatory" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="numerical-response-numerical-explanatory">Numerical Response Numerical Explanatory</h2>

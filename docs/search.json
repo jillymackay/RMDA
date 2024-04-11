@@ -347,14 +347,14 @@
     "href": "week07.html#numerical-response",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Numerical Response",
-    "text": "Numerical Response"
+    "text": "Numerical Response\n\ncows |&gt; \n  summarise(mean_yield = mean(`Average Daily Yield`),\n            sd_yield = sd(`Average Daily Yield`))\n\n# A tibble: 1 × 2\n  mean_yield sd_yield\n       &lt;dbl&gt;    &lt;dbl&gt;\n1         32     3.73\n\nt.test(cows$`Average Daily Yield`, mu = 28)\n\n\n    One Sample t-test\n\ndata:  cows$`Average Daily Yield`\nt = 21.448, df = 399, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 28\n95 percent confidence interval:\n 31.63336 32.36664\nsample estimates:\nmean of x \n       32"
   },
   {
     "objectID": "week07.html#numerical-response-categorical-explanatory",
     "href": "week07.html#numerical-response-categorical-explanatory",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Numerical Response Categorical Explanatory",
-    "text": "Numerical Response Categorical Explanatory"
+    "text": "Numerical Response Categorical Explanatory\n\ndiet &lt;- tibble (before = c(5.04, 4.63, 4.04, 5.10, 5.43, 4.83, 3.45, 3.49, 5.02, 4.81),\n                after = c( 4.78, 2.49, 4.46, 2.03, 5.13, 7.23, 3.50, 1.89, 3.30, 3.91))\n\n\ndiet |&gt; \n  ggplot(aes(y = before)) +\n  geom_boxplot() +\n  geom_boxplot(aes(y = after, x =1)) +\n  theme_classic() +\n  scale_x_continuous(labels =c(\"Before Diet\", \"After Diet\"), breaks = c(0,1)) +\n  labs(x = \"Diet\", y = \"Weight (kg)\")\n\n\n\ndiet |&gt; \n  summarise(before_mean = mean(before),\n            after_mean = mean(after),\n            before_sd = sd(before),\n            after_sd = sd(after))\n\n# A tibble: 1 × 4\n  before_mean after_mean before_sd after_sd\n        &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1        4.58       3.87     0.689     1.62\n\nt.test(diet$before, diet$after, paired = TRUE, alternative = \"two.sided\")\n\n\n    Paired t-test\n\ndata:  diet$before and diet$after\nt = 1.4615, df = 9, p-value = 0.1779\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -0.3900511  1.8140511\nsample estimates:\nmean difference \n          0.712"
   },
   {
     "objectID": "week07.html#numerical-response-numerical-explanatory",
