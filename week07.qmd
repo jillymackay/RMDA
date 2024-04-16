@@ -78,15 +78,61 @@ diet |>
 
 t.test(diet$before, diet$after, paired = TRUE, alternative = "two.sided")
 
+```
+
+2-Way ANOVA
+```{r}
+#| eval: true
+
+
+
+model1 <-  aov(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)
+summary(model1)
+
+```
+
+Linear model
+
+```{r}
+#| eval: true
+
+model2 <- lm(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)
+summary(model2)
 
 ```
 
 
-
 ## Numerical Response Numerical Explanatory {.unnumbered}
 
+Correlation
+```{r}
+#| eval: true
+cor.test(cows$`Average Daily Yield`, cows$`Welfare Score`)
 
 
+```
+
+Linear Model
+
+```{r}
+#| eval: true
+
+
+```
+
+Genearlised Linear Model
+
+```{r}
+
+#eval: true
+
+
+model4 <- glm(`Average Daily Yield` ~ `Welfare Score` 
+              + `housing type` + parlour, data = cows)
+summary(model4)
+
+
+```
 ## Categorical Response {.unnumbered}
 
 

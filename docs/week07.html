@@ -356,9 +356,76 @@ mean difference
           0.712 </code></pre>
 </div>
 </div>
+<p>2-Way ANOVA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span>  <span class="fu">aov</span>(<span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span> <span class="sc">~</span> parlour <span class="sc">+</span>  <span class="st">`</span><span class="at">housing type</span><span class="st">`</span>, <span class="at">data =</span> cows)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+parlour          1    900   900.0  78.511 &lt; 2e-16 ***
+`housing type`   1    100   100.0   8.723 0.00333 ** 
+Residuals      397   4551    11.5                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Linear model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span> <span class="sc">~</span> parlour <span class="sc">+</span>  <span class="st">`</span><span class="at">housing type</span><span class="st">`</span>, <span class="at">data =</span> cows)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `Average Daily Yield` ~ parlour + `housing type`, 
+    data = cows)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.8651  -1.7814   0.0787   1.6805  11.7654 
+
+Coefficients:
+                                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      34.0000     0.2932 115.956  &lt; 2e-16 ***
+parlourrobot                     -3.0000     0.3386  -8.861  &lt; 2e-16 ***
+`housing type`seasonally housed  -1.0000     0.3386  -2.954  0.00333 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.386 on 397 degrees of freedom
+Multiple R-squared:  0.1801,    Adjusted R-squared:  0.176 
+F-statistic: 43.62 on 2 and 397 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 </section>
 <section id="numerical-response-numerical-explanatory" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="numerical-response-numerical-explanatory">Numerical Response Numerical Explanatory</h2>
+<p>Correlation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(cows<span class="sc">$</span><span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span>, cows<span class="sc">$</span><span class="st">`</span><span class="at">Welfare Score</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  cows$`Average Daily Yield` and cows$`Welfare Score`
+t = 1.7643, df = 398, p-value = 0.07845
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.01004724  0.18454894
+sample estimates:
+       cor 
+0.08809126 </code></pre>
+</div>
+</div>
+<p>Linear Model</p>
+<p>Genearlised Linear Model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#eval: true</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="st">`</span><span class="at">Average Daily Yield</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Welfare Score</span><span class="st">`</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>              <span class="sc">+</span> <span class="st">`</span><span class="at">housing type</span><span class="st">`</span> <span class="sc">+</span> parlour, <span class="at">data =</span> cows)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="categorical-response" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="categorical-response">Categorical Response</h2>

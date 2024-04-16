@@ -995,3 +995,23 @@ t.test(robot_yield, manual_yield, alternative = "two.sided")
 
 
 summary(lm(`Average Daily Yield` ~ parlour, data = cows))
+
+model1 <-  aov(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)
+summary(model1)
+
+
+model2 <- lm(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)
+summary(model2)
+
+
+
+cor.test(cows$`Average Daily Yield`, cows$`Welfare Score`)
+
+
+model3 <- lm(`Average Daily Yield` ~ `Welfare Score`, data = cows)
+summary(model3)
+
+
+model4 <- glm(`Average Daily Yield` ~ `Welfare Score` 
+              + `housing type` + parlour, data = cows)
+summary(model4)
