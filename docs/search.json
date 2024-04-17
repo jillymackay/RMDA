@@ -361,14 +361,14 @@
     "href": "week07.html#numerical-response-numerical-explanatory",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Numerical Response Numerical Explanatory",
-    "text": "Numerical Response Numerical Explanatory\nCorrelation\n\ncor.test(cows$`Average Daily Yield`, cows$`Welfare Score`)\n\n\n    Pearson's product-moment correlation\n\ndata:  cows$`Average Daily Yield` and cows$`Welfare Score`\nt = 1.7643, df = 398, p-value = 0.07845\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.01004724  0.18454894\nsample estimates:\n       cor \n0.08809126 \n\n\nLinear Model\nGenearlised Linear Model\n\n#eval: true\n\n\nmodel4 &lt;- glm(`Average Daily Yield` ~ `Welfare Score` \n              + `housing type` + parlour, data = cows)\nsummary(model4)"
+    "text": "Numerical Response Numerical Explanatory\nCorrelation\n\ncor.test(cows$`Average Daily Yield`, cows$`Welfare Score`)\n\n\n    Pearson's product-moment correlation\n\ndata:  cows$`Average Daily Yield` and cows$`Welfare Score`\nt = 1.7643, df = 398, p-value = 0.07845\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.01004724  0.18454894\nsample estimates:\n       cor \n0.08809126 \n\n\nLinear Model\nGenearlised Linear Model\n\n#| eval: true\n\n\nmodel4 &lt;- glm(`Average Daily Yield` ~ `Welfare Score` \n              + `housing type` + parlour, data = cows)\nsummary(model4)"
   },
   {
     "objectID": "week07.html#categorical-response",
     "href": "week07.html#categorical-response",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Categorical Response",
-    "text": "Categorical Response"
+    "text": "Categorical Response\n\nbinom.test(x = 3, n = 20, p = 0.18, alternative = \"two.sided\")\n\n\n    Exact binomial test\n\ndata:  3 and 20\nnumber of successes = 3, number of trials = 20, p-value = 1\nalternative hypothesis: true probability of success is not equal to 0.18\n95 percent confidence interval:\n 0.03207094 0.37892683\nsample estimates:\nprobability of success \n                  0.15"
   },
   {
     "objectID": "week07.html#categorical-response-categorical-explanatory",

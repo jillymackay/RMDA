@@ -1015,3 +1015,6 @@ summary(model3)
 model4 <- glm(`Average Daily Yield` ~ `Welfare Score` 
               + `housing type` + parlour, data = cows)
 summary(model4)
+
+
+binom.test(x = 3, n = 20, p = 0.18, alternative = "two.sided")
