@@ -1018,3 +1018,66 @@ summary(model4)
 
 
 binom.test(x = 3, n = 20, p = 0.18, alternative = "two.sided")
+
+
+prop.test(x = 3, n = 20, p = 0.18, alternative = "two.sided")
+
+
+
+work <- matrix(c(2, 5, 38, 35), 
+               ncol=2, 
+               byrow=TRUE,
+               dimnames = list(c("Dysplasia", "No Dysplasia"),
+                               c("Before Work Season", "After Work Season")))
+
+
+mcnemar.test(work)
+
+
+fisher.test(x = c(4,16), y = c(2,18))
+
+# Calculate Odds Ratio
+(4+18) / (16 + 2)
+
+
+
+gsd <- matrix(c(16, 12, 84, 86), 
+              ncol=2, 
+              byrow=TRUE,
+              dimnames = list(c("Dysplasia", "No Dysplasia"),
+                              c("Inbred", "Less Inbred")))
+
+
+chisq.test(gsd)
+
+library(vcd)
+assocstats(gsd)
+
+
+
+
+dysp <- tibble(dysplasia = c(1, 1, 1, 1, 1, 1, 1,
+                             0, 0, 0, 0, 0, 0, 0,
+                             0, 0, 0, 0, 0, 0, 0),
+               inflammation =c(0.91, 0.79, 1.40, 0.71, 1.01, 0.77, 0.85,
+                               0.42, 1.02, 0.31, 0.05, 1.17, 0.04, 0.36, 
+                               0.12, 0.02, 0.05, 0.42, 0.92, 0.72,  1.05)) 
+
+logit <- glm(dysplasia ~ inflammation, data = dysp, family = "binomial")
+summary(logit)
+
+library(easystats)
+report(logit)
+parameters(logit)
+exp(cbind(OddsRatio = coef(logit), confint(logit)))
+
+
+residuals <- tibble(resids = resid(model4))
+
+residuals |> 
+  ggplot(aes(x = resids)) +
+  geom_density()+
+  theme_classic()
+
+
+describe_distribution(residuals)

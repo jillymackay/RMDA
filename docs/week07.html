@@ -429,28 +429,164 @@ sample estimates:
 </section>
 <section id="categorical-response" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="categorical-response">Categorical Response</h2>
+<p>Proportion Test</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">p =</span> <span class="fl">0.18</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">p =</span> <span class="fl">0.18</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Exact binomial test
+    1-sample proportions test with continuity correction
 
-data:  3 and 20
-number of successes = 3, number of trials = 20, p-value = 1
-alternative hypothesis: true probability of success is not equal to 0.18
+data:  3 out of 20, null probability 0.18
+X-squared = 0.0033875, df = 1, p-value = 0.9536
+alternative hypothesis: true p is not equal to 0.18
 95 percent confidence interval:
- 0.03207094 0.37892683
+ 0.03956627 0.38862512
 sample estimates:
-probability of success 
-                  0.15 </code></pre>
+   p 
+0.15 </code></pre>
 </div>
 </div>
 </section>
 <section id="categorical-response-categorical-explanatory" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="categorical-response-categorical-explanatory">Categorical Response Categorical Explanatory</h2>
+<p>McNemar’s Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>work <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">38</span>, <span class="dv">35</span>), </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">ncol=</span><span class="dv">2</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">byrow=</span><span class="cn">TRUE</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Dysplasia"</span>, <span class="st">"No Dysplasia"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">c</span>(<span class="st">"Before Work Season"</span>, <span class="st">"After Work Season"</span>)))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(work)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test with continuity correction
+
+data:  work
+McNemar's chi-squared = 23.814, df = 1, p-value = 1.061e-06</code></pre>
+</div>
+</div>
+<p>Fisher’s Exact Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">16</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">18</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  c(4, 16) and c(2, 18)
+p-value = 1
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.02564066        Inf
+sample estimates:
+odds ratio 
+       Inf </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Odds Ratio</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4</span><span class="sc">+</span><span class="dv">18</span>) <span class="sc">/</span> (<span class="dv">16</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.222222</code></pre>
+</div>
+</div>
+<p>Chi2 Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>gsd <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">84</span>, <span class="dv">86</span>), </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">ncol=</span><span class="dv">2</span>, </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">byrow=</span><span class="cn">TRUE</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Dysplasia"</span>, <span class="st">"No Dysplasia"</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">c</span>(<span class="st">"Inbred"</span>, <span class="st">"Less Inbred"</span>)))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(gsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  gsd
+X-squared = 0.30714, df = 1, p-value = 0.5794</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assocstats</span>(gsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     X^2 df P(&gt; X^2)
+Likelihood Ratio 0.57672  1  0.44760
+Pearson          0.57481  1  0.44835
+
+Phi-Coefficient   : 0.054 
+Contingency Coeff.: 0.054 
+Cramer's V        : 0.054 </code></pre>
+</div>
+</div>
 </section>
 <section id="categorical-response-numerical-explanatory" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="categorical-response-numerical-explanatory">Categorical Response Numerical Explanatory</h2>
+<p>Logistic Regression</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dysp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">dysplasia =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">inflammation =</span><span class="fu">c</span>(<span class="fl">0.91</span>, <span class="fl">0.79</span>, <span class="fl">1.40</span>, <span class="fl">0.71</span>, <span class="fl">1.01</span>, <span class="fl">0.77</span>, <span class="fl">0.85</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fl">0.42</span>, <span class="fl">1.02</span>, <span class="fl">0.31</span>, <span class="fl">0.05</span>, <span class="fl">1.17</span>, <span class="fl">0.04</span>, <span class="fl">0.36</span>, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                               <span class="fl">0.12</span>, <span class="fl">0.02</span>, <span class="fl">0.05</span>, <span class="fl">0.42</span>, <span class="fl">0.92</span>, <span class="fl">0.72</span>,  <span class="fl">1.05</span>)) </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(dysplasia <span class="sc">~</span> inflammation, <span class="at">data =</span> dysp, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dysplasia ~ inflammation, family = "binomial", 
+    data = dysp)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.5715  -0.5727  -0.3094   1.0397   1.4914  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)    -3.190      1.484  -2.150   0.0316 *
+inflammation    3.488      1.740   2.004   0.0450 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 26.734  on 20  degrees of freedom
+Residual deviance: 20.534  on 19  degrees of freedom
+AIC: 24.534
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We fitted a logistic model (estimated using ML) to predict dysplasia with
+inflammation (formula: dysplasia ~ inflammation). The model's explanatory power
+is moderate (Tjur's R2 = 0.24). The model's intercept, corresponding to
+inflammation = 0, is at -3.19 (95% CI [-7.09, -0.88], p = 0.032). Within this
+model:
+
+  - The effect of inflammation is statistically significant and positive (beta =
+3.49, 95% CI [0.65, 7.91], p = 0.045; Std. beta = 1.47, 95% CI [0.27, 3.33])
+
+Standardized parameters were obtained by fitting the model on a standardized
+version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+computed using a Wald z-distribution approximation.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span>(logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parameter    | Log-Odds |   SE |         95% CI |     z |     p
+---------------------------------------------------------------
+(Intercept)  |    -3.19 | 1.48 | [-7.09, -0.88] | -2.15 | 0.032
+inflammation |     3.49 | 1.74 | [ 0.65,  7.91] |  2.00 | 0.045</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OddsRatio =</span> <span class="fu">coef</span>(logit), <span class="fu">confint</span>(logit)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               OddsRatio        2.5 %       97.5 %
+(Intercept)   0.04118154 0.0008355444    0.4146414
+inflammation 32.71638289 1.9151146706 2735.6121035</code></pre>
+</div>
+</div>
 </section>
 <section id="parametric-vs-non-parametric" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="parametric-vs-non-parametric">Parametric vs Non Parametric</h2>
@@ -460,6 +596,18 @@ probability of success
 </section>
 <section id="assumptions" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>Residuals</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">resids =</span> <span class="fu">resid</span>(model4))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>residuals <span class="sc">|&gt;</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> resids)) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()<span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_distribution</span>(residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>

@@ -368,21 +368,21 @@
     "href": "week07.html#categorical-response",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Categorical Response",
-    "text": "Categorical Response\n\nbinom.test(x = 3, n = 20, p = 0.18, alternative = \"two.sided\")\n\n\n    Exact binomial test\n\ndata:  3 and 20\nnumber of successes = 3, number of trials = 20, p-value = 1\nalternative hypothesis: true probability of success is not equal to 0.18\n95 percent confidence interval:\n 0.03207094 0.37892683\nsample estimates:\nprobability of success \n                  0.15"
+    "text": "Categorical Response\nProportion Test\n\nprop.test(x = 3, n = 20, p = 0.18, alternative = \"two.sided\")\n\n\n    1-sample proportions test with continuity correction\n\ndata:  3 out of 20, null probability 0.18\nX-squared = 0.0033875, df = 1, p-value = 0.9536\nalternative hypothesis: true p is not equal to 0.18\n95 percent confidence interval:\n 0.03956627 0.38862512\nsample estimates:\n   p \n0.15"
   },
   {
     "objectID": "week07.html#categorical-response-categorical-explanatory",
     "href": "week07.html#categorical-response-categorical-explanatory",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Categorical Response Categorical Explanatory",
-    "text": "Categorical Response Categorical Explanatory"
+    "text": "Categorical Response Categorical Explanatory\nMcNemar’s Test\n\nwork &lt;- matrix(c(2, 5, 38, 35), \n               ncol=2, \n               byrow=TRUE,\n               dimnames = list(c(\"Dysplasia\", \"No Dysplasia\"),\n                               c(\"Before Work Season\", \"After Work Season\")))\n\n\nmcnemar.test(work)\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  work\nMcNemar's chi-squared = 23.814, df = 1, p-value = 1.061e-06\n\n\nFisher’s Exact Test\n\nfisher.test(x = c(4,16), y = c(2,18))\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  c(4, 16) and c(2, 18)\np-value = 1\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n 0.02564066        Inf\nsample estimates:\nodds ratio \n       Inf \n\n# Calculate Odds Ratio\n(4+18) / (16 + 2)\n\n[1] 1.222222\n\n\nChi2 Test\n\ngsd &lt;- matrix(c(16, 12, 84, 86), \n              ncol=2, \n              byrow=TRUE,\n              dimnames = list(c(\"Dysplasia\", \"No Dysplasia\"),\n                              c(\"Inbred\", \"Less Inbred\")))\n\n\nchisq.test(gsd)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  gsd\nX-squared = 0.30714, df = 1, p-value = 0.5794\n\nlibrary(vcd)\nassocstats(gsd)\n\n                     X^2 df P(&gt; X^2)\nLikelihood Ratio 0.57672  1  0.44760\nPearson          0.57481  1  0.44835\n\nPhi-Coefficient   : 0.054 \nContingency Coeff.: 0.054 \nCramer's V        : 0.054"
   },
   {
     "objectID": "week07.html#categorical-response-numerical-explanatory",
     "href": "week07.html#categorical-response-numerical-explanatory",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Categorical Response Numerical Explanatory",
-    "text": "Categorical Response Numerical Explanatory"
+    "text": "Categorical Response Numerical Explanatory\nLogistic Regression\n\ndysp &lt;- tibble(dysplasia = c(1, 1, 1, 1, 1, 1, 1,\n                             0, 0, 0, 0, 0, 0, 0,\n                             0, 0, 0, 0, 0, 0, 0),\n               inflammation =c(0.91, 0.79, 1.40, 0.71, 1.01, 0.77, 0.85,\n                               0.42, 1.02, 0.31, 0.05, 1.17, 0.04, 0.36, \n                               0.12, 0.02, 0.05, 0.42, 0.92, 0.72,  1.05)) \n\nlogit &lt;- glm(dysplasia ~ inflammation, data = dysp, family = \"binomial\")\nsummary(logit)\n\n\nCall:\nglm(formula = dysplasia ~ inflammation, family = \"binomial\", \n    data = dysp)\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-1.5715  -0.5727  -0.3094   1.0397   1.4914  \n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept)    -3.190      1.484  -2.150   0.0316 *\ninflammation    3.488      1.740   2.004   0.0450 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 26.734  on 20  degrees of freedom\nResidual deviance: 20.534  on 19  degrees of freedom\nAIC: 24.534\n\nNumber of Fisher Scoring iterations: 5\n\nlibrary(easystats)\nreport(logit)\n\nWe fitted a logistic model (estimated using ML) to predict dysplasia with\ninflammation (formula: dysplasia ~ inflammation). The model's explanatory power\nis moderate (Tjur's R2 = 0.24). The model's intercept, corresponding to\ninflammation = 0, is at -3.19 (95% CI [-7.09, -0.88], p = 0.032). Within this\nmodel:\n\n  - The effect of inflammation is statistically significant and positive (beta =\n3.49, 95% CI [0.65, 7.91], p = 0.045; Std. beta = 1.47, 95% CI [0.27, 3.33])\n\nStandardized parameters were obtained by fitting the model on a standardized\nversion of the dataset. 95% Confidence Intervals (CIs) and p-values were\ncomputed using a Wald z-distribution approximation.\n\nparameters(logit)\n\nParameter    | Log-Odds |   SE |         95% CI |     z |     p\n---------------------------------------------------------------\n(Intercept)  |    -3.19 | 1.48 | [-7.09, -0.88] | -2.15 | 0.032\ninflammation |     3.49 | 1.74 | [ 0.65,  7.91] |  2.00 | 0.045\n\nexp(cbind(OddsRatio = coef(logit), confint(logit)))\n\n               OddsRatio        2.5 %       97.5 %\n(Intercept)   0.04118154 0.0008355444    0.4146414\ninflammation 32.71638289 1.9151146706 2735.6121035"
   },
   {
     "objectID": "week07.html#parametric-vs-non-parametric",
@@ -403,7 +403,7 @@
     "href": "week07.html#assumptions",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Assumptions",
-    "text": "Assumptions"
+    "text": "Assumptions\nResiduals\n\nresiduals &lt;- tibble(resids = resid(model4))\n\nresiduals |&gt; \n  ggplot(aes(x = resids)) +\n  geom_density()+\n  theme_classic()\n\n\ndescribe_distribution(residuals)"
   },
   {
     "objectID": "week089.html",
