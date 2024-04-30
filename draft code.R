@@ -1081,3 +1081,113 @@ residuals |>
 
 
 describe_distribution(residuals)
+
+
+
+
+
+
+
+
+
+
+examples <- tibble (x.perfect = c(1,2,3,4,5,6,7,8,9,10), 
+                    y.perfect = c(1,2,3,4,5,6,7,8,9,10), 
+                    x.realistic = c(1,2,3,4,4,6,8,8,9,11), 
+                    y.realistic = c(2, 2, 4, 5, 5, 5, 7, 8, 9, 9))
+
+
+examples |> 
+  ggplot (aes(x = x.perfect, y = y.perfect))+
+  geom_point (shape = 8) +
+  scale_y_continuous(limits =c(0,10)) +
+  scale_x_continuous(limits = c(0,10)) +
+  labs (title = "100% of the variation in y is explained by x",
+        x = "A Perfect Explanatory Variable",
+        y = "A Perfect Response Variable") +
+  theme_classic()
+
+
+
+examples |> 
+  ggplot (aes(x = x.realistic, y = y.realistic))+
+  geom_point () +
+  scale_y_continuous(limits =c(0,10)) +
+  scale_x_continuous(limits = c(0,10)) +
+  labs (title = "How much of the variation in y is explained by x?",
+        x = "A Realistic Explanatory Variable",
+        y = "A Realistic Response Variable") +
+  theme_classic()
+
+lm(formula = y.perfect ~ x.perfect, data = examples)
+
+lm(formula = y.realistic ~ x.realistic, data = examples)
+
+
+
+unicorns <- tibble (NoRadio = c(150, 130, 121, 90, 98, 100, 98, 100, 113, 111),
+                 RadioMusic = c(112, 127, 132, 150, 112, 128, 110, 120, 98, 107),
+                 RadioDiscussion = c(75, 98, 88, 83, 83, 77, 75, 84, 93, 99)) |> 
+  pivot_longer(cols = c(NoRadio:RadioDiscussion),
+               names_to = "Radio",
+               values_to = "DustYield")
+
+
+unicorns |> 
+  ggplot (aes (x = Radio, y = DustYield)) + 
+  geom_point(aes(shape = Radio, colour = Radio),  position = position_jitter(width = .13)) +
+  labs (y = "Dust Yield (Kg)", x = "Radio Condition") +
+  scale_color_brewer(palette = "Accent") +
+  scale_y_continuous(limits = c(0, 200)) +
+  theme_classic () +
+  theme(legend.position = "none") 
+
+
+
+unicorns |>
+  filter(Radio == "NoRadio") |> 
+  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |> 
+  # The mutate function adds a new variable just to plot this one specific chart
+  # And then we pipe it directly into ggplot, so we're not changing the unicorns data
+  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.
+  ggplot (aes (x = UnicornNo, y = DustYield)) + 
+  geom_point() +
+  labs (y = "Dust Yield (Kg)", x = "Unicorn No") +
+  scale_y_continuous(limits = c(0, 200)) +
+  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + 
+  theme_classic ()
+
+
+unicorns |>
+  group_by(Radio) |>
+  filter(Radio == "NoRadio") |>
+  summarise(mean = mean(DustYield))
+
+
+unicorns |>
+  filter(Radio == "NoRadio") |> 
+  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |> 
+  # The mutate function adds a new variable just to plot this one specific chart
+  # And then we pipe it directly into ggplot, so we're not changing the unicorns data
+  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.
+  ggplot (aes (x = UnicornNo, y = DustYield)) + 
+  geom_point() +
+  geom_hline(yintercept = 111.1)+
+  labs (y = "Dust Yield (Kg)", x = "Unicorn No") +
+  scale_y_continuous(limits = c(0, 200)) +
+  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + 
+  theme_classic ()
+
+
+unicorns |> 
+  filter(Radio == "NoRadio") |> 
+  mutate(Diff = DustYield-111.1)
+
+unicorns |> 
+  filter(Radio == "NoRadio") |> 
+  mutate(Diff = DustYield-111.1) |> 
+  summarise(`Sum of Differences` = sum(Diff))
+
+unicorns |> 
+  group_by(Radio) |> 
+  summarise (Variance = var(DustYield))

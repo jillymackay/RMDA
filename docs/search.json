@@ -340,7 +340,49 @@
     "href": "week07.html",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "",
-    "text": "Lecture 1: Choosing a Statistical Test\nlibrary(tidyverse)\n\ncows &lt;- readxl::read_excel(\"cows.xlsx\") |&gt; \n  mutate(parlour = as.factor(parlour),\n         `housing type` = as.factor(`housing type`))\n\n\ncows |&gt; \n  ggplot(aes(x = `Welfare Score`, y= `Average Daily Yield`, colour = `housing type`)) +\n  geom_point() +\n  theme_classic() +\n  labs(x  = \"Welfare Score\", y = \"Average Daily Yield\",\n       title = \"Milk Yield versus Welfare Score\",\n       subtitle = \"For Robotic vs Manual Parlours\") +\n  facet_wrap(facets = ~parlour, ncol = 1) +\n  theme(legend.position = \"bottom\")"
+    "text": "Lecture 1: Partitioning Variation\nlibrary(tidyverse)\n\n\nexamples &lt;- tibble (x.perfect = c(1,2,3,4,5,6,7,8,9,10), \n                    y.perfect = c(1,2,3,4,5,6,7,8,9,10), \n                    x.realistic = c(1,2,3,4,4,6,8,8,9,11), \n                    y.realistic = c(2, 2, 4, 5, 5, 5, 7, 8, 9, 9))\nlibrary(tidyverse)\n\ncows &lt;- readxl::read_excel(\"cows.xlsx\") |&gt; \n  mutate(parlour = as.factor(parlour),\n         `housing type` = as.factor(`housing type`))\n\n\ncows |&gt; \n  ggplot(aes(x = `Welfare Score`, y= `Average Daily Yield`, colour = `housing type`)) +\n  geom_point() +\n  theme_classic() +\n  labs(x  = \"Welfare Score\", y = \"Average Daily Yield\",\n       title = \"Milk Yield versus Welfare Score\",\n       subtitle = \"For Robotic vs Manual Parlours\") +\n  facet_wrap(facets = ~parlour, ncol = 1) +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "week07.html#a-perfect-world",
+    "href": "week07.html#a-perfect-world",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "A Perfect World",
+    "text": "A Perfect World\n\nexamples |&gt; \n  ggplot (aes(x = x.perfect, y = y.perfect))+\n  geom_point (shape = 8) +\n  scale_y_continuous(limits =c(0,10)) +\n  scale_x_continuous(limits = c(0,10)) +\n  labs (title = \"100% of the variation in y is explained by x\",\n        x = \"A Perfect Explanatory Variable\",\n        y = \"A Perfect Response Variable\") +\n  theme_classic()"
+  },
+  {
+    "objectID": "week07.html#our-unicorn-farm",
+    "href": "week07.html#our-unicorn-farm",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "Our Unicorn Farm",
+    "text": "Our Unicorn Farm\n\nunicorns &lt;- tibble (NoRadio = c(150, 130, 121, 90, 98, 100, 98, 100, 113, 111),\n                 RadioMusic = c(112, 127, 132, 150, 112, 128, 110, 120, 98, 107),\n                 RadioDiscussion = c(75, 98, 88, 83, 83, 77, 75, 84, 93, 99)) |&gt; \n  pivot_longer(cols = c(NoRadio:RadioDiscussion),\n               names_to = \"Radio\",\n               values_to = \"DustYield\")\n\n\nunicorns |&gt; \n  ggplot (aes (x = Radio, y = DustYield)) + \n  geom_point(aes(shape = Radio, colour = Radio),  position = position_jitter(width = .13)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Radio Condition\") +\n  scale_color_brewer(palette = \"Accent\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic () +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "week07.html#no-radio-group-.unnumbered",
+    "href": "week07.html#no-radio-group-.unnumbered",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "8.1 No Radio Group .{unnumbered}",
+    "text": "8.1 No Radio Group .{unnumbered}\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
+  },
+  {
+    "objectID": "week07.html#no-radio-mean-.unnumbered",
+    "href": "week07.html#no-radio-mean-.unnumbered",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "8.2 No Radio Mean .{unnumbered}",
+    "text": "8.2 No Radio Mean .{unnumbered}\n\nunicorns |&gt;\n  group_by(Radio) |&gt;\n  filter(Radio == \"NoRadio\") |&gt;\n  summarise(mean = mean(DustYield))\n\n# A tibble: 1 × 2\n  Radio    mean\n  &lt;chr&gt;   &lt;dbl&gt;\n1 NoRadio  111.\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  geom_hline(yintercept = 111.1)+\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
+  },
+  {
+    "objectID": "week07.html#deviations-from-the-mean-.unnumbered",
+    "href": "week07.html#deviations-from-the-mean-.unnumbered",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "8.3 Deviations from the mean .{unnumbered}",
+    "text": "8.3 Deviations from the mean .{unnumbered}\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1)\n\n# A tibble: 10 × 3\n   Radio   DustYield    Diff\n   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n 1 NoRadio       150  38.9  \n 2 NoRadio       130  18.9  \n 3 NoRadio       121   9.9  \n 4 NoRadio        90 -21.1  \n 5 NoRadio        98 -13.1  \n 6 NoRadio       100 -11.1  \n 7 NoRadio        98 -13.1  \n 8 NoRadio       100 -11.1  \n 9 NoRadio       113   1.90 \n10 NoRadio       111  -0.100\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1) |&gt; \n  summarise(`Sum of Differences` = sum(Diff))\n\n# A tibble: 1 × 1\n  `Sum of Differences`\n                 &lt;dbl&gt;\n1             5.68e-14"
+  },
+  {
+    "objectID": "week07.html#variance-.unnumbered",
+    "href": "week07.html#variance-.unnumbered",
+    "title": "8  Week 7: Analysing Quantitative Data",
+    "section": "8.4 Variance .{unnumbered}",
+    "text": "8.4 Variance .{unnumbered}\n\n#: eval: true\n\n\nunicorns |&gt; \n  group_by(Radio) |&gt; \n  summarise (Variance = var(DustYield))"
   },
   {
     "objectID": "week07.html#numerical-response",
@@ -403,7 +445,7 @@
     "href": "week07.html#assumptions",
     "title": "8  Week 7: Analysing Quantitative Data",
     "section": "Assumptions",
-    "text": "Assumptions\nResiduals\n\nresiduals &lt;- tibble(resids = resid(model4))\n\nresiduals |&gt; \n  ggplot(aes(x = resids)) +\n  geom_density()+\n  theme_classic()\n\n\ndescribe_distribution(residuals)"
+    "text": "Assumptions\nResiduals\n\nresiduals &lt;- tibble(resids = resid(model4))\n\nresiduals |&gt; \n  ggplot(aes(x = resids)) +\n  geom_density()+\n  theme_classic()\n\n\nparameters::describe_distribution(residuals)"
   },
   {
     "objectID": "week089.html",
