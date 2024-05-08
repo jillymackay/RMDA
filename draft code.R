@@ -1191,3 +1191,117 @@ unicorns |>
 unicorns |> 
   group_by(Radio) |> 
   summarise (Variance = var(DustYield))
+
+
+
+Sce1 <- tibble (Condition1 = c(99,100,101,99,100,101,99,101,100,101),
+                Condition2 = c(120,121,122,120,121,122,120,123,121,120),
+                Condition3 = c(83,84,85,85,84,83,83,84,85,86)) |>
+  pivot_longer (cols = c(Condition1:Condition3), names_to = "Condition", values_to = "DustYield") |>
+  mutate (Count = c(1:30)) 
+
+Sce2 <-tibble (Condition1 = c(84,86,123,95,87,110,99,95,121,121),
+               Condition2 = c(83,115,85,85, 110,105,84,115,101,100),
+               Condition3 = c(84,122,80,80,101,83,83,99, 120,120)) |>
+  pivot_longer (cols = c(Condition1:Condition3), names_to = "Condition", values_to = "DustYield") |>
+  mutate (Count = c(1:30)) 
+
+
+# In the code above I've gathered the data into a tidy format 
+
+
+ImaginaryScenario1 <- Sce1 |>
+  ggplot (aes (x = Count, y = DustYield)) + 
+  geom_point(aes(shape = Condition, colour = Condition)) +
+  labs (y = "Dust Yield (Kg)", x = "Unicorn ID Number") +
+  scale_y_continuous(limits = c(0, 200)) +
+  theme_classic ()
+
+# I have also made this chart an object because we're going to update it
+# It's quicker to do this as an object
+# You can compare how we update this chart with how we update the ones above.
+
+ImaginaryScenario1
+
+
+experiment <- Sce2 |> 
+  ggplot (aes (x = Count, y = DustYield)) + 
+  geom_point(aes(shape = Condition, colour = Condition)) +
+  labs (y = "Dust Yield (Kg)", x = "Unicorn ID Number") +
+  scale_y_continuous(limits = c(0, 200)) +
+  theme_classic ()
+
+experiment
+
+ImaginaryScenario1 +
+  geom_hline(yintercept = mean(Sce1$DustYield))
+
+experiment +
+  geom_hline(yintercept = mean(Sce2$DustYield))
+
+
+ImaginaryScenario1 +
+  geom_hline(yintercept = mean(Sce1$DustYield)) +
+  geom_segment(aes(x =1, y = 100.1, xend =30, yend = 100.1, color = "red")) +
+  geom_segment(aes(x = 1, y = 121.0, xend = 30, yend = 121.0, color = "green")) +
+  geom_segment (aes(x = 1, y = 84.2, xend = 30, yend = 84.2, color = "blue")) +
+  theme (legend.position = "none")
+
+
+experiment +
+  geom_hline(yintercept = mean(Sce1$DustYield)) +
+  geom_segment(aes(x =1, y = 102, xend =30, yend = 102, color = "red")) +
+  geom_segment(aes(x = 1, y = 98.3, xend = 30, yend = 98.3, color = "green")) +
+  geom_segment (aes(x = 1, y = 97.2, xend = 30, yend = 97.2, color = "blue")) +
+  theme (legend.position = "none")
+
+
+
+Sce2 |>
+  group_by(Condition) |>
+  summarise(mean = mean (DustYield))
+
+
+
+
+MFY <- unicorns |>
+  mutate ("Y" = DustYield) |>
+  mutate ("M" = mean(Y)) |>
+  # If we now ask R to group the data, it will calculate the mean per group:
+  group_by(Radio) |>
+  mutate ("F" = mean(Y)) |>
+  # Remember to ungroup after!
+  ungroup() 
+
+
+
+MFY <- MFY |>
+  mutate (MY = (Y-M),
+          MF = (F-M),
+          FY = (Y - F))
+
+
+MFY <- MFY |>
+  mutate (MY2 = (MY*MY),
+          MF2 = (MF*MF),
+          FY2 = (FY*FY))
+
+
+MFY |>
+  summarise(SumSquareMY = sum(MY2),
+            SumSquareMF = sum(MF2),
+            SumSquareFY = sum(FY2))
+
+
+
+MFY |>
+  summarise(SumSquareMY = sum(MY2),
+            SumSquareMF = sum(MF2),
+            SumSquareFY = sum(FY2),
+            MeanSquareMY = sum(MY2)/29,
+            MeanSquareMF = sum(MF2)/2,
+            MeanSquareFY = sum(FY2)/27) 
+
+
+ANOVA <- aov(DustYield ~ Radio, data = unicorns)
+summary(ANOVA)
