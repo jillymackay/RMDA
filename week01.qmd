@@ -7,9 +7,7 @@ execute:
   echo: TRUE
   warning: FALSE
   message: FALSE
-  
 ---
-
 
 ```{r, "Week 1 Set Up", eval = TRUE, echo = FALSE}
 library(tidyverse)
@@ -55,7 +53,7 @@ b2 <- bland |>
 
 ```
 
-# Lecture 3: The Replication Crisis  {.unnumbered}
+# Lecture 3: The Replication Crisis {.unnumbered}
 
 Bland-Altmann Plots are generated with the following code.
 
@@ -88,7 +86,7 @@ b1
 
 ```
 
-And then if we add 100 to each measure, we see a very similar plot:  
+And then if we add 100 to each measure, we see a very similar plot:
 
 ```{r}
 bland |> 
@@ -110,10 +108,10 @@ bland |>
 b2
 ```
 
-
-# Lecture 5: Introduction to Research Methods  {.unnumbered}
+# Lecture 5: Introduction to Research Methods {.unnumbered}
 
 ## Create data and plot
+
 ```{r, "Create data for Manipulation Study"}
 
 library(tidyverse)
@@ -152,8 +150,7 @@ summary(plant_model)
 
 ```
 
-
-## Read and  Run Crude Chicken Correlations
+## Read and Run Crude Chicken Correlations
 
 ```{r, "Week 1 crude", eval = TRUE, echo = TRUE}
 

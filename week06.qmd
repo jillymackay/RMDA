@@ -1,5 +1,5 @@
 ---
-title: "Week 6: Analysing Qualitative Data"
+title: "Week 6: Reading Week"
 format: html
 editor: source
 execute: 
@@ -9,4 +9,4 @@ execute:
   message: FALSE
 ---
 
-There's no content in this week this year :)
+There's no R content in this week this year :)

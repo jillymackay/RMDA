@@ -42,3 +42,16 @@ internet |>
 
 
 ```
+
+
+
+#  Lecture 4: Meta Analyses {.unnumbered}
+
+Calculate rs from R2
+
+```{r}
+
+sqrt(0.11)
+
+
+```

@@ -1,5 +1,5 @@
 ---
-title: "Week 10: Project Proposals"
+title: "Week 10: Analysing Quanlitative Data"
 format: html
 editor: source
 execute: 
@@ -9,4 +9,4 @@ execute:
   message: FALSE
 ---
 
-This week has no content yet, please check back later!
+You have no R content in this week

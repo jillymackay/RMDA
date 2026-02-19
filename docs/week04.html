@@ -190,25 +190,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./week06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 6: Analysing Qualitative Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 6: Reading Week</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./week07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Week 7: Analysing Quantitative Data</span></span></a>
+  <a href="./week0708.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Weeks 7 and 8: R Stats</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./week089.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Weeks 8 &amp; 9: Analytical Softwares</span></span></a>
+  <a href="./week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Week 9 Analysing Quantitative Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./week10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 10: Project Proposals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Week 10: Analysing Quanlitative Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lecture-effect-sizes-and-covariance" id="toc-lecture-effect-sizes-and-covariance" class="nav-link active" data-scroll-target="#lecture-effect-sizes-and-covariance">Lecture: Effect Sizes and Covariance</a>
+  <li><a href="#lecture-1-effect-sizes-and-covariance" id="toc-lecture-1-effect-sizes-and-covariance" class="nav-link active" data-scroll-target="#lecture-1-effect-sizes-and-covariance">Lecture 1: Effect Sizes and Covariance</a>
   <ul class="collapse">
   <li><a href="#mock-data-and-visualisation" id="toc-mock-data-and-visualisation" class="nav-link" data-scroll-target="#mock-data-and-visualisation">Mock Data and visualisation</a></li>
   <li><a href="#calculcate-cohens-d" id="toc-calculcate-cohens-d" class="nav-link" data-scroll-target="#calculcate-cohens-d">Calculcate Cohen’s d</a></li>
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#other-correlation-coefficients" id="toc-other-correlation-coefficients" class="nav-link" data-scroll-target="#other-correlation-coefficients">Other Correlation Coefficients</a></li>
   <li><a href="#cramers-v" id="toc-cramers-v" class="nav-link" data-scroll-target="#cramers-v">Cramer’s V</a></li>
   <li><a href="#r2adj-example" id="toc-r2adj-example" class="nav-link" data-scroll-target="#r2adj-example">R<sup>2</sup>adj Example</a></li>
-  <li><a href="#covariance-.-unnumbered" id="toc-covariance-.-unnumbered" class="nav-link" data-scroll-target="#covariance-.-unnumbered"><span class="header-section-number">5.1</span> Covariance {. unnumbered}</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance">Covariance</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -262,8 +262,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="lecture-effect-sizes-and-covariance" class="level1 unnumbered">
-<h1 class="unnumbered">Lecture: Effect Sizes and Covariance</h1>
+<section id="lecture-1-effect-sizes-and-covariance" class="level1 unnumbered">
+<h1 class="unnumbered">Lecture 1: Effect Sizes and Covariance</h1>
 <section id="mock-data-and-visualisation" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="mock-data-and-visualisation">Mock Data and visualisation</h2>
 <div class="cell">
@@ -443,8 +443,8 @@ F-statistic: 16.13 on 2 and 17 DF,  p-value: 0.000118</code></pre>
 </div>
 </div>
 </section>
-<section id="covariance-.-unnumbered" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="covariance-.-unnumbered"><span class="header-section-number">5.1</span> Covariance {. unnumbered}</h2>
+<section id="covariance" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="covariance">Covariance</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>jobmod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(burnout <span class="sc">~</span> empathy <span class="sc">+</span> job, <span class="at">data =</span> job_dat)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(jobmod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -24,7 +24,7 @@ cat_weights <- tibble(avg_daily_snacks  = c(3, 2, 4, 2, 3, 1, 1, 0, 1, 0, 2, 3, 
 
 
 
-# Lecture: Effect Sizes and Covariance {.unnumbered}
+# Lecture 1: Effect Sizes and Covariance {.unnumbered}
 
 
 ## Mock Data and visualisation {.unnumbered}
@@ -164,7 +164,7 @@ job_dat |>
 ```
 
 
-## Covariance {. unnumbered}
+## Covariance {.unnumbered}
 
 
 ```{r}

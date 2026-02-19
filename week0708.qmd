@@ -1,5 +1,5 @@
 ---
-title: "Weeks 8 & 9: Analytical Softwares"
+title: "Weeks 7 and 8: R Stats"
 format: html
 editor: source
 execute: 
@@ -9,4 +9,5 @@ execute:
   message: FALSE
 ---
 
-This week has no content yet, please check back later!
+
+All your R content is elsewhere this week :)

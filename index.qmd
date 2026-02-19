@@ -8,39 +8,34 @@ execute:
   warning: FALSE
 ---
 
-# Preface  {.unnumbered}
+![Research Methods and Data Analysis (IAWEL) Cover](assets/cover.png){fig-alt="A black and white line drawing of a duck" fig-align="center" width="300"}
 
-This book accompanies the Research Methods and Data Analysis course on the International Animal Welfare Ethics and Law MSc at the Royal (Dick) School of Veterinary Studies.
+# Preface {.unnumbered}
 
-It is a companion document to the course, and not core to the materials.
+This book accompanies the Research Methods and Data Analysis course on the [International Animal Welfare Ethics and Law MSc](https://vet.ed.ac.uk/education/postgraduate/taught/animal-welfare) at the [Royal (Dick) School of Veterinary Studies](https://vet.ed.ac.uk/).
+
+It is a companion document to the course, and not core to the materials, however we choose to make this publically available as part of our commitment to open science frameworks and accessibility in education.
 
 Throughout the RMDA Lectures, you will see a number of statistical tests, data visualisations, data manipulation, text mining, and simple calculations. Almost inevitably, each one of these steps will have been performed in R.
 
 Your R textbook is [R\@R(D)SVS](https://jillymackay.github.io/RatRDSVS/index.html "R@R(D)SVS Textbook"), and that textbook will explain h[ow to download and install R,](https://jillymackay.github.io/RatRDSVS/install.html "Installing R") [how to run simple commands in R](https://jillymackay.github.io/RatRDSVS/start.html), and more. This RMDA textbook is like an accompanying document to your lecture materials, and is a place to help you move your R and statistical knowledge along.
 
-## Packages in this textbook  {.unnumbered}
+## Packages in this textbook {.unnumbered}
 
 There are a range of packages used in this book, including Tidyverse [@tidyverse], effsize [@effsize], ggstatsplot [@ggstatsplot], vcd [@vcd], wordcloud [@wordcloud], easystats [@easystats], rstan [@rstan], rstanarm [@rstanarm]
 
-
-You may need to [download and install a package](https://jillymackay.github.io/RatRDSVS/start.html#packages) or [load a package](https://jillymackay.github.io/RatRDSVS/start.html#ex_packages) for some of these commands to work. 
-
-
+You may need to [download and install a package](https://jillymackay.github.io/RatRDSVS/start.html#packages) or [load a package](https://jillymackay.github.io/RatRDSVS/start.html#ex_packages) for some of these commands to work.
 
 ## Licensing {.unnumbered}
 
-This book is licensed under the Unlicense. 
-
+This book is licensed under the Unlicense.
 
 This is free and unencumbered software released into the public domain.
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
 
 In jurisdictions that recognize copyright laws, the author or authors of this software dedicate any and all copyright interest in the software to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and successors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this software under copyright law.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>

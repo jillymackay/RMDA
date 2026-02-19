@@ -205,7 +205,7 @@ posteriors2 |>
 ```
 
 
-# Lecture: Calculating variance {.unnumbered}
+# Lecture 3: Calculating variance {.unnumbered}
 
 
 ## Why does it matter? {.unnumbered}
@@ -346,14 +346,4 @@ vardat |>
 
 
 
-#  Lecture: Meta Analyses {.unnumbered}
-
-Calculate rs from R2
-
-```{r}
-
-sqrt(0.11)
-
-
-```
 
