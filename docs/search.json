@@ -308,11 +308,11 @@
     "text": "R2adj Example\n\njobmod &lt;- lm(burnout ~ empathy + satisfaction, data = job_dat)\nsummary(jobmod)\n\n\nCall:\nlm(formula = burnout ~ empathy + satisfaction, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.7526 -1.0832 -0.3836  1.4822  4.7305 \n\nCoefficients:\n                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       1.9944     1.8904   1.055    0.306    \nempathy           2.7516     0.4865   5.656 2.85e-05 ***\nsatisfactionyes   1.0202     1.1393   0.895    0.383    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.354 on 17 degrees of freedom\nMultiple R-squared:  0.6549,    Adjusted R-squared:  0.6144 \nF-statistic: 16.13 on 2 and 17 DF,  p-value: 0.000118\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = satisfaction)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ satisfaction, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
   },
   {
-    "objectID": "week04.html#covariance-.-unnumbered",
-    "href": "week04.html#covariance-.-unnumbered",
+    "objectID": "week04.html#covariance",
+    "href": "week04.html#covariance",
     "title": "5  Week 4: Considerations for Collecting Data",
-    "section": "5.1 Covariance {. unnumbered}",
-    "text": "5.1 Covariance {. unnumbered}\n\njobmod2 &lt;- lm(burnout ~ empathy + job, data = job_dat)\nsummary(jobmod2)\n\n\nCall:\nlm(formula = burnout ~ empathy + job, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6359 -1.3894 -0.4212  1.6035  4.5151 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    2.631      1.552   1.695    0.108    \nempathy        2.575      0.471   5.469 4.16e-05 ***\njobvet         1.127      1.052   1.072    0.299    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.331 on 17 degrees of freedom\nMultiple R-squared:  0.6615,    Adjusted R-squared:  0.6217 \nF-statistic: 16.61 on 2 and 17 DF,  p-value: 0.0001002\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod2)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = job)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ job, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
+    "section": "Covariance",
+    "text": "Covariance\n\njobmod2 &lt;- lm(burnout ~ empathy + job, data = job_dat)\nsummary(jobmod2)\n\n\nCall:\nlm(formula = burnout ~ empathy + job, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6359 -1.3894 -0.4212  1.6035  4.5151 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    2.631      1.552   1.695    0.108    \nempathy        2.575      0.471   5.469 4.16e-05 ***\njobvet         1.127      1.052   1.072    0.299    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.331 on 17 degrees of freedom\nMultiple R-squared:  0.6615,    Adjusted R-squared:  0.6217 \nF-statistic: 16.61 on 2 and 17 DF,  p-value: 0.0001002\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod2)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = job)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ job, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
   },
   {
     "objectID": "week05.html",
@@ -336,151 +336,11 @@
     "text": "There’s no R content in this week this year :)"
   },
   {
-    "objectID": "week07.html",
-    "href": "week07.html",
+    "objectID": "week0708.html",
+    "href": "week0708.html",
     "title": "8  Weeks 7 and 8: R Stats",
     "section": "",
     "text": "All your R content is elsewhere this week :)"
-  },
-  {
-    "objectID": "week07.html#a-perfect-world",
-    "href": "week07.html#a-perfect-world",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "A Perfect World",
-    "text": "A Perfect World\n\nexamples |&gt; \n  ggplot (aes(x = x.perfect, y = y.perfect))+\n  geom_point (shape = 8) +\n  scale_y_continuous(limits =c(0,10)) +\n  scale_x_continuous(limits = c(0,10)) +\n  labs (title = \"100% of the variation in y is explained by x\",\n        x = \"A Perfect Explanatory Variable\",\n        y = \"A Perfect Response Variable\") +\n  theme_classic()"
-  },
-  {
-    "objectID": "week07.html#our-unicorn-farm",
-    "href": "week07.html#our-unicorn-farm",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Our Unicorn Farm",
-    "text": "Our Unicorn Farm\n\nunicorns &lt;- tibble (NoRadio = c(150, 130, 121, 90, 98, 100, 98, 100, 113, 111),\n                 RadioMusic = c(112, 127, 132, 150, 112, 128, 110, 120, 98, 107),\n                 RadioDiscussion = c(75, 98, 88, 83, 83, 77, 75, 84, 93, 99)) |&gt; \n  pivot_longer(cols = c(NoRadio:RadioDiscussion),\n               names_to = \"Radio\",\n               values_to = \"DustYield\")\n\n\nunicorns |&gt; \n  ggplot (aes (x = Radio, y = DustYield)) + \n  geom_point(aes(shape = Radio, colour = Radio),  position = position_jitter(width = .13)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Radio Condition\") +\n  scale_color_brewer(palette = \"Accent\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic () +\n  theme(legend.position = \"none\")"
-  },
-  {
-    "objectID": "week07.html#no-radio-group-.unnumbered",
-    "href": "week07.html#no-radio-group-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.1 No Radio Group .{unnumbered}",
-    "text": "8.1 No Radio Group .{unnumbered}\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
-  },
-  {
-    "objectID": "week07.html#no-radio-mean-.unnumbered",
-    "href": "week07.html#no-radio-mean-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.2 No Radio Mean .{unnumbered}",
-    "text": "8.2 No Radio Mean .{unnumbered}\n\nunicorns |&gt;\n  group_by(Radio) |&gt;\n  filter(Radio == \"NoRadio\") |&gt;\n  summarise(mean = mean(DustYield))\n\n# A tibble: 1 × 2\n  Radio    mean\n  &lt;chr&gt;   &lt;dbl&gt;\n1 NoRadio  111.\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  geom_hline(yintercept = 111.1)+\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
-  },
-  {
-    "objectID": "week07.html#deviations-from-the-mean-.unnumbered",
-    "href": "week07.html#deviations-from-the-mean-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.3 Deviations from the mean .{unnumbered}",
-    "text": "8.3 Deviations from the mean .{unnumbered}\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1)\n\n# A tibble: 10 × 3\n   Radio   DustYield    Diff\n   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n 1 NoRadio       150  38.9  \n 2 NoRadio       130  18.9  \n 3 NoRadio       121   9.9  \n 4 NoRadio        90 -21.1  \n 5 NoRadio        98 -13.1  \n 6 NoRadio       100 -11.1  \n 7 NoRadio        98 -13.1  \n 8 NoRadio       100 -11.1  \n 9 NoRadio       113   1.90 \n10 NoRadio       111  -0.100\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1) |&gt; \n  summarise(`Sum of Differences` = sum(Diff))\n\n# A tibble: 1 × 1\n  `Sum of Differences`\n                 &lt;dbl&gt;\n1             5.68e-14"
-  },
-  {
-    "objectID": "week07.html#variance-.unnumbered",
-    "href": "week07.html#variance-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.4 Variance .{unnumbered}",
-    "text": "8.4 Variance .{unnumbered}\n\n#: eval: true\n\n\nunicorns |&gt; \n  group_by(Radio) |&gt; \n  summarise (Variance = var(DustYield))"
-  },
-  {
-    "objectID": "week07.html#imaginary-scenarions-.unnumbered",
-    "href": "week07.html#imaginary-scenarions-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.5 Imaginary Scenarions .{unnumbered}",
-    "text": "8.5 Imaginary Scenarions .{unnumbered}\n\nSce1 &lt;- tibble (Condition1 = c(99,100,101,99,100,101,99,101,100,101),\n                Condition2 = c(120,121,122,120,121,122,120,123,121,120),\n                Condition3 = c(83,84,85,85,84,83,83,84,85,86)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\nSce2 &lt;-tibble (Condition1 = c(84,86,123,95,87,110,99,95,121,121),\n               Condition2 = c(83,115,85,85, 110,105,84,115,101,100),\n               Condition3 = c(84,122,80,80,101,83,83,99, 120,120)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\n\n\n\nImaginaryScenario1 &lt;- Sce1 |&gt;\n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\n# I have also made this chart an object because we're going to update it\n# It's quicker to do this as an object\n# You can compare how we update this chart with how we update the ones above.\n\nImaginaryScenario1\n\n\n\nexperiment &lt;- Sce2 |&gt; \n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\nexperiment\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield))\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce2$DustYield))\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 100.1, xend =30, yend = 100.1, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 121.0, xend = 30, yend = 121.0, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 84.2, xend = 30, yend = 84.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 102, xend =30, yend = 102, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 98.3, xend = 30, yend = 98.3, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 97.2, xend = 30, yend = 97.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nSce2 |&gt;\n  group_by(Condition) |&gt;\n  summarise(mean = mean (DustYield))\n\n# A tibble: 3 × 2\n  Condition   mean\n  &lt;chr&gt;      &lt;dbl&gt;\n1 Condition1 102. \n2 Condition2  98.3\n3 Condition3  97.2"
-  },
-  {
-    "objectID": "week07.html#mfy-.unnumbered",
-    "href": "week07.html#mfy-.unnumbered",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "8.6 MFY .{unnumbered}",
-    "text": "8.6 MFY .{unnumbered}\n\nMFY &lt;- unicorns |&gt;\n  mutate (\"Y\" = DustYield) |&gt;\n  mutate (\"M\" = mean(Y)) |&gt;\n  # If we now ask R to group the data, it will calculate the mean per group:\n  group_by(Radio) |&gt;\n  mutate (\"F\" = mean(Y)) |&gt;\n  # Remember to ungroup after!\n  ungroup() \n\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY = (Y-M),\n          MF = (F-M),\n          FY = (Y - F))\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY2 = (MY*MY),\n          MF2 = (MF*MF),\n          FY2 = (FY*FY))\n\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2))\n\n# A tibble: 1 × 3\n  SumSquareMY SumSquareMF SumSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1      12053.       6301.       5752.\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2),\n            MeanSquareMY = sum(MY2)/29,\n            MeanSquareMF = sum(MF2)/2,\n            MeanSquareFY = sum(FY2)/27) \n\n# A tibble: 1 × 6\n  SumSquareMY SumSquareMF SumSquareFY MeanSquareMY MeanSquareMF MeanSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1      12053.       6301.       5752.         416.        3151.         213.\n\nANOVA &lt;- aov(DustYield ~ Radio, data = unicorns)\nsummary(ANOVA)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nRadio        2   6301    3151   14.79 4.6e-05 ***\nResiduals   27   5752     213                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "week07.html#numerical-response",
-    "href": "week07.html#numerical-response",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Numerical Response",
-    "text": "Numerical Response\n\ncows |&gt; \n  summarise(mean_yield = mean(`Average Daily Yield`),\n            sd_yield = sd(`Average Daily Yield`))\n\n# A tibble: 1 × 2\n  mean_yield sd_yield\n       &lt;dbl&gt;    &lt;dbl&gt;\n1         32     3.73\n\nt.test(cows$`Average Daily Yield`, mu = 28)\n\n\n    One Sample t-test\n\ndata:  cows$`Average Daily Yield`\nt = 21.448, df = 399, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 28\n95 percent confidence interval:\n 31.63336 32.36664\nsample estimates:\nmean of x \n       32"
-  },
-  {
-    "objectID": "week07.html#numerical-response-categorical-explanatory",
-    "href": "week07.html#numerical-response-categorical-explanatory",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Numerical Response Categorical Explanatory",
-    "text": "Numerical Response Categorical Explanatory\n\ndiet &lt;- tibble (before = c(5.04, 4.63, 4.04, 5.10, 5.43, 4.83, 3.45, 3.49, 5.02, 4.81),\n                after = c( 4.78, 2.49, 4.46, 2.03, 5.13, 7.23, 3.50, 1.89, 3.30, 3.91))\n\n\ndiet |&gt; \n  ggplot(aes(y = before)) +\n  geom_boxplot() +\n  geom_boxplot(aes(y = after, x =1)) +\n  theme_classic() +\n  scale_x_continuous(labels =c(\"Before Diet\", \"After Diet\"), breaks = c(0,1)) +\n  labs(x = \"Diet\", y = \"Weight (kg)\")\n\n\n\ndiet |&gt; \n  summarise(before_mean = mean(before),\n            after_mean = mean(after),\n            before_sd = sd(before),\n            after_sd = sd(after))\n\n# A tibble: 1 × 4\n  before_mean after_mean before_sd after_sd\n        &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1        4.58       3.87     0.689     1.62\n\nt.test(diet$before, diet$after, paired = TRUE, alternative = \"two.sided\")\n\n\n    Paired t-test\n\ndata:  diet$before and diet$after\nt = 1.4615, df = 9, p-value = 0.1779\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -0.3900511  1.8140511\nsample estimates:\nmean difference \n          0.712 \n\n\n2-Way ANOVA\n\nmodel1 &lt;-  aov(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)\nsummary(model1)\n\n                Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nparlour          1    900   900.0  78.511 &lt; 2e-16 ***\n`housing type`   1    100   100.0   8.723 0.00333 ** \nResiduals      397   4551    11.5                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nLinear model\n\nmodel2 &lt;- lm(`Average Daily Yield` ~ parlour +  `housing type`, data = cows)\nsummary(model2)\n\n\nCall:\nlm(formula = `Average Daily Yield` ~ parlour + `housing type`, \n    data = cows)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-10.8651  -1.7814   0.0787   1.6805  11.7654 \n\nCoefficients:\n                                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                      34.0000     0.2932 115.956  &lt; 2e-16 ***\nparlourrobot                     -3.0000     0.3386  -8.861  &lt; 2e-16 ***\n`housing type`seasonally housed  -1.0000     0.3386  -2.954  0.00333 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.386 on 397 degrees of freedom\nMultiple R-squared:  0.1801,    Adjusted R-squared:  0.176 \nF-statistic: 43.62 on 2 and 397 DF,  p-value: &lt; 2.2e-16"
-  },
-  {
-    "objectID": "week07.html#numerical-response-numerical-explanatory",
-    "href": "week07.html#numerical-response-numerical-explanatory",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Numerical Response Numerical Explanatory",
-    "text": "Numerical Response Numerical Explanatory\nCorrelation\n\ncor.test(cows$`Average Daily Yield`, cows$`Welfare Score`)\n\n\n    Pearson's product-moment correlation\n\ndata:  cows$`Average Daily Yield` and cows$`Welfare Score`\nt = 1.7643, df = 398, p-value = 0.07845\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.01004724  0.18454894\nsample estimates:\n       cor \n0.08809126 \n\n\nLinear Model\nGenearlised Linear Model\n\n#| eval: true\n\n\nmodel4 &lt;- glm(`Average Daily Yield` ~ `Welfare Score` \n              + `housing type` + parlour, data = cows)\nsummary(model4)"
-  },
-  {
-    "objectID": "week07.html#categorical-response",
-    "href": "week07.html#categorical-response",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Categorical Response",
-    "text": "Categorical Response\nProportion Test\n\nprop.test(x = 3, n = 20, p = 0.18, alternative = \"two.sided\")\n\n\n    1-sample proportions test with continuity correction\n\ndata:  3 out of 20, null probability 0.18\nX-squared = 0.0033875, df = 1, p-value = 0.9536\nalternative hypothesis: true p is not equal to 0.18\n95 percent confidence interval:\n 0.03956627 0.38862512\nsample estimates:\n   p \n0.15"
-  },
-  {
-    "objectID": "week07.html#categorical-response-categorical-explanatory",
-    "href": "week07.html#categorical-response-categorical-explanatory",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Categorical Response Categorical Explanatory",
-    "text": "Categorical Response Categorical Explanatory\nMcNemar’s Test\n\nwork &lt;- matrix(c(2, 5, 38, 35), \n               ncol=2, \n               byrow=TRUE,\n               dimnames = list(c(\"Dysplasia\", \"No Dysplasia\"),\n                               c(\"Before Work Season\", \"After Work Season\")))\n\n\nmcnemar.test(work)\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  work\nMcNemar's chi-squared = 23.814, df = 1, p-value = 1.061e-06\n\n\nFisher’s Exact Test\n\nfisher.test(x = c(4,16), y = c(2,18))\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  c(4, 16) and c(2, 18)\np-value = 1\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n 0.02564066        Inf\nsample estimates:\nodds ratio \n       Inf \n\n# Calculate Odds Ratio\n(4+18) / (16 + 2)\n\n[1] 1.222222\n\n\nChi2 Test\n\ngsd &lt;- matrix(c(16, 12, 84, 86), \n              ncol=2, \n              byrow=TRUE,\n              dimnames = list(c(\"Dysplasia\", \"No Dysplasia\"),\n                              c(\"Inbred\", \"Less Inbred\")))\n\n\nchisq.test(gsd)\n\n\n    Pearson's Chi-squared test with Yates' continuity correction\n\ndata:  gsd\nX-squared = 0.30714, df = 1, p-value = 0.5794\n\nlibrary(vcd)\nassocstats(gsd)\n\n                     X^2 df P(&gt; X^2)\nLikelihood Ratio 0.57672  1  0.44760\nPearson          0.57481  1  0.44835\n\nPhi-Coefficient   : 0.054 \nContingency Coeff.: 0.054 \nCramer's V        : 0.054"
-  },
-  {
-    "objectID": "week07.html#categorical-response-numerical-explanatory",
-    "href": "week07.html#categorical-response-numerical-explanatory",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Categorical Response Numerical Explanatory",
-    "text": "Categorical Response Numerical Explanatory\nLogistic Regression\n\ndysp &lt;- tibble(dysplasia = c(1, 1, 1, 1, 1, 1, 1,\n                             0, 0, 0, 0, 0, 0, 0,\n                             0, 0, 0, 0, 0, 0, 0),\n               inflammation =c(0.91, 0.79, 1.40, 0.71, 1.01, 0.77, 0.85,\n                               0.42, 1.02, 0.31, 0.05, 1.17, 0.04, 0.36, \n                               0.12, 0.02, 0.05, 0.42, 0.92, 0.72,  1.05)) \n\nlogit &lt;- glm(dysplasia ~ inflammation, data = dysp, family = \"binomial\")\nsummary(logit)\n\n\nCall:\nglm(formula = dysplasia ~ inflammation, family = \"binomial\", \n    data = dysp)\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-1.5715  -0.5727  -0.3094   1.0397   1.4914  \n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept)    -3.190      1.484  -2.150   0.0316 *\ninflammation    3.488      1.740   2.004   0.0450 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 26.734  on 20  degrees of freedom\nResidual deviance: 20.534  on 19  degrees of freedom\nAIC: 24.534\n\nNumber of Fisher Scoring iterations: 5\n\nlibrary(easystats)\nreport(logit)\n\nWe fitted a logistic model (estimated using ML) to predict dysplasia with\ninflammation (formula: dysplasia ~ inflammation). The model's explanatory power\nis moderate (Tjur's R2 = 0.24). The model's intercept, corresponding to\ninflammation = 0, is at -3.19 (95% CI [-7.09, -0.88], p = 0.032). Within this\nmodel:\n\n  - The effect of inflammation is statistically significant and positive (beta =\n3.49, 95% CI [0.65, 7.91], p = 0.045; Std. beta = 1.47, 95% CI [0.27, 3.33])\n\nStandardized parameters were obtained by fitting the model on a standardized\nversion of the dataset. 95% Confidence Intervals (CIs) and p-values were\ncomputed using a Wald z-distribution approximation.\n\nparameters(logit)\n\nParameter    | Log-Odds |   SE |         95% CI |     z |     p\n---------------------------------------------------------------\n(Intercept)  |    -3.19 | 1.48 | [-7.09, -0.88] | -2.15 | 0.032\ninflammation |     3.49 | 1.74 | [ 0.65,  7.91] |  2.00 | 0.045\n\nexp(cbind(OddsRatio = coef(logit), confint(logit)))\n\n               OddsRatio        2.5 %       97.5 %\n(Intercept)   0.04118154 0.0008355444    0.4146414\ninflammation 32.71638289 1.9151146706 2735.6121035"
-  },
-  {
-    "objectID": "week07.html#parametric-vs-non-parametric",
-    "href": "week07.html#parametric-vs-non-parametric",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Parametric vs Non Parametric",
-    "text": "Parametric vs Non Parametric"
-  },
-  {
-    "objectID": "week07.html#power-calculations",
-    "href": "week07.html#power-calculations",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Power Calculations",
-    "text": "Power Calculations"
-  },
-  {
-    "objectID": "week07.html#assumptions",
-    "href": "week07.html#assumptions",
-    "title": "8  Week 7: Analysing Quantitative Data",
-    "section": "Assumptions",
-    "text": "Assumptions\nResiduals\n\nresiduals &lt;- tibble(resids = resid(model4))\n\nresiduals |&gt; \n  ggplot(aes(x = resids)) +\n  geom_density()+\n  theme_classic()\n\n\nparameters::describe_distribution(residuals)"
-  },
-  {
-    "objectID": "week089.html",
-    "href": "week089.html",
-    "title": "9  Weeks 8 & 9: Analytical Softwares",
-    "section": "",
-    "text": "This week has no content yet, please check back later!"
-  },
-  {
-    "objectID": "week10.html",
-    "href": "week10.html",
-    "title": "10  Week 10: Analysing Quanlitative Data",
-    "section": "",
-    "text": "You have no R content in this week"
-  },
-  {
-    "objectID": "refs.html",
-    "href": "refs.html",
-    "title": "11  References",
-    "section": "",
-    "text": "References\nThe cover image duck comes from Pixabay, as a Creative Commons 0 image by Clker-Free-Vector-Images-3736\n\n\nBrilleman, SL, MJ Crowther, M Moreno-Betancur, J Buros Novik, and R\nWolfe. 2018. “Joint Longitudinal and Time-to-Event Models via\nStan.” https://github.com/stan-dev/stancon_talks/.\n\n\nFellows, Ian. 2018. Wordcloud: Word Clouds. https://CRAN.R-project.org/package=wordcloud.\n\n\nLüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Brenton M.\nWiernik, and Dominique Makowski. 2022. “Easystats: Framework for\nEasy Statistical Modeling, Visualization, and Reporting.”\nCRAN. https://easystats.github.io/easystats/.\n\n\nPatil, Indrajeet. 2021. “Visualizations with\nstatistical details: The ’ggstatsplot’\napproach.” Journal of Open Source\nSoftware 6 (61): 3167. https://doi.org/10.21105/joss.03167.\n\n\nStan Development Team. 2023. “RStan: The\nR Interface to Stan.” https://mc-stan.org/.\n\n\nTorchiano, Marco. 2020. Effsize: Efficient Effect Size\nComputation. https://doi.org/10.5281/zenodo.1480624.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the tidyverse.”\nJournal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nZeileis, Achim, David Meyer, and Kurt Hornik. 2007.\n“Residual-Based Shadings for Visualizing (Conditional)\nIndependence.” Journal of Computational and Graphical\nStatistics 16 (3): 507–25. https://doi.org/10.1198/106186007X237856."
   },
   {
     "objectID": "week09.html",
@@ -504,46 +364,46 @@
     "text": "Our Unicorn Farm\n\nunicorns &lt;- tibble (NoRadio = c(150, 130, 121, 90, 98, 100, 98, 100, 113, 111),\n                 RadioMusic = c(112, 127, 132, 150, 112, 128, 110, 120, 98, 107),\n                 RadioDiscussion = c(75, 98, 88, 83, 83, 77, 75, 84, 93, 99)) |&gt; \n  pivot_longer(cols = c(NoRadio:RadioDiscussion),\n               names_to = \"Radio\",\n               values_to = \"DustYield\")\n\n\nunicorns |&gt; \n  ggplot (aes (x = Radio, y = DustYield)) + \n  geom_point(aes(shape = Radio, colour = Radio),  position = position_jitter(width = .13)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Radio Condition\") +\n  scale_color_brewer(palette = \"Accent\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic () +\n  theme(legend.position = \"none\")"
   },
   {
-    "objectID": "week09.html#no-radio-group-.unnumbered",
-    "href": "week09.html#no-radio-group-.unnumbered",
+    "objectID": "week09.html#no-radio-group",
+    "href": "week09.html#no-radio-group",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.1 No Radio Group .{unnumbered}",
-    "text": "9.1 No Radio Group .{unnumbered}\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
+    "section": "No Radio Group",
+    "text": "No Radio Group\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
   },
   {
-    "objectID": "week09.html#no-radio-mean-.unnumbered",
-    "href": "week09.html#no-radio-mean-.unnumbered",
+    "objectID": "week09.html#no-radio-mean",
+    "href": "week09.html#no-radio-mean",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.2 No Radio Mean .{unnumbered}",
-    "text": "9.2 No Radio Mean .{unnumbered}\n\nunicorns |&gt;\n  group_by(Radio) |&gt;\n  filter(Radio == \"NoRadio\") |&gt;\n  summarise(mean = mean(DustYield))\n\n# A tibble: 1 × 2\n  Radio    mean\n  &lt;chr&gt;   &lt;dbl&gt;\n1 NoRadio  111.\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  geom_hline(yintercept = 111.1)+\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
+    "section": "No Radio Mean",
+    "text": "No Radio Mean\n\nunicorns |&gt;\n  group_by(Radio) |&gt;\n  filter(Radio == \"NoRadio\") |&gt;\n  summarise(mean = mean(DustYield))\n\n# A tibble: 1 × 2\n  Radio    mean\n  &lt;chr&gt;   &lt;dbl&gt;\n1 NoRadio  111.\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  geom_hline(yintercept = 111.1)+\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
   },
   {
-    "objectID": "week09.html#deviations-from-the-mean-.unnumbered",
-    "href": "week09.html#deviations-from-the-mean-.unnumbered",
+    "objectID": "week09.html#deviations-from-the-mean",
+    "href": "week09.html#deviations-from-the-mean",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.3 Deviations from the mean .{unnumbered}",
-    "text": "9.3 Deviations from the mean .{unnumbered}\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1)\n\n# A tibble: 10 × 3\n   Radio   DustYield    Diff\n   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n 1 NoRadio       150  38.9  \n 2 NoRadio       130  18.9  \n 3 NoRadio       121   9.9  \n 4 NoRadio        90 -21.1  \n 5 NoRadio        98 -13.1  \n 6 NoRadio       100 -11.1  \n 7 NoRadio        98 -13.1  \n 8 NoRadio       100 -11.1  \n 9 NoRadio       113   1.90 \n10 NoRadio       111  -0.100\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1) |&gt; \n  summarise(`Sum of Differences` = sum(Diff))\n\n# A tibble: 1 × 1\n  `Sum of Differences`\n                 &lt;dbl&gt;\n1             5.68e-14"
+    "section": "Deviations from the mean",
+    "text": "Deviations from the mean\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1)\n\n# A tibble: 10 × 3\n   Radio   DustYield    Diff\n   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n 1 NoRadio       150  38.9  \n 2 NoRadio       130  18.9  \n 3 NoRadio       121   9.9  \n 4 NoRadio        90 -21.1  \n 5 NoRadio        98 -13.1  \n 6 NoRadio       100 -11.1  \n 7 NoRadio        98 -13.1  \n 8 NoRadio       100 -11.1  \n 9 NoRadio       113   1.90 \n10 NoRadio       111  -0.100\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1) |&gt; \n  summarise(`Sum of Differences` = sum(Diff))\n\n# A tibble: 1 × 1\n  `Sum of Differences`\n                 &lt;dbl&gt;\n1             5.68e-14"
   },
   {
-    "objectID": "week09.html#variance-.unnumbered",
-    "href": "week09.html#variance-.unnumbered",
+    "objectID": "week09.html#variance",
+    "href": "week09.html#variance",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.4 Variance .{unnumbered}",
-    "text": "9.4 Variance .{unnumbered}\n\n#: eval: true\n\n\nunicorns |&gt; \n  group_by(Radio) |&gt; \n  summarise (Variance = var(DustYield))"
+    "section": "Variance",
+    "text": "Variance\n\n#: eval: true\n\n\nunicorns |&gt; \n  group_by(Radio) |&gt; \n  summarise (Variance = var(DustYield))"
   },
   {
-    "objectID": "week09.html#imaginary-scenarions-.unnumbered",
-    "href": "week09.html#imaginary-scenarions-.unnumbered",
+    "objectID": "week09.html#imaginary-scenarions",
+    "href": "week09.html#imaginary-scenarions",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.5 Imaginary Scenarions .{unnumbered}",
-    "text": "9.5 Imaginary Scenarions .{unnumbered}\n\nSce1 &lt;- tibble (Condition1 = c(99,100,101,99,100,101,99,101,100,101),\n                Condition2 = c(120,121,122,120,121,122,120,123,121,120),\n                Condition3 = c(83,84,85,85,84,83,83,84,85,86)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\nSce2 &lt;-tibble (Condition1 = c(84,86,123,95,87,110,99,95,121,121),\n               Condition2 = c(83,115,85,85, 110,105,84,115,101,100),\n               Condition3 = c(84,122,80,80,101,83,83,99, 120,120)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\n\n\n\nImaginaryScenario1 &lt;- Sce1 |&gt;\n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\n# I have also made this chart an object because we're going to update it\n# It's quicker to do this as an object\n# You can compare how we update this chart with how we update the ones above.\n\nImaginaryScenario1\n\n\n\nexperiment &lt;- Sce2 |&gt; \n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\nexperiment\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield))\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce2$DustYield))\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 100.1, xend =30, yend = 100.1, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 121.0, xend = 30, yend = 121.0, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 84.2, xend = 30, yend = 84.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 102, xend =30, yend = 102, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 98.3, xend = 30, yend = 98.3, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 97.2, xend = 30, yend = 97.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nSce2 |&gt;\n  group_by(Condition) |&gt;\n  summarise(mean = mean (DustYield))\n\n# A tibble: 3 × 2\n  Condition   mean\n  &lt;chr&gt;      &lt;dbl&gt;\n1 Condition1 102. \n2 Condition2  98.3\n3 Condition3  97.2"
+    "section": "Imaginary Scenarions",
+    "text": "Imaginary Scenarions\n\nSce1 &lt;- tibble (Condition1 = c(99,100,101,99,100,101,99,101,100,101),\n                Condition2 = c(120,121,122,120,121,122,120,123,121,120),\n                Condition3 = c(83,84,85,85,84,83,83,84,85,86)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\nSce2 &lt;-tibble (Condition1 = c(84,86,123,95,87,110,99,95,121,121),\n               Condition2 = c(83,115,85,85, 110,105,84,115,101,100),\n               Condition3 = c(84,122,80,80,101,83,83,99, 120,120)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\n\n\n\nImaginaryScenario1 &lt;- Sce1 |&gt;\n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\n# I have also made this chart an object because we're going to update it\n# It's quicker to do this as an object\n# You can compare how we update this chart with how we update the ones above.\n\nImaginaryScenario1\n\n\n\nexperiment &lt;- Sce2 |&gt; \n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\nexperiment\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield))\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce2$DustYield))\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 100.1, xend =30, yend = 100.1, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 121.0, xend = 30, yend = 121.0, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 84.2, xend = 30, yend = 84.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 102, xend =30, yend = 102, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 98.3, xend = 30, yend = 98.3, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 97.2, xend = 30, yend = 97.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nSce2 |&gt;\n  group_by(Condition) |&gt;\n  summarise(mean = mean (DustYield))\n\n# A tibble: 3 × 2\n  Condition   mean\n  &lt;chr&gt;      &lt;dbl&gt;\n1 Condition1 102. \n2 Condition2  98.3\n3 Condition3  97.2"
   },
   {
-    "objectID": "week09.html#mfy-.unnumbered",
-    "href": "week09.html#mfy-.unnumbered",
+    "objectID": "week09.html#mfy",
+    "href": "week09.html#mfy",
     "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "9.6 MFY .{unnumbered}",
-    "text": "9.6 MFY .{unnumbered}\n\nMFY &lt;- unicorns |&gt;\n  mutate (\"Y\" = DustYield) |&gt;\n  mutate (\"M\" = mean(Y)) |&gt;\n  # If we now ask R to group the data, it will calculate the mean per group:\n  group_by(Radio) |&gt;\n  mutate (\"F\" = mean(Y)) |&gt;\n  # Remember to ungroup after!\n  ungroup() \n\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY = (Y-M),\n          MF = (F-M),\n          FY = (Y - F))\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY2 = (MY*MY),\n          MF2 = (MF*MF),\n          FY2 = (FY*FY))\n\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2))\n\n# A tibble: 1 × 3\n  SumSquareMY SumSquareMF SumSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1      12053.       6301.       5752.\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2),\n            MeanSquareMY = sum(MY2)/29,\n            MeanSquareMF = sum(MF2)/2,\n            MeanSquareFY = sum(FY2)/27) \n\n# A tibble: 1 × 6\n  SumSquareMY SumSquareMF SumSquareFY MeanSquareMY MeanSquareMF MeanSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1      12053.       6301.       5752.         416.        3151.         213.\n\nANOVA &lt;- aov(DustYield ~ Radio, data = unicorns)\nsummary(ANOVA)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nRadio        2   6301    3151   14.79 4.6e-05 ***\nResiduals   27   5752     213                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "section": "MFY",
+    "text": "MFY\n\nMFY &lt;- unicorns |&gt;\n  mutate (\"Y\" = DustYield) |&gt;\n  mutate (\"M\" = mean(Y)) |&gt;\n  # If we now ask R to group the data, it will calculate the mean per group:\n  group_by(Radio) |&gt;\n  mutate (\"F\" = mean(Y)) |&gt;\n  # Remember to ungroup after!\n  ungroup() \n\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY = (Y-M),\n          MF = (F-M),\n          FY = (Y - F))\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY2 = (MY*MY),\n          MF2 = (MF*MF),\n          FY2 = (FY*FY))\n\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2))\n\n# A tibble: 1 × 3\n  SumSquareMY SumSquareMF SumSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1      12053.       6301.       5752.\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2),\n            MeanSquareMY = sum(MY2)/29,\n            MeanSquareMF = sum(MF2)/2,\n            MeanSquareFY = sum(FY2)/27) \n\n# A tibble: 1 × 6\n  SumSquareMY SumSquareMF SumSquareFY MeanSquareMY MeanSquareMF MeanSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1      12053.       6301.       5752.         416.        3151.         213.\n\nANOVA &lt;- aov(DustYield ~ Radio, data = unicorns)\nsummary(ANOVA)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nRadio        2   6301    3151   14.79 4.6e-05 ***\nResiduals   27   5752     213                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "week09.html#numerical-response",
@@ -609,59 +469,17 @@
     "text": "Assumptions\nResiduals\n\nresiduals &lt;- tibble(resids = resid(model4))\n\nresiduals |&gt; \n  ggplot(aes(x = resids)) +\n  geom_density()+\n  theme_classic()\n\n\nparameters::describe_distribution(residuals)"
   },
   {
-    "objectID": "week04.html#covariance",
-    "href": "week04.html#covariance",
-    "title": "5  Week 4: Considerations for Collecting Data",
-    "section": "Covariance",
-    "text": "Covariance\n\njobmod2 &lt;- lm(burnout ~ empathy + job, data = job_dat)\nsummary(jobmod2)\n\n\nCall:\nlm(formula = burnout ~ empathy + job, data = job_dat)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.6359 -1.3894 -0.4212  1.6035  4.5151 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    2.631      1.552   1.695    0.108    \nempathy        2.575      0.471   5.469 4.16e-05 ***\njobvet         1.127      1.052   1.072    0.299    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.331 on 17 degrees of freedom\nMultiple R-squared:  0.6615,    Adjusted R-squared:  0.6217 \nF-statistic: 16.61 on 2 and 17 DF,  p-value: 0.0001002\n\njob_dat |&gt; \n  mutate(mod = predict(jobmod2)) |&gt; \n  ggplot() + \n  geom_point(aes(x = empathy, y = burnout, colour = job)) +\n  geom_line(aes(x = empathy, y = mod)) +\n  theme_classic() +\n  facet_wrap(facets = ~ job, ncol = 1) +\n  labs(x = \"Empathy Score\", y = \"Burnout Score\")"
-  },
-  {
-    "objectID": "week0708.html",
-    "href": "week0708.html",
-    "title": "8  Weeks 7 and 8: R Stats",
+    "objectID": "week10.html",
+    "href": "week10.html",
+    "title": "10  Week 10: Analysing Quanlitative Data",
     "section": "",
-    "text": "All your R content is elsewhere this week :)"
+    "text": "You have no R content in this week"
   },
   {
-    "objectID": "week09.html#no-radio-group",
-    "href": "week09.html#no-radio-group",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "No Radio Group",
-    "text": "No Radio Group\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
-  },
-  {
-    "objectID": "week09.html#no-radio-mean",
-    "href": "week09.html#no-radio-mean",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "No Radio Mean",
-    "text": "No Radio Mean\n\nunicorns |&gt;\n  group_by(Radio) |&gt;\n  filter(Radio == \"NoRadio\") |&gt;\n  summarise(mean = mean(DustYield))\n\n# A tibble: 1 × 2\n  Radio    mean\n  &lt;chr&gt;   &lt;dbl&gt;\n1 NoRadio  111.\n\nunicorns |&gt;\n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(UnicornNo = c(1,2,3,4,5,6,7,8,9,10)) |&gt; \n  # The mutate function adds a new variable just to plot this one specific chart\n  # And then we pipe it directly into ggplot, so we're not changing the unicorns data\n  # Remember you can check this with `View(unicorns)`, you'll see 'UnicornNo' doesn't exist.\n  ggplot (aes (x = UnicornNo, y = DustYield)) + \n  geom_point() +\n  geom_hline(yintercept = 111.1)+\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn No\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  scale_x_continuous(breaks = c(0, 2, 4, 6, 8, 10)) + \n  theme_classic ()"
-  },
-  {
-    "objectID": "week09.html#deviations-from-the-mean",
-    "href": "week09.html#deviations-from-the-mean",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "Deviations from the mean",
-    "text": "Deviations from the mean\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1)\n\n# A tibble: 10 × 3\n   Radio   DustYield    Diff\n   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n 1 NoRadio       150  38.9  \n 2 NoRadio       130  18.9  \n 3 NoRadio       121   9.9  \n 4 NoRadio        90 -21.1  \n 5 NoRadio        98 -13.1  \n 6 NoRadio       100 -11.1  \n 7 NoRadio        98 -13.1  \n 8 NoRadio       100 -11.1  \n 9 NoRadio       113   1.90 \n10 NoRadio       111  -0.100\n\nunicorns |&gt; \n  filter(Radio == \"NoRadio\") |&gt; \n  mutate(Diff = DustYield-111.1) |&gt; \n  summarise(`Sum of Differences` = sum(Diff))\n\n# A tibble: 1 × 1\n  `Sum of Differences`\n                 &lt;dbl&gt;\n1             5.68e-14"
-  },
-  {
-    "objectID": "week09.html#variance",
-    "href": "week09.html#variance",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "Variance",
-    "text": "Variance\n\n#: eval: true\n\n\nunicorns |&gt; \n  group_by(Radio) |&gt; \n  summarise (Variance = var(DustYield))"
-  },
-  {
-    "objectID": "week09.html#imaginary-scenarions",
-    "href": "week09.html#imaginary-scenarions",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "Imaginary Scenarions",
-    "text": "Imaginary Scenarions\n\nSce1 &lt;- tibble (Condition1 = c(99,100,101,99,100,101,99,101,100,101),\n                Condition2 = c(120,121,122,120,121,122,120,123,121,120),\n                Condition3 = c(83,84,85,85,84,83,83,84,85,86)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\nSce2 &lt;-tibble (Condition1 = c(84,86,123,95,87,110,99,95,121,121),\n               Condition2 = c(83,115,85,85, 110,105,84,115,101,100),\n               Condition3 = c(84,122,80,80,101,83,83,99, 120,120)) |&gt;\n  pivot_longer (cols = c(Condition1:Condition3), names_to = \"Condition\", values_to = \"DustYield\") |&gt;\n  mutate (Count = c(1:30)) \n\n\n\n\nImaginaryScenario1 &lt;- Sce1 |&gt;\n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\n# I have also made this chart an object because we're going to update it\n# It's quicker to do this as an object\n# You can compare how we update this chart with how we update the ones above.\n\nImaginaryScenario1\n\n\n\nexperiment &lt;- Sce2 |&gt; \n  ggplot (aes (x = Count, y = DustYield)) + \n  geom_point(aes(shape = Condition, colour = Condition)) +\n  labs (y = \"Dust Yield (Kg)\", x = \"Unicorn ID Number\") +\n  scale_y_continuous(limits = c(0, 200)) +\n  theme_classic ()\n\nexperiment\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield))\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce2$DustYield))\n\n\n\nImaginaryScenario1 +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 100.1, xend =30, yend = 100.1, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 121.0, xend = 30, yend = 121.0, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 84.2, xend = 30, yend = 84.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nexperiment +\n  geom_hline(yintercept = mean(Sce1$DustYield)) +\n  geom_segment(aes(x =1, y = 102, xend =30, yend = 102, color = \"red\")) +\n  geom_segment(aes(x = 1, y = 98.3, xend = 30, yend = 98.3, color = \"green\")) +\n  geom_segment (aes(x = 1, y = 97.2, xend = 30, yend = 97.2, color = \"blue\")) +\n  theme (legend.position = \"none\")\n\n\n\nSce2 |&gt;\n  group_by(Condition) |&gt;\n  summarise(mean = mean (DustYield))\n\n# A tibble: 3 × 2\n  Condition   mean\n  &lt;chr&gt;      &lt;dbl&gt;\n1 Condition1 102. \n2 Condition2  98.3\n3 Condition3  97.2"
-  },
-  {
-    "objectID": "week09.html#mfy",
-    "href": "week09.html#mfy",
-    "title": "9  Week 9 Analysing Quantitative Data",
-    "section": "MFY",
-    "text": "MFY\n\nMFY &lt;- unicorns |&gt;\n  mutate (\"Y\" = DustYield) |&gt;\n  mutate (\"M\" = mean(Y)) |&gt;\n  # If we now ask R to group the data, it will calculate the mean per group:\n  group_by(Radio) |&gt;\n  mutate (\"F\" = mean(Y)) |&gt;\n  # Remember to ungroup after!\n  ungroup() \n\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY = (Y-M),\n          MF = (F-M),\n          FY = (Y - F))\n\n\nMFY &lt;- MFY |&gt;\n  mutate (MY2 = (MY*MY),\n          MF2 = (MF*MF),\n          FY2 = (FY*FY))\n\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2))\n\n# A tibble: 1 × 3\n  SumSquareMY SumSquareMF SumSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n1      12053.       6301.       5752.\n\nMFY |&gt;\n  summarise(SumSquareMY = sum(MY2),\n            SumSquareMF = sum(MF2),\n            SumSquareFY = sum(FY2),\n            MeanSquareMY = sum(MY2)/29,\n            MeanSquareMF = sum(MF2)/2,\n            MeanSquareFY = sum(FY2)/27) \n\n# A tibble: 1 × 6\n  SumSquareMY SumSquareMF SumSquareFY MeanSquareMY MeanSquareMF MeanSquareFY\n        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1      12053.       6301.       5752.         416.        3151.         213.\n\nANOVA &lt;- aov(DustYield ~ Radio, data = unicorns)\nsummary(ANOVA)\n\n            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nRadio        2   6301    3151   14.79 4.6e-05 ***\nResiduals   27   5752     213                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "objectID": "refs.html",
+    "href": "refs.html",
+    "title": "11  References",
+    "section": "",
+    "text": "References\nThe cover image duck comes from Pixabay, as a Creative Commons 0 image by Clker-Free-Vector-Images-3736\n\n\nBrilleman, SL, MJ Crowther, M Moreno-Betancur, J Buros Novik, and R\nWolfe. 2018. “Joint Longitudinal and Time-to-Event Models via\nStan.” https://github.com/stan-dev/stancon_talks/.\n\n\nFellows, Ian. 2018. Wordcloud: Word Clouds. https://CRAN.R-project.org/package=wordcloud.\n\n\nLüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Brenton M.\nWiernik, and Dominique Makowski. 2022. “Easystats: Framework for\nEasy Statistical Modeling, Visualization, and Reporting.”\nCRAN. https://easystats.github.io/easystats/.\n\n\nPatil, Indrajeet. 2021. “Visualizations with\nstatistical details: The ’ggstatsplot’\napproach.” Journal of Open Source\nSoftware 6 (61): 3167. https://doi.org/10.21105/joss.03167.\n\n\nStan Development Team. 2023. “RStan: The\nR Interface to Stan.” https://mc-stan.org/.\n\n\nTorchiano, Marco. 2020. Effsize: Efficient Effect Size\nComputation. https://doi.org/10.5281/zenodo.1480624.\n\n\nWickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy\nD’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.\n“Welcome to the tidyverse.”\nJournal of Open Source Software 4 (43): 1686. https://doi.org/10.21105/joss.01686.\n\n\nZeileis, Achim, David Meyer, and Kurt Hornik. 2007.\n“Residual-Based Shadings for Visualizing (Conditional)\nIndependence.” Journal of Computational and Graphical\nStatistics 16 (3): 507–25. https://doi.org/10.1198/106186007X237856."
   }
 ]
